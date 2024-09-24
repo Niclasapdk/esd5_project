@@ -2,7 +2,7 @@ clear all
 close
 fig = figure();
 sys = tf(4,[1 2 10]);
-sys1 = tf(4,[1 2 10],'IODelay',0.25);
+sys1 = tf(4,[1 2 10],'IODelay',0.5);
 Hd = c2d(sys,0.2);
 step(sys1,'g',sys,'b',Hd,'r');
 lgd = legend('Average u(t)','Continuous control, u(t)', 'u(kT)', 'Location','SouthEast');
