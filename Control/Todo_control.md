@@ -2,5 +2,6 @@
 
 - Motor model (transferfunction)
 - Sensors Encoder (Current)
-- Test
+- Simple model
+- Cascade model
 - Datasheets
