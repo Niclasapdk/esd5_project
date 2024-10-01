@@ -4,7 +4,7 @@
 - H-bridge model (Transferfunction)
 - Sensors Encoder (Current)
 - Simple model
-- Cascade model
+- Cascade model (Out-loop postion, inner-loop Current(tourqe))
 - Datasheets(motor, h-bro)
 - krav(præcision, hastighed)
-- eed
+- Find noise sources
