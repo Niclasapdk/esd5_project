@@ -6,3 +6,4 @@
 - Cascade model
 - Datasheets(motor, h-bro)
 - krav(præcision, hastighed)
+- ee
