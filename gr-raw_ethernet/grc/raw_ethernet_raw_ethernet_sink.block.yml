@@ -1,0 +1,48 @@
+id: raw_ethernet_raw_ethernet_sink
+label: raw_ethernet_sink
+category: '[raw_ethernet]'
+
+templates:
+  imports: from raw_ethernet.raw_ethernet_sink import raw_ethernet_sink
+  make: raw_ethernet_sink(${interface}, ${dest_mac})
+
+#  Make one 'parameters' list entry for every parameter you want settable from the GUI.
+#     Keys include:
+#     * id (makes the value accessible as keyname, e.g. in the make entry)
+#     * label (label shown in the GUI)
+#     * dtype (e.g. int, float, complex, byte, short, xxx_vector, ...)
+#     * default
+parameters:
+- id: interface
+  label: Network interface
+  dtype: string
+  default: eth0
+- id: dest_mac
+  label: Destination MAC address
+  dtype: string
+  default: "ff:ff:ff:ff:ff:ff"
+
+#  Make one 'inputs' list entry per input and one 'outputs' list entry per output.
+#  Keys include:
+#      * label (an identifier for the GUI)
+#      * domain (optional - stream or message. Default is stream)
+#      * dtype (e.g. int, float, complex, byte, short, xxx_vector, ...)
+#      * vlen (optional - data stream vector length. Default is 1)
+#      * optional (optional - set to 1 for optional inputs. Default is 0)
+inputs:
+- label: in
+  domain: stream
+  dtype: short
+  vlen: 1
+  optional: 0
+
+outputs:
+#- label: ...
+#  domain: ...
+#  dtype: ...
+#  vlen: ...
+#  optional: ...
+
+#  'file_format' specifies the version of the GRC yml format used in the file
+#  and should usually not be changed.
+file_format: 1
