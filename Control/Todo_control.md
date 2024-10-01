@@ -2,6 +2,6 @@
 
 - Motor model (transferfunction)
 - Sensors Encoder (Current)
-- Simple model
-- Cascade model
-- Datasheets
+- Test
+- Datasheets(motor, h-bro)
+- krav(præcision, hastighed)
