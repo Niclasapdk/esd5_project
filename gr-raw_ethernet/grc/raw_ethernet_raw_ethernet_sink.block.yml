@@ -4,7 +4,7 @@ category: '[raw_ethernet]'
 
 templates:
   imports: from raw_ethernet.raw_ethernet_sink import raw_ethernet_sink
-  make: raw_ethernet_sink(${interface}, ${dest_mac})
+  make: raw_ethernet_sink(${interface}, ${dest_mac}, ${samples_per_frame})
 
 #  Make one 'parameters' list entry for every parameter you want settable from the GUI.
 #     Keys include:
@@ -21,6 +21,10 @@ parameters:
   label: Destination MAC address
   dtype: string
   default: "ff:ff:ff:ff:ff:ff"
+- id: samples_per_frame
+  label: Samples per frame (truncated to max 1486)
+  dtype: int
+  default: 1486
 
 #  Make one 'inputs' list entry per input and one 'outputs' list entry per output.
 #  Keys include:
