@@ -1,0 +1,21 @@
+* C:\Users\nicla\Documents\GitHub\esd5_project\rf_front_end\bandpass_filter\bandpass_scaled.asc
+L1 N002 P001 99.23n
+L2 N003 P002 159.16n
+L3 N004 P003 99.23n
+C1 N002 0 14.16p
+C2 N003 0 57.36p
+C3 N004 0 57.36p
+R1 N002 N001 50
+V1 N001 0 AC 1
+C4 N005 0 14.16p
+R2 N005 0 50
+L4 N004 0 74.17p
+L5 N005 0 300.37p
+L6 N003 0 74.17p
+L7 N002 0 300.37p
+C5 N003 P001 42.87f
+C6 N004 P002 26.73f
+C7 N005 P003 42.87f
+.ac dec 1000 1Giga 4Giga
+.backanno
+.end
