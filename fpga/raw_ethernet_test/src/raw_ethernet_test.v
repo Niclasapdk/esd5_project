@@ -5,13 +5,13 @@ module raw_ethernet_test (
 	// Reset KEY
 	input  [0: 0] KEY,
 
-	// Ethernet 1
-	output        NET1_RESET_N,
-	input         NET1_RX_CLK,
-	input  [3: 0] NET1_RX_DATA,
-	input         NET1_RX_DV,
-	output [3: 0] NET1_TX_DATA,
-	output        NET1_TX_EN,
+	// Ethernet 0
+	output        NET0_RESET_N,
+	input         NET0_RX_CLK,
+	input  [3: 0] NET0_RX_DATA,
+	input         NET0_RX_DV,
+	output [3: 0] NET0_TX_DATA,
+	output        NET0_TX_EN,
 
 	// LEDs
 	output        O_VALID,
@@ -60,13 +60,13 @@ ethernet_connection_inst (
     .i_eth_rx_ready(eth_rx_ready),  // Flow control signal
 
     // Ethernet: 1000BASE-T RGMII
-    .phy0_rx_clk(NET1_RX_CLK),
-    .phy0_rxd(NET1_RX_DATA),
-    .phy0_rx_ctl(NET1_RX_DV),
+    .phy0_rx_clk(NET0_RX_CLK),
+    .phy0_rxd(NET0_RX_DATA),
+    .phy0_rx_ctl(NET0_RX_DV),
     .phy0_tx_clk(),
     .phy0_txd(),
     .phy0_tx_ctl(),
-    .phy0_reset_n(NET1_RESET_N),
+    .phy0_reset_n(NET0_RESET_N),
     .phy0_int_n()
 );
 
