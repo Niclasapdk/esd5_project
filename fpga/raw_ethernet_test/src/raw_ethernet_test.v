@@ -6,12 +6,15 @@ module raw_ethernet_test (
 	input  [0: 0] KEY,
 
 	// Ethernet 0
+	output        NET0_GTX_CLK,
 	output        NET0_RESET_N,
 	input         NET0_RX_CLK,
 	input  [3: 0] NET0_RX_DATA,
 	input         NET0_RX_DV,
+	input         NET0_RX_ER,
 	output [3: 0] NET0_TX_DATA,
 	output        NET0_TX_EN,
+	input         NET0_INT_N,
 
 	// LEDs
 	output        O_VALID,
@@ -25,10 +28,18 @@ module raw_ethernet_test (
 );
 
 wire core_reset_n;
+wire core_reset;
+assign core_reset = ~core_reset_n;
 
 wire ethernet_clk;
 wire ethernet_clk90;
 wire eth_rx_ready;
+assign O_DEBOUNCE = NET0_RX_ER;
+assign O_RESET = ethernet_clk;
+// assign O_DATA[6] = NET0_RX_CLK;
+// assign O_DATA[5] = NET0_RX_DV;
+// assign O_DATA[3: 0] = NET0_RX_DATA;
+// assign NET0_TX_EN = 1;
 
 my_pll pll_inst (
 	.areset(~KEY[0]),
@@ -39,11 +50,12 @@ my_pll pll_inst (
 	.locked(core_reset_n)
 );
 
-debounce debounce_ready_inst(
-	.pb_1(I_READY),
-	.clk(sys_clk),
-	.pb_out(eth_rx_ready)
-);
+// debounce debounce_ready_inst(
+// 	.pb_1(I_READY),
+// 	.clk(sys_clk),
+// 	.pb_out(eth_rx_ready)
+// );
+assign eth_rx_ready = ~I_READY;
 
 ethernet_connection #(.TARGET("ALTERA"))
 ethernet_connection_inst (
@@ -51,7 +63,7 @@ ethernet_connection_inst (
     // Synchronous reset
     .i_clk(ethernet_clk),
     .i_clk90(ethernet_clk90),
-    .rst(core_reset_n),
+    .rst(core_reset),
     
     // Output raw Ethernet frame data
     .o_eth_rx_valid(O_VALID),
@@ -63,11 +75,11 @@ ethernet_connection_inst (
     .phy0_rx_clk(NET0_RX_CLK),
     .phy0_rxd(NET0_RX_DATA),
     .phy0_rx_ctl(NET0_RX_DV),
-    .phy0_tx_clk(),
-    .phy0_txd(),
-    .phy0_tx_ctl(),
+    .phy0_tx_clk(NET0_GTX_CLK),
+    .phy0_txd(NET0_TX_DATA),
+    .phy0_tx_ctl(NET0_TX_EN),
     .phy0_reset_n(NET0_RESET_N),
-    .phy0_int_n()
+    .phy0_int_n(NET0_INT_N)
 );
 
 endmodule

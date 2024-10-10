@@ -1,5 +1,5 @@
 Flow report for raw_ethernet_test
-Mon Oct  7 10:34:44 2024
+Thu Oct 10 14:07:15 2024
 Quartus Prime Version 20.1.1 Build 720 11/11/2020 SJ Lite Edition
 
 
@@ -41,20 +41,20 @@ https://fpgasoftware.intel.com/eula.
 +----------------------------------------------------------------------------------+
 ; Flow Summary                                                                     ;
 +------------------------------------+---------------------------------------------+
-; Flow Status                        ; Successful - Mon Oct  7 10:34:44 2024       ;
+; Flow Status                        ; Successful - Thu Oct 10 14:07:15 2024       ;
 ; Quartus Prime Version              ; 20.1.1 Build 720 11/11/2020 SJ Lite Edition ;
 ; Revision Name                      ; raw_ethernet_test                           ;
 ; Top-level Entity Name              ; raw_ethernet_test                           ;
 ; Family                             ; Cyclone IV E                                ;
 ; Device                             ; EP4CE115F29C7                               ;
 ; Timing Models                      ; Final                                       ;
-; Total logic elements               ; 202 / 114,480 ( < 1 % )                     ;
-;     Total combinational functions  ; 189 / 114,480 ( < 1 % )                     ;
-;     Dedicated logic registers      ; 110 / 114,480 ( < 1 % )                     ;
-; Total registers                    ; 110                                         ;
-; Total pins                         ; 27 / 529 ( 5 % )                            ;
+; Total logic elements               ; 902 / 114,480 ( < 1 % )                     ;
+;     Total combinational functions  ; 848 / 114,480 ( < 1 % )                     ;
+;     Dedicated logic registers      ; 514 / 114,480 ( < 1 % )                     ;
+; Total registers                    ; 526                                         ;
+; Total pins                         ; 30 / 529 ( 6 % )                            ;
 ; Total virtual pins                 ; 0                                           ;
-; Total memory bits                  ; 110,592 / 3,981,312 ( 3 % )                 ;
+; Total memory bits                  ; 81,920 / 3,981,312 ( 2 % )                  ;
 ; Embedded Multiplier 9-bit elements ; 0 / 532 ( 0 % )                             ;
 ; Total PLLs                         ; 1 / 4 ( 25 % )                              ;
 +------------------------------------+---------------------------------------------+
@@ -65,7 +65,7 @@ https://fpgasoftware.intel.com/eula.
 +-------------------+---------------------+
 ; Option            ; Setting             ;
 +-------------------+---------------------+
-; Start date & time ; 10/07/2024 10:32:00 ;
+; Start date & time ; 10/10/2024 14:06:39 ;
 ; Main task         ; Compilation         ;
 ; Revision Name     ; raw_ethernet_test   ;
 +-------------------+---------------------+
@@ -76,7 +76,7 @@ https://fpgasoftware.intel.com/eula.
 +-------------------------------------+----------------------------------------+---------------+-------------+-----------------------------------+
 ; Assignment Name                     ; Value                                  ; Default Value ; Entity Name ; Section Id                        ;
 +-------------------------------------+----------------------------------------+---------------+-------------+-----------------------------------+
-; COMPILER_SIGNATURE_ID               ; 175964485223.172828992006298           ; --            ; --          ; --                                ;
+; COMPILER_SIGNATURE_ID               ; 175964485223.172856199940021           ; --            ; --          ; --                                ;
 ; EDA_GENERATE_FUNCTIONAL_NETLIST     ; Off                                    ; --            ; --          ; eda_board_design_timing           ;
 ; EDA_GENERATE_FUNCTIONAL_NETLIST     ; Off                                    ; --            ; --          ; eda_board_design_boundary_scan    ;
 ; EDA_GENERATE_FUNCTIONAL_NETLIST     ; Off                                    ; --            ; --          ; eda_board_design_signal_integrity ;
@@ -102,15 +102,12 @@ https://fpgasoftware.intel.com/eula.
 +----------------------+--------------+-------------------------+---------------------+------------------------------------+
 ; Module Name          ; Elapsed Time ; Average Processors Used ; Peak Virtual Memory ; Total CPU Time (on all processors) ;
 +----------------------+--------------+-------------------------+---------------------+------------------------------------+
-; Analysis & Synthesis ; 00:00:09     ; 1.0                     ; 639 MB              ; 00:00:21                           ;
-; Fitter               ; 00:00:17     ; 1.0                     ; 1368 MB             ; 00:00:25                           ;
-; Assembler            ; 00:00:03     ; 1.0                     ; 572 MB              ; 00:00:03                           ;
-; Timing Analyzer      ; 00:00:01     ; 1.0                     ; 757 MB              ; 00:00:02                           ;
-; EDA Netlist Writer   ; 00:00:01     ; 1.0                     ; 819 MB              ; 00:00:00                           ;
-; Assembler            ; 00:00:02     ; 1.0                     ; 573 MB              ; 00:00:03                           ;
-; Timing Analyzer      ; 00:00:02     ; 1.0                     ; 725 MB              ; 00:00:01                           ;
-; EDA Netlist Writer   ; 00:00:00     ; 1.0                     ; 818 MB              ; 00:00:00                           ;
-; Total                ; 00:00:35     ; --                      ; --                  ; 00:00:55                           ;
+; Analysis & Synthesis ; 00:00:10     ; 1.0                     ; 645 MB              ; 00:00:21                           ;
+; Fitter               ; 00:00:18     ; 1.0                     ; 1399 MB             ; 00:00:28                           ;
+; Assembler            ; 00:00:03     ; 1.0                     ; 575 MB              ; 00:00:03                           ;
+; Timing Analyzer      ; 00:00:02     ; 1.1                     ; 768 MB              ; 00:00:02                           ;
+; EDA Netlist Writer   ; 00:00:01     ; 1.0                     ; 825 MB              ; 00:00:01                           ;
+; Total                ; 00:00:34     ; --                      ; --                  ; 00:00:55                           ;
 +----------------------+--------------+-------------------------+---------------------+------------------------------------+
 
 
@@ -121,9 +118,6 @@ https://fpgasoftware.intel.com/eula.
 +----------------------+------------------+---------+------------+----------------+
 ; Analysis & Synthesis ; mltop            ; mltop   ; mltop      ; x86_64         ;
 ; Fitter               ; mltop            ; mltop   ; mltop      ; x86_64         ;
-; Assembler            ; mltop            ; mltop   ; mltop      ; x86_64         ;
-; Timing Analyzer      ; mltop            ; mltop   ; mltop      ; x86_64         ;
-; EDA Netlist Writer   ; mltop            ; mltop   ; mltop      ; x86_64         ;
 ; Assembler            ; mltop            ; mltop   ; mltop      ; x86_64         ;
 ; Timing Analyzer      ; mltop            ; mltop   ; mltop      ; x86_64         ;
 ; EDA Netlist Writer   ; mltop            ; mltop   ; mltop      ; x86_64         ;
@@ -138,9 +132,6 @@ quartus_fit --read_settings_files=off --write_settings_files=off raw_ethernet_te
 quartus_asm --read_settings_files=off --write_settings_files=off raw_ethernet_test -c raw_ethernet_test
 quartus_sta raw_ethernet_test -c raw_ethernet_test
 quartus_eda --read_settings_files=off --write_settings_files=off raw_ethernet_test -c raw_ethernet_test
-quartus_asm --read_settings_files=on --write_settings_files=off raw_ethernet_test -c raw_ethernet_test
-quartus_sta raw_ethernet_test -c raw_ethernet_test
-quartus_eda --read_settings_files=on --write_settings_files=off raw_ethernet_test -c raw_ethernet_test
 
 
 
