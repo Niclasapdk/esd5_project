@@ -1,5 +1,5 @@
 Flow report for raw_ethernet_test
-Thu Oct 10 14:07:15 2024
+Thu Oct 10 16:27:59 2024
 Quartus Prime Version 20.1.1 Build 720 11/11/2020 SJ Lite Edition
 
 
@@ -41,17 +41,17 @@ https://fpgasoftware.intel.com/eula.
 +----------------------------------------------------------------------------------+
 ; Flow Summary                                                                     ;
 +------------------------------------+---------------------------------------------+
-; Flow Status                        ; Successful - Thu Oct 10 14:07:15 2024       ;
+; Flow Status                        ; Successful - Thu Oct 10 16:27:59 2024       ;
 ; Quartus Prime Version              ; 20.1.1 Build 720 11/11/2020 SJ Lite Edition ;
 ; Revision Name                      ; raw_ethernet_test                           ;
 ; Top-level Entity Name              ; raw_ethernet_test                           ;
 ; Family                             ; Cyclone IV E                                ;
 ; Device                             ; EP4CE115F29C7                               ;
 ; Timing Models                      ; Final                                       ;
-; Total logic elements               ; 902 / 114,480 ( < 1 % )                     ;
-;     Total combinational functions  ; 848 / 114,480 ( < 1 % )                     ;
-;     Dedicated logic registers      ; 514 / 114,480 ( < 1 % )                     ;
-; Total registers                    ; 526                                         ;
+; Total logic elements               ; 1,031 / 114,480 ( < 1 % )                   ;
+;     Total combinational functions  ; 943 / 114,480 ( < 1 % )                     ;
+;     Dedicated logic registers      ; 605 / 114,480 ( < 1 % )                     ;
+; Total registers                    ; 617                                         ;
 ; Total pins                         ; 30 / 529 ( 6 % )                            ;
 ; Total virtual pins                 ; 0                                           ;
 ; Total memory bits                  ; 81,920 / 3,981,312 ( 2 % )                  ;
@@ -65,7 +65,7 @@ https://fpgasoftware.intel.com/eula.
 +-------------------+---------------------+
 ; Option            ; Setting             ;
 +-------------------+---------------------+
-; Start date & time ; 10/10/2024 14:06:39 ;
+; Start date & time ; 10/10/2024 16:27:24 ;
 ; Main task         ; Compilation         ;
 ; Revision Name     ; raw_ethernet_test   ;
 +-------------------+---------------------+
@@ -76,7 +76,7 @@ https://fpgasoftware.intel.com/eula.
 +-------------------------------------+----------------------------------------+---------------+-------------+-----------------------------------+
 ; Assignment Name                     ; Value                                  ; Default Value ; Entity Name ; Section Id                        ;
 +-------------------------------------+----------------------------------------+---------------+-------------+-----------------------------------+
-; COMPILER_SIGNATURE_ID               ; 175964485223.172856199940021           ; --            ; --          ; --                                ;
+; COMPILER_SIGNATURE_ID               ; 175964485223.172857044440449           ; --            ; --          ; --                                ;
 ; EDA_GENERATE_FUNCTIONAL_NETLIST     ; Off                                    ; --            ; --          ; eda_board_design_timing           ;
 ; EDA_GENERATE_FUNCTIONAL_NETLIST     ; Off                                    ; --            ; --          ; eda_board_design_boundary_scan    ;
 ; EDA_GENERATE_FUNCTIONAL_NETLIST     ; Off                                    ; --            ; --          ; eda_board_design_signal_integrity ;
@@ -102,12 +102,12 @@ https://fpgasoftware.intel.com/eula.
 +----------------------+--------------+-------------------------+---------------------+------------------------------------+
 ; Module Name          ; Elapsed Time ; Average Processors Used ; Peak Virtual Memory ; Total CPU Time (on all processors) ;
 +----------------------+--------------+-------------------------+---------------------+------------------------------------+
-; Analysis & Synthesis ; 00:00:10     ; 1.0                     ; 645 MB              ; 00:00:21                           ;
-; Fitter               ; 00:00:18     ; 1.0                     ; 1399 MB             ; 00:00:28                           ;
-; Assembler            ; 00:00:03     ; 1.0                     ; 575 MB              ; 00:00:03                           ;
-; Timing Analyzer      ; 00:00:02     ; 1.1                     ; 768 MB              ; 00:00:02                           ;
-; EDA Netlist Writer   ; 00:00:01     ; 1.0                     ; 825 MB              ; 00:00:01                           ;
-; Total                ; 00:00:34     ; --                      ; --                  ; 00:00:55                           ;
+; Analysis & Synthesis ; 00:00:09     ; 1.0                     ; 644 MB              ; 00:00:21                           ;
+; Fitter               ; 00:00:18     ; 1.0                     ; 1404 MB             ; 00:00:28                           ;
+; Assembler            ; 00:00:03     ; 1.0                     ; 576 MB              ; 00:00:03                           ;
+; Timing Analyzer      ; 00:00:02     ; 1.1                     ; 769 MB              ; 00:00:02                           ;
+; EDA Netlist Writer   ; 00:00:00     ; 1.0                     ; 823 MB              ; 00:00:01                           ;
+; Total                ; 00:00:32     ; --                      ; --                  ; 00:00:55                           ;
 +----------------------+--------------+-------------------------+---------------------+------------------------------------+
 
 
