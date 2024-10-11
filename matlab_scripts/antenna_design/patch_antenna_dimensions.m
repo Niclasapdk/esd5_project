@@ -1,4 +1,4 @@
-er = 4.7;
+er = 4.259; %solved for after antenna visit :) from some frequency cant remember now :(
 vo = 3E8;
 fr = 2.44E9;
 h = 1.43e-3;
@@ -15,8 +15,8 @@ num2sip(deltaL);
 
 L = (1 / (2 * fr * sqrt(eeff) * sqrt(mu_0 * epsilon_0))) - (2 * deltaL);
 
-num2sip(L);
-num2sip(W);
+num2sip(L)
+num2sip(W)
 
 
 % Define constants
@@ -36,3 +36,9 @@ G12 = (1 / (120 * pi^2)) * integral(integrand2, 0, pi);
 R = (1)/(2*(G1+G12));
 
 xp = (L/pi)*acos(sqrt(50/R));
+syms x y
+feedwidth = solve(50 == ((120*pi)/(sqrt(eeff))/((x/h)+1.393+0.667*log((x/h) + 1.44))),x);
+vpa(feedwidth);
+num2sip(0.002339715109807816757048285620612);
+feedinsert = solve(50 == R*cos((pi/L)*y)^2,y);
+num2sip(0.010877943066655413771036390799119);
