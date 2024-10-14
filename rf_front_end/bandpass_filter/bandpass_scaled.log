@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 Questionable use of curly braces in "l1 n002 p001 {99.23n*(1+{tol})}"
     Error: undefined symbol in: "99.23n*(1+([tol]))"
 Questionable use of curly braces in "l1 n002 p001 (99.23n*(1+{tol}))"
@@ -55,6 +56,13 @@ Questionable use of curly braces in "c7 n005 p003 {42.87f*(1+{tol})}"
 Questionable use of curly braces in "c7 n005 p003 (42.87f*(1+{tol}))"
     Error: undefined symbol in: "[tol]"
 Circuit: * C:\Users\johba\esd5_project\rf_front_end\bandpass_filter\bandpass_scaled.asc
+=======
+LTspice 24.0.9 for Windows
+Circuit: * C:\Users\nicla\Documents\GitHub\esd5_project\rf_front_end\bandpass_filter\bandpass_scaled.asc
+Start Time: Mon Oct 14 11:18:51 2024
+solver = Normal
+Maximum thread count: 16
+>>>>>>> 95d8207 (adds bandpass simulation data)
 
 Error on line 2 : l1 n002 p001 (99.23n*(1+(tol)))
 	 Unknown parameter "*"
@@ -90,6 +98,7 @@ Total elapsed time: 0.154 seconds.
 
 tnom = 27
 temp = 27
+<<<<<<< HEAD
 method = trap
 totiter = 0
 traniter = 0
@@ -99,4 +108,9 @@ rejected = 0
 matrix size = 9
 fillins = 1
 solver = Normal
+=======
+method = modified trap
+.step tol=0.16
+Total elapsed time: 0.311 seconds.
+>>>>>>> 95d8207 (adds bandpass simulation data)
 
