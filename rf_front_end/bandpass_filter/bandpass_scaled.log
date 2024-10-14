@@ -1,44 +1,44 @@
 LTspice 24.0.9 for Windows
 Circuit: * C:\Users\nicla\Documents\GitHub\esd5_project\rf_front_end\bandpass_filter\bandpass_scaled.asc
-Start Time: Tue Oct  8 12:39:38 2024
+Start Time: Thu Oct 10 12:51:24 2024
 solver = Normal
 Maximum thread count: 16
 
 
 
 .OP point found by inspection.
-.step tol=-0.02
+.step tol=-0.16
 
 
 
-.step tol=-0.015
+.step tol=-0.12
 
 
 
-.step tol=-0.01
+.step tol=-0.08
 
 
 
-.step tol=-0.005
+.step tol=-0.04
 
 
 
-.step tol=1.73472347597681e-18
+.step tol=1.38777878078145e-17
 
 
 
-.step tol=0.005
+.step tol=0.04
 
 
 
-.step tol=0.01
+.step tol=0.08
 
 
 
-.step tol=0.015
+.step tol=0.12
 tnom = 27
 temp = 27
 method = modified trap
-.step tol=0.02
-Total elapsed time: 0.344 seconds.
+.step tol=0.16
+Total elapsed time: 0.294 seconds.
 
