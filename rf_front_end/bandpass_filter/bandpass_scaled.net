@@ -17,6 +17,6 @@ C5 N003 P001 {42.87f * (1+{tol})} ; C5
 C6 N004 P002 {26.73f * (1+{tol})} ; C6
 C7 N005 P003 {42.87f * (1+{tol})} ; C7
 .ac dec 1000 1Giga 5Giga
-.;step param tol -0.16 0.16 0.04
+.step param tol -0.16 0.16 0.04
 .backanno
 .end
