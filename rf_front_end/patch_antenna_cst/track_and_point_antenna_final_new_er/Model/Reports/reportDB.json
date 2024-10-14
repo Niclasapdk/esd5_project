@@ -1,0 +1,50 @@
+{
+    "lastModifiedBy": {
+        "build": 20230504,
+        "major": 2023,
+        "patch": 4
+    },
+    "reports": [
+        {
+            "items": [
+                {
+                    "description": "",
+                    "module": "ModelerViewer",
+                    "name": "Components\\component1",
+                    "options": "{\"addOverlay\":true}",
+                    "screenshotFilepath": "70ea4b4fa7774a6a9a9b7fbd27af1742\\88f999c44fdb434cb79ad__d_9808_c7.png",
+                    "sortkey": 0,
+                    "treePath": "{\"plotSettings\":\"<?xml version=\\\"1.0\\\" encoding=\\\"UTF-8\\\"?>\\n<RememberPlots version=\\\"20200930\\\">\\n  <ModelViewSettings name=\\\"\\\" workplane=\\\"1\\\">\\n    <ViewSettings axes=\\\"1\\\" bbox=\\\"1\\\" wireframe=\\\"0\\\">\\n      <Camera matrix=\\\"-0.61909467 -0.705911219 0.344110727 0 0.782802105 -0.519673884 0.342288107 0 -0.0627996847 0.481279254 0.874315262 0 0 0 0 1\\\" center=\\\"-1.03198528 -15.09161\\\" distance=\\\"1519.54407\\\" scale=\\\"10.1880369\\\"/>\\n      <Cutplane active=\\\"0\\\" normal=\\\"1 0 0\\\" dist=\\\"0\\\" covermode=\\\"HIDE\\\"/>\\n    </ViewSettings>\\n  </ModelViewSettings>\\n</RememberPlots>\\n\",\"treePaths\":[\"Components\\\\component1\"]}",
+                    "uid": "88f999c44fdb434cb79ad11d598082c7",
+                    "vis3DFilepath": ""
+                },
+                {
+                    "description": "",
+                    "module": "ModelerViewer",
+                    "name": "Components\\component1",
+                    "options": "{\"addOverlay\":true}",
+                    "screenshotFilepath": "70ea4b4fa7774a6a9a9b7fbd27af1742\\b09ed_08b_d64d048b7_70_4e64ae860.png",
+                    "sortkey": 1,
+                    "treePath": "{\"plotSettings\":\"<?xml version=\\\"1.0\\\" encoding=\\\"UTF-8\\\"?>\\n<RememberPlots version=\\\"20200930\\\">\\n  <ModelViewSettings name=\\\"\\\" workplane=\\\"1\\\">\\n    <ViewSettings axes=\\\"1\\\" bbox=\\\"1\\\" wireframe=\\\"0\\\">\\n      <Camera matrix=\\\"-0.61909467 -0.705911219 0.344110727 0 0.782802105 -0.519673884 0.342288107 0 -0.0627996847 0.481279254 0.874315262 0 0 0 0 1\\\" center=\\\"-1.03198528 -15.09161\\\" distance=\\\"1519.54407\\\" scale=\\\"10.1880369\\\"/>\\n      <Cutplane active=\\\"0\\\" normal=\\\"1 0 0\\\" dist=\\\"0\\\" covermode=\\\"HIDE\\\"/>\\n    </ViewSettings>\\n  </ModelViewSettings>\\n</RememberPlots>\\n\",\"treePaths\":[\"Components\\\\component1\"]}",
+                    "uid": "b09ed208b5d64d048b727014e64ae860",
+                    "vis3DFilepath": ""
+                },
+                {
+                    "description": "",
+                    "module": "ModelerViewer",
+                    "name": "Farfields\\farfield (f=2.4677) [1]",
+                    "options": "{\"addOverlay\":true}",
+                    "screenshotFilepath": "70ea4b4fa7774a6a9a9b7fbd27af1742\\3c8d7cbaa_8c4_00b__600_7_b4b_a3d.png",
+                    "sortkey": 2,
+                    "treePath": "{\"plotSettings\":\"{\\\"data\\\":{\\\"ff\\\":{\\\"calc_settings\\\":{\\\"FFArray\\\":{\\\"arrayEnabled\\\":false,\\\"arrayList\\\":[{\\\"amplitude\\\":\\\"1\\\",\\\"phase\\\":\\\"-45\\\",\\\"posX\\\":\\\"-30.737705\\\",\\\"posY\\\":\\\"-30.737705\\\",\\\"posZ\\\":\\\"0\\\"},{\\\"amplitude\\\":\\\"1\\\",\\\"phase\\\":\\\"-15\\\",\\\"posX\\\":\\\"30.737705\\\",\\\"posY\\\":\\\"-30.737705\\\",\\\"posZ\\\":\\\"0\\\"},{\\\"amplitude\\\":\\\"1\\\",\\\"phase\\\":\\\"15\\\",\\\"posX\\\":\\\"-30.737705\\\",\\\"posY\\\":\\\"30.737705\\\",\\\"posZ\\\":\\\"0\\\"},{\\\"amplitude\\\":\\\"1\\\",\\\"phase\\\":\\\"45\\\",\\\"posX\\\":\\\"30.737705\\\",\\\"posY\\\":\\\"30.737705\\\",\\\"posZ\\\":\\\"0\\\"}],\\\"autoPhaseShift\\\":false,\\\"type\\\":\\\"RECT\\\",\\\"xNum\\\":2,\\\"xPhase\\\":\\\"30\\\",\\\"xSpace\\\":\\\"61.47541\\\",\\\"yNum\\\":2,\\\"yPhase\\\":\\\"60\\\",\\\"ySpace\\\":\\\"61.47541\\\",\\\"zNum\\\":1,\\\"zPhase\\\":\\\"0.0\\\",\\\"zSpace\\\":\\\"0.0\\\"},\\\"MLFMMFFCalcFlag\\\":true,\\\"MLFMMFFCalcNumInterpPoints\\\":6,\\\"antennaType\\\":\\\"ANTENNA_UNKNOWN\\\",\\\"automaticCS\\\":true,\\\"axesType\\\":\\\"AXES_USER\\\",\\\"calcMethod\\\":\\\"FARFIELD_APPROX\\\",\\\"calculationFlags\\\":5,\\\"constAngle_1D\\\":90.0,\\\"coordSysType\\\":\\\"SPHERICAL\\\",\\\"distance\\\":1.0,\\\"includeUCSidewalls\\\":true,\\\"interpolation\\\":\\\"INT_AUTOMATIC\\\",\\\"lockSteps\\\":true,\\\"mirrorPlanes\\\":[{\\\"dir\\\":-1,\\\"epsilon\\\":0.0,\\\"kappa\\\":0.0,\\\"lossy\\\":false,\\\"pos\\\":0.0,\\\"type\\\":\\\"EL\\\",\\\"use\\\":false},{\\\"dir\\\":-1,\\\"epsilon\\\":0.0,\\\"kappa\\\":0.0,\\\"lossy\\\":false,\\\"pos\\\":0.0,\\\"type\\\":\\\"EL\\\",\\\"use\\\":false}],\\\"originType\\\":\\\"FARFIELD_CBBOX\\\",\\\"phaseCenter\\\":{\\\"component\\\":\\\"BORESIGHT\\\",\\\"doCalc\\\":false,\\\"minRes\\\":0.0,\\\"plane\\\":\\\"BOTH_PLANES\\\",\\\"rotAngleZLocalOnePlane\\\":0.0,\\\"spaceLimit\\\":30.0},\\\"phiEnd\\\":360.0,\\\"phiStart\\\":0.0,\\\"plotDim\\\":\\\"threeD\\\",\\\"plotMode\\\":\\\"DIRECTIVITY\\\",\\\"plotRangeOnly\\\":false,\\\"polarization\\\":\\\"LINEAR\\\",\\\"slantAngle\\\":0.0,\\\"step2_2D\\\":5.0,\\\"step_1D\\\":5.0,\\\"step_2D\\\":5.0,\\\"symmetricRange\\\":false,\\\"theta360\\\":false,\\\"thetaEnd\\\":180.0,\\\"thetaStart\\\":0.0,\\\"timeDomainFF\\\":false,\\\"useUserMirrorplane\\\":false,\\\"userFrequency\\\":-1.0,\\\"userMirrorPlane\\\":{\\\"dir\\\":0,\\\"epsilon\\\":1.0,\\\"kappa\\\":0.0,\\\"lossy\\\":false,\\\"pos\\\":0.0,\\\"type\\\":\\\"EL\\\",\\\"use\\\":false},\\\"userNMultipol\\\":0,\\\"userOrigin\\\":[0.0,0.0,0.0],\\\"userRefPol\\\":[0.0,1.0,0.0],\\\"userTime\\\":0.0,\\\"vary_1D\\\":\\\"VARY_POLAR\\\",\\\"xAxis\\\":[1.0,0.0,0.0],\\\"zAxis\\\":[0.0,0.0,1.0]},\\\"plot_settings\\\":{\\\"MLSkipSidelobesAbove\\\":0.9,\\\"MLdBLevel\\\":3.0,\\\"banding2D\\\":false,\\\"colorByValue\\\":true,\\\"dBNormalisation\\\":0.0,\\\"dBRange\\\":40.0,\\\"dBUnit\\\":\\\"AMP_SI_UNSCALED\\\",\\\"disablePolarPlotExtraLines\\\":false,\\\"doPlotMax\\\":false,\\\"drawContourLines\\\":false,\\\"drawStepLines\\\":false,\\\"farfield1DWithProfile\\\":false,\\\"farfieldTransparent\\\":false,\\\"ff3dScaleFactor\\\":1.0,\\\"flipAxes2D\\\":false,\\\"invertAxialRatio\\\":false,\\\"invertXAxis2D\\\":false,\\\"invertYAxis2D\\\":false,\\\"keepAspectRatio2D\\\":false,\\\"linear\\\":false,\\\"maxPlotValue\\\":\\\"1.0\\\",\\\"maxReference\\\":\\\"vecabs\\\",\\\"numContours\\\":33,\\\"plot1dtype\\\":\\\"cartesian\\\",\\\"plot2dtype\\\":\\\"ortho\\\",\\\"plotComp\\\":\\\"spherical abs\\\",\\\"plotIsoLongitudeLatitude\\\":false,\\\"show3dAxes\\\":true,\\\"showGridLines\\\":true,\\\"showPhaseCenter\\\":true,\\\"showStructure\\\":false,\\\"showTIS\\\":\\\"off\\\",\\\"showTRP\\\":\\\"off\\\",\\\"structTransparent\\\":false}},\\\"modelview\\\":\\\"<?xml version=\\\\\\\"1.0\\\\\\\" encoding=\\\\\\\"UTF-8\\\\\\\"?>\\\\n<RememberPlots version=\\\\\\\"20200930\\\\\\\">\\\\n  <ModelViewSettings name=\\\\\\\"\\\\\\\" workplane=\\\\\\\"1\\\\\\\">\\\\n    <ViewSettings axes=\\\\\\\"1\\\\\\\" bbox=\\\\\\\"1\\\\\\\" wireframe=\\\\\\\"0\\\\\\\">\\\\n      <Camera matrix=\\\\\\\"-0.258806616 -0.534088492 0.804843843 0 0.902570784 0.163091645 0.398458302 0 -0.344075054 0.829551339 0.439843178 0 0 0 0 1\\\\\\\" center=\\\\\\\"0 0\\\\\\\" distance=\\\\\\\"1657.11108\\\\\\\" scale=\\\\\\\"2.60159731\\\\\\\"/>\\\\n      <Cutplane active=\\\\\\\"0\\\\\\\" normal=\\\\\\\"1 0 0\\\\\\\" dist=\\\\\\\"0\\\\\\\" covermode=\\\\\\\"HIDE\\\\\\\"/>\\\\n    </ViewSettings>\\\\n  </ModelViewSettings>\\\\n</RememberPlots>\\\\n\\\",\\\"parameters_expr\\\":{\\\"CH\\\":\\\"0.035\\\",\\\"FL\\\":\\\"15.287\\\",\\\"FW\\\":\\\"2.339\\\",\\\"P1L\\\":\\\"29.426\\\",\\\"P1W\\\":\\\"37.911\\\",\\\"PH\\\":\\\"1.43\\\",\\\"PL\\\":\\\"29.426\\\",\\\"PW\\\":\\\"37.911\\\",\\\"S1H\\\":\\\"1.43\\\",\\\"S1L\\\":\\\"60\\\",\\\"S1W\\\":\\\"60\\\",\\\"SH\\\":\\\"1.43\\\",\\\"SL\\\":\\\"29.426\\\",\\\"SW\\\":\\\"37.911\\\",\\\"gapL\\\":\\\"10.878\\\",\\\"gapW\\\":\\\"2\\\"},\\\"parameters_val\\\":{\\\"CH\\\":0.035,\\\"FL\\\":15.287,\\\"FW\\\":2.339,\\\"P1L\\\":29.426,\\\"P1W\\\":37.911,\\\"PH\\\":1.43,\\\"PL\\\":29.426,\\\"PW\\\":37.911,\\\"S1H\\\":1.43,\\\"S1L\\\":60.0,\\\"S1W\\\":60.0,\\\"SH\\\":1.43,\\\"SL\\\":29.426,\\\"SW\\\":37.911,\\\"gapL\\\":10.878,\\\"gapW\\\":2.0}},\\\"version\\\":20210504}\",\"treePaths\":[\"Farfields\\\\farfield (f=2.4677) [1]\"]}",
+                    "uid": "3c8d7cbaa28c4500b52600571b4b2a3d",
+                    "vis3DFilepath": ""
+                }
+            ],
+            "name": "Report 1",
+            "pathName": "70ea4b4fa7774a6a9a9b7fbd27af1742",
+            "uid": "70ea4b4fa7774a6a9a9b7fbd27af1742"
+        }
+    ],
+    "version": 20200902
+}

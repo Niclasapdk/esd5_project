@@ -1,0 +1,65 @@
+{
+    "parameters": [
+        {
+            "expr": "128",
+            "name": "SL",
+            "value": "128"
+        },
+        {
+            "expr": "120",
+            "name": "SW",
+            "value": "120"
+        },
+        {
+            "expr": "1.43",
+            "name": "SH",
+            "value": "1.43"
+        },
+        {
+            "expr": "0.035",
+            "name": "CH",
+            "value": "0.035"
+        },
+        {
+            "expr": "28.027",
+            "name": "PL",
+            "value": "28.027"
+        },
+        {
+            "expr": "36.415",
+            "name": "PW",
+            "value": "36.415"
+        },
+        {
+            "expr": "2.24",
+            "name": "StripW",
+            "value": "2.24"
+        },
+        {
+            "expr": "10.47",
+            "name": "NotchLength",
+            "value": "10.47"
+        },
+        {
+            "expr": "2.24",
+            "name": "NotchWidth",
+            "value": "2.24"
+        },
+        {
+            "expr": "16.5",
+            "name": "FL",
+            "value": "16.5"
+        },
+        {
+            "expr": "2.24",
+            "name": "FW",
+            "value": "2.24"
+        },
+        {
+            "expr": "6.26",
+            "name": "k",
+            "value": "6.26"
+        }
+    ],
+    "version": 1
+}
