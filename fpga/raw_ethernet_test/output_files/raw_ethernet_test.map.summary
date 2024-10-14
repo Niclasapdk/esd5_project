@@ -1,13 +1,13 @@
-Analysis & Synthesis Status : Successful - Thu Oct 10 16:27:34 2024
+Analysis & Synthesis Status : Successful - Mon Oct 14 10:14:46 2024
 Quartus Prime Version : 20.1.1 Build 720 11/11/2020 SJ Lite Edition
 Revision Name : raw_ethernet_test
 Top-level Entity Name : raw_ethernet_test
 Family : Cyclone IV E
-Total logic elements : 1,094
-    Total combinational functions : 937
-    Dedicated logic registers : 625
-Total registers : 637
-Total pins : 30
+Total logic elements : 1,452
+    Total combinational functions : 1,324
+    Dedicated logic registers : 669
+Total registers : 681
+Total pins : 45
 Total virtual pins : 0
 Total memory bits : 81,920
 Embedded Multiplier 9-bit elements : 0

@@ -16,6 +16,17 @@ module raw_ethernet_test (
 	output        NET0_TX_EN,
 	input         NET0_INT_N,
 
+	// Ethernet 1
+	output        NET1_GTX_CLK,
+	output        NET1_RESET_N,
+	input         NET1_RX_CLK,
+	input  [3: 0] NET1_RX_DATA,
+	input         NET1_RX_DV,
+	input         NET1_RX_ER,
+	output [3: 0] NET1_TX_DATA,
+	output        NET1_TX_EN,
+	input         NET1_INT_N,
+
 	// LEDs
 	output        O_VALID,
 	output        O_LAST,
@@ -50,11 +61,6 @@ my_pll pll_inst (
 	.locked(core_reset_n)
 );
 
-// debounce debounce_ready_inst(
-// 	.pb_1(I_READY),
-// 	.clk(sys_clk),
-// 	.pb_out(eth_rx_ready)
-// );
 assign eth_rx_ready = ~I_READY;
 
 ethernet_connection #(.TARGET("ALTERA"))
@@ -72,14 +78,14 @@ ethernet_connection_inst (
     .i_eth_rx_ready(eth_rx_ready),  // Flow control signal
 
     // Ethernet: 1000BASE-T RGMII
-    .phy0_rx_clk(NET0_RX_CLK),
-    .phy0_rxd(NET0_RX_DATA),
-    .phy0_rx_ctl(NET0_RX_DV),
-    .phy0_tx_clk(NET0_GTX_CLK),
-    .phy0_txd(NET0_TX_DATA),
-    .phy0_tx_ctl(NET0_TX_EN),
-    .phy0_reset_n(NET0_RESET_N),
-    .phy0_int_n(NET0_INT_N)
+    .phy_rx_clk(NET0_RX_CLK),
+    .phy_rxd(NET0_RX_DATA),
+    .phy_rx_ctl(NET0_RX_DV),
+    .phy_tx_clk(NET0_GTX_CLK),
+    .phy_txd(NET0_TX_DATA),
+    .phy_tx_ctl(NET0_TX_EN),
+    .phy_reset_n(NET0_RESET_N),
+    .phy_int_n(NET0_INT_N)
 );
 
 endmodule
