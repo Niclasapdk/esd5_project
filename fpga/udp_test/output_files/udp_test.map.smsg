@@ -1,0 +1,2 @@
+Warning (10268): Verilog HDL information at axis_async_fifo.v(383): always construct contains both blocking and non-blocking assignments File: /home/markus/uni/esd5_project/fpga/udp_test/lib/eth/lib/axis/rtl/axis_async_fifo.v Line: 383
+Warning (10268): Verilog HDL information at axis_async_fifo.v(647): always construct contains both blocking and non-blocking assignments File: /home/markus/uni/esd5_project/fpga/udp_test/lib/eth/lib/axis/rtl/axis_async_fifo.v Line: 647
