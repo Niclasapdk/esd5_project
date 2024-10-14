@@ -1,4 +1,5 @@
-er = 4.259; %solved for after antenna visit :) from some frequency cant remember now :(
+old_er = 4.7;
+er = 4.259; %solved for after antenna lab visit with found frequency of 2.54GHz
 vo = 3E8;
 fr = 2.44E9;
 h = 1.43e-3;
