@@ -1,6 +1,6 @@
 old_er = 4.7;
 er = 4.259; %solved for after antenna lab visit with found frequency of 2.54GHz
-vo = 3E8;
+vo = physconst('Lightspeed');
 fr = 2.44E9;
 h = 1.43e-3;
 mu_0 = 1.26e-6; % permeability of free space in H/m
@@ -16,8 +16,8 @@ num2sip(deltaL);
 
 L = (1 / (2 * fr * sqrt(eeff) * sqrt(mu_0 * epsilon_0))) - (2 * deltaL);
 
-num2sip(L)
-num2sip(W)
+num2sip(L);
+num2sip(W);
 
 
 % Define constants
@@ -42,4 +42,4 @@ feedwidth = solve(50 == ((120*pi)/(sqrt(eeff))/((x/h)+1.393+0.667*log((x/h) + 1.
 vpa(feedwidth);
 num2sip(0.002339715109807816757048285620612);
 feedinsert = solve(50 == R*cos((pi/L)*y)^2,y);
-num2sip(0.010877943066655413771036390799119);
+vpa(feedinsert);
