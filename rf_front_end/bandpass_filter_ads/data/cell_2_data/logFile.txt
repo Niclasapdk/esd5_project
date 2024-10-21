@@ -1,0 +1,17 @@
+
+hpeesofsim (*) 610.shp Aug 20 2024, MINT version 5
+    (64-bit windows built: Tue Aug 20, 2024 21:40:41 +0000)
+
+
+***** Simulation started at Thu Oct 17 16:05:47 2024
+      Running on host: "Niclas-Laptop"
+      In Directory: "C:\Users\nicla\MyFirstWorkspace_wrk\data"
+      Process ID: 9056
+
+
+SP SP1[1] <MyFirstWorkspace_lib:cell_2:schematic>   freq=(1.5 GHz->3.5 GHz)
+
+
+Resource usage:
+  Total stopwatch time     =     2.70 seconds.
+
