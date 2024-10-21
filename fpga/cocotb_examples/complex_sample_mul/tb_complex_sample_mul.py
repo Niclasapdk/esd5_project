@@ -1,5 +1,6 @@
 import cocotb
 from cocotb.triggers import Timer
+from cocotb.binary import BinaryValue
 
 def logprint(msg):
     print(f"FROM_TB {msg}")
@@ -25,10 +26,10 @@ def mul_model(Ix, Qx, Is, Qs):
 @cocotb.test()
 async def complex_sample_mul_test(dut):
     """test for multiplication using the complex_sample_mul task"""
-    Ix = [1, 2, 3, 4]
-    Qx = [6, 2, 1, 4]
-    Is = [8, 1, 2, 6]
-    Qs = [8, 1, 5, 1]
+    Ix = [2047, 2, 2, 2]
+    Qx = [4, 4, 4, 4]
+    Is = [2047, 2, 3, 4]
+    Qs = [1, 2, 3, 4]
     dut.I_x1.value = Ix[0]
     dut.I_x2.value = Ix[1]
     dut.I_x3.value = Ix[2]
@@ -48,7 +49,9 @@ async def complex_sample_mul_test(dut):
 
     await Timer(2)
     I_e, Q_e = mul_model(Ix, Qx, Is, Qs)
-    logprint(f"I_y: {dut.I_y.value}")
-    assert I_e == dut.I_y.value, "Expected I value"
-    assert Q_e == dut.Q_y.value, "Expected Q value"
+    logprint(f"I_y: {dut.I_y.value.signed_integer}")
+    logprint(f"Q_y: {dut.Q_y.value.signed_integer}")
+    assert I_e == dut.I_y.value.signed_integer, "Expected I value"
+    assert Q_e == dut.Q_y.value.signed_integer, "Expected Q value"
     await Timer(2)
+    #assert False, "snorre was here"
