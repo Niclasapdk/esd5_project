@@ -1,0 +1,5 @@
+sim_build
+__pycache__
+a.out
+.venv
+pyrightconfig.json

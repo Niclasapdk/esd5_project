@@ -1,0 +1,6 @@
+pytest
+pytest-xdist
+cocotb
+cocotb-bus
+cocotb-test
+cocotbext-axi
