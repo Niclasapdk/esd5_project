@@ -1,0 +1,22 @@
+Output: Gerber X2 Files
+Type  : GerberX2
+From  : Variant [[No Variations]] of Project [bandpass_microstrip_altium.PrjPcb]
+   Generated File[main_Copper_Signal_Top.gbr]
+   Generated File[main_Copper_Signal_Bot.gbr]
+   Generated File[main_Legend_Top.gbr]
+   Generated File[main_Legend_Bot.gbr]
+   Generated File[main_Soldermask_Top.gbr]
+   Generated File[main_Soldermask_Bot.gbr]
+   Generated File[main_Paste_Top.gbr]
+   Generated File[main_Paste_Bot.gbr]
+   Generated File[main_Profile.gbr]
+   Generated File[main_NPTH_Drill.gbr]
+   Generated File[main_PTH_Drill.gbr]
+   Generated File[main.EXTREP]
+   Generated File[main.REP]
+
+
+Files Generated   : 13
+Documents Printed : 0
+
+Finished Output Generation At 09.29.15 On 22/10/2024
