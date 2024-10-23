@@ -1,5 +1,5 @@
-old_er = 4.7;
-er = 4.259; %solved for after antenna lab visit with found frequency of 2.54GHz
+% old_er = 4.7;
+er = 4.2; %solved for after antenna lab visit with found frequency of 2.54GHz
 vo = physconst('Lightspeed');
 fr = 2.44E9;
 h = 1.43e-3;
@@ -16,8 +16,8 @@ num2sip(deltaL);
 
 L = (1 / (2 * fr * sqrt(eeff) * sqrt(mu_0 * epsilon_0))) - (2 * deltaL);
 
-num2sip(L);
-num2sip(W);
+num2sip(L)
+num2sip(W)
 
 
 % Define constants
