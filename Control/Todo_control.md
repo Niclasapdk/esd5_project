@@ -1,6 +1,6 @@
 # Todo list control
 
-- Motor model (transferfunction)
+- Motor model (transferfunction) [Aleksander dokumentere dette]
 - Sensors Encoder (Current)
 - Simple model
 - Cascade model
