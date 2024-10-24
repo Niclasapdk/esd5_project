@@ -24,7 +24,7 @@ localparam[1:0] st_in = 2'b00,
 //registers
 //######################################
 reg [TEMP_MA_AR_SIZE-1:0] temp_ma_ar = 0;
-reg real ma_sum, ma_last, ma_first, temp_sum_test;
+reg real ma_sum, ma_last, ma_first;
 
 //######################################
 //program
@@ -49,14 +49,13 @@ always @(posedge clk, posedge rst) begin
             st_shift:begin
                 temp_ma_ar <= temp_ma_ar << REAL_SIZE;
                 ma_sum <= (ma_sum + ma_first - ma_last)/MA_ARRAY_LENGTH;
-                temp_sum_test <= ma_sum + ma_first - ma_last;
                 state <= st_in;
             end
         endcase
     end
 end
 
-
+assign ma_out = ma_sum;
 
 //always @(posedge clk, posedge rst) begin
  //   if (rst) begin
