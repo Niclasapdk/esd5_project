@@ -1,0 +1,85 @@
+Test data 1: 
+
+  TCCR1A |= _BV(COM1B1);
+  OCR1B = 255;
+  delay(1000);
+  TCCR1A &= ~(_BV(COM1B1));
+  delay(500);
+  OCR1B  = 32;
+  TCCR1A |= _BV(COM1B1);
+  delay(1000);
+  TCCR1A &= ~(_BV(COM1B1));
+  delay(500);
+  OCR1B  = 127;
+  TCCR1A |= _BV(COM1B1);
+  delay(1000);
+  TCCR1A &= ~(_BV(COM1B1));
+  delay(500);
+  OCR1B  = 200;
+  TCCR1A |= _BV(COM1B1);
+  delay(1000);
+
+
+Test data 2: 
+
+  TCCR1A |= _BV(COM1B1);
+  OCR1B = 67;
+  delay(1000);
+  TCCR1A &= ~(_BV(COM1B1));
+  delay(500);
+  OCR1B  = 154;
+  TCCR1A |= _BV(COM1B1);
+  delay(1000);
+  TCCR1A &= ~(_BV(COM1B1));
+  delay(500);
+  OCR1B  = 212;
+  TCCR1A |= _BV(COM1B1);
+  delay(1000);
+  TCCR1A &= ~(_BV(COM1B1));
+  delay(500);
+  OCR1B  = 43;
+  TCCR1A |= _BV(COM1B1);
+  delay(1000);
+
+Test data 3: 
+
+  TCCR1A |= _BV(COM1B1);
+  OCR1B = 99;
+  delay(1000);
+  TCCR1A &= ~(_BV(COM1B1));
+  delay(500);
+  OCR1B  = 176;
+  TCCR1A |= _BV(COM1B1);
+  delay(1000);
+  TCCR1A &= ~(_BV(COM1B1));
+  delay(500);
+  OCR1B  = 58;
+  TCCR1A |= _BV(COM1B1);
+  delay(1000);
+  TCCR1A &= ~(_BV(COM1B1));
+  delay(500);
+  OCR1B  = 220;
+  TCCR1A |= _BV(COM1B1);
+  delay(1000);
+
+
+Test data 4: 
+
+  TCCR1A |= _BV(COM1B1);
+  OCR1B = 120;
+  delay(1000);
+  TCCR1A &= ~(_BV(COM1B1));
+  delay(500);
+  OCR1B  = 35;
+  TCCR1A |= _BV(COM1B1);
+  delay(1000);
+  TCCR1A &= ~(_BV(COM1B1));
+  delay(500);
+  OCR1B  = 203;
+  TCCR1A |= _BV(COM1B1);
+  delay(1000);
+  TCCR1A &= ~(_BV(COM1B1));
+  delay(500);
+  OCR1B  = 88;
+  TCCR1A |= _BV(COM1B1);
+  delay(1000);
