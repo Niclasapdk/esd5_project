@@ -1,0 +1,69 @@
+{
+   "execution": {
+      "classname": "SMAPowerByEmagHPCFrame",
+      "libname": "SMAPowerByEmagUI"
+   },
+   "inputVariables": [
+      {
+         "name": "SL",
+         "type": "float",
+         "value": 128.0
+      },
+      {
+         "name": "SW",
+         "type": "float",
+         "value": 120.0
+      },
+      {
+         "name": "SH",
+         "type": "float",
+         "value": 1.43
+      },
+      {
+         "name": "CH",
+         "type": "float",
+         "value": 0.035
+      },
+      {
+         "name": "PL",
+         "type": "float",
+         "value": 28.027
+      },
+      {
+         "name": "PW",
+         "type": "float",
+         "value": 36.415
+      },
+      {
+         "name": "StripW",
+         "type": "float",
+         "value": 2.24
+      },
+      {
+         "name": "NotchLength",
+         "type": "float",
+         "value": 10.47
+      },
+      {
+         "name": "NotchWidth",
+         "type": "float",
+         "value": 2.24
+      },
+      {
+         "name": "FL",
+         "type": "float",
+         "value": 16.5
+      },
+      {
+         "name": "FW",
+         "type": "float",
+         "value": 2.24
+      },
+      {
+         "name": "k",
+         "type": "float",
+         "value": 6.26
+      }
+   ],
+   "outputVariables": []
+}

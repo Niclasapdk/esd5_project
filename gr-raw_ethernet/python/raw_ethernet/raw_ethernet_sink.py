@@ -17,16 +17,20 @@ class raw_ethernet_sink(gr.sync_block):
     """
     A sink which will output data to raw ethernet
     """
-    def __init__(self, interface, dest_mac):
+    def __init__(self, interface, dest_mac, samples_per_frame):
         gr.sync_block.__init__(self,
             name="raw_ethernet_sink",
             in_sig=[numpy.uint16],
             out_sig=None)
         self.interface = interface
         self.dest_mac = bytes.fromhex(" ".join(dest_mac.split(":")))
-        self.socket = socket.socket(socket.AF_PACKET, socket.SOCK_RAW)
+        self.socket = socket.socket(socket.AF_PACKET, socket.SOCK_RAW, socket.IPPROTO_RAW)
         self.socket.bind((self.interface, 0))
         self.src_mac = self.get_mac_address(self.interface)
+
+        MAX_ETHERNET_PAYLOAD_SIZE = 1500 - 14  # MTU - Ethernet header size
+        MAX_SAMPLES_PER_FRAME = MAX_ETHERNET_PAYLOAD_SIZE // 2  # uint16 samples
+        self.samples_per_frame = min(samples_per_frame, MAX_SAMPLES_PER_FRAME)
 
     def get_mac_address(self, iface):
         import fcntl
@@ -39,16 +43,18 @@ class raw_ethernet_sink(gr.sync_block):
         return info[18:24]
 
     def work(self, input_items, output_items):
-        print(input_items)
         in0 = input_items[0]
-        # Convert IQ samples to bytes
-        payload = in0.tobytes()
+        ninput = len(in0)
+
+        payload = in0[:self.samples_per_frame].tobytes()
+
         # Define Ethernet frame components
         dest_mac = self.dest_mac  # Broadcast or target MAC
         src_mac = self.src_mac
         ethertype = struct.pack('!H', 0x88B5)  # Custom EtherType
+
         # Construct Ethernet frame
         ethernet_frame = dest_mac + src_mac + ethertype + payload
-        # Send frame
         self.socket.send(ethernet_frame)
-        return len(input_items[0])
+
+        return self.samples_per_frame # tell the scheduler how much data we processed

@@ -1,0 +1,22 @@
+Output: Gerber X2 Files
+Type  : GerberX2
+From  : Variant [[No Variations]] of Project [patch_antenna_altium.PrjPcb]
+   Generated File[antenna_array_Copper_Signal_Top.gbr]
+   Generated File[antenna_array_Copper_Signal_Bot.gbr]
+   Generated File[antenna_array_Legend_Top.gbr]
+   Generated File[antenna_array_Legend_Bot.gbr]
+   Generated File[antenna_array_Soldermask_Top.gbr]
+   Generated File[antenna_array_Soldermask_Bot.gbr]
+   Generated File[antenna_array_Paste_Top.gbr]
+   Generated File[antenna_array_Paste_Bot.gbr]
+   Generated File[antenna_array_Profile.gbr]
+   Generated File[antenna_array_NPTH_Drill.gbr]
+   Generated File[antenna_array_PTH_Drill.gbr]
+   Generated File[antenna_array.EXTREP]
+   Generated File[antenna_array.REP]
+
+
+Files Generated   : 13
+Documents Printed : 0
+
+Finished Output Generation At 10.56.40 On 22/10/2024

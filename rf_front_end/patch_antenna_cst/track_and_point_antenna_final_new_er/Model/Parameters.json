@@ -1,0 +1,85 @@
+{
+    "parameters": [
+        {
+            "expr": "29.426",
+            "name": "PL",
+            "value": "29.426"
+        },
+        {
+            "expr": "37.911",
+            "name": "PW",
+            "value": "37.911"
+        },
+        {
+            "expr": "1.43",
+            "name": "PH",
+            "value": "1.43"
+        },
+        {
+            "expr": "0.035",
+            "name": "CH",
+            "value": "0.035"
+        },
+        {
+            "expr": "29.426",
+            "name": "SL",
+            "value": "29.426"
+        },
+        {
+            "expr": "37.911",
+            "name": "SW",
+            "value": "37.911"
+        },
+        {
+            "expr": "1.43",
+            "name": "SH",
+            "value": "1.43"
+        },
+        {
+            "expr": "60",
+            "name": "S1L",
+            "value": "60"
+        },
+        {
+            "expr": "60",
+            "name": "S1W",
+            "value": "60"
+        },
+        {
+            "expr": "1.43",
+            "name": "S1H",
+            "value": "1.43"
+        },
+        {
+            "expr": "37.911",
+            "name": "P1W",
+            "value": "37.911"
+        },
+        {
+            "expr": "29.426",
+            "name": "P1L",
+            "value": "29.426"
+        },
+        {
+            "expr": "(S1L/2)-(PL/2)",
+            "name": "FL",
+            "value": "15.287"
+        },
+        {
+            "expr": "2.339",
+            "name": "FW",
+            "value": "2.339"
+        },
+        {
+            "expr": "10.878",
+            "name": "gapL",
+            "value": "10.878"
+        },
+        {
+            "expr": "2",
+            "name": "gapW",
+            "value": "2"
+        }
+    ],
+    "version": 1
+}

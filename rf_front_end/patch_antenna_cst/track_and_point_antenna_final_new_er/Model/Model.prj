@@ -1,0 +1,21 @@
+[Version]
+2
+[ProjectVersion]
+'# MWS Version: Version 2023.4 - May 04 2023 - ACIS 32.0.1 - Learning Edition
+[Author]
+johba
+[Mesh Cells]
+83,490
+[Mesh Type]
+Hexahedral
+[Last Problem Type]
+High Frequency
+[Last Solver Type]
+HF Time Domain
+[Last Solver Type Abb]
+t
+[Results]
+Time Domain: S-Parameter
+[Modeler Unique ID]
+5:track_and_point_antenna_final_new_er.cst?ee4410856dee837c296bc772cff4e99d?143943:numberofparameters=12:port=1>mode=1>zre=50>zim=0:::ch?fl?fw?p1l?p1w?pl?s1h?s1l?s1w?sh?gapl?gapw
+[Comment]
