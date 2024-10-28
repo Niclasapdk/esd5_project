@@ -9,7 +9,7 @@ tests_dir = os.path.dirname(__file__)
 # @pytest.mark.parametrize("seed", range(10))
 def test_top():
     run(verilog_sources=[os.path.join(tests_dir, "top.v"), 
-                         os.path.join(tests_dir, "abs_cmul.v")], 
+                         os.path.join(tests_dir, "abs_sq_cmul.v")], 
                          toplevel="top", 
                          module = "tb_top",
                          waves=True)

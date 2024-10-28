@@ -27,24 +27,30 @@ async def top_test(dut):
     for i in range(1, 51):
         #input_array.append(random.uniform(1, 10))
         input_array.append(random.randint(1,10))
-
-
-    index = 0
-    clk = 1
+    
+    dut.en.value = 0
+    await Timer(1)
+    dut.clk.value = 0
+    await Timer(1)
+    dut.clk.value = 1
     dut.en.value = 1
 
-    while index < len(input_array):
-        if clk == 1:
-            dut.ma_input.value = input_array[index]
-            index += 1
-            await Timer(1)
-            clk = 0
-            dut.clk.value = 0
-            await Timer(1)
-            clk = 1
-            dut.clk.value = 1
-            
+    expected_sum = 0
+    model_shiftreg = []
 
+    for xi in input_array:
+        dut.ma_input.value = xi
+        model_shiftreg.append(xi)
+        last = model_shiftreg.pop(0) if len(model_shiftreg) > dut.MA_SNAPSHOT_COUNT.value else 0
+        expected_sum += xi - last
+        expected_out = expected_sum/dut.MA_SNAPSHOT_COUNT.value
+        await Timer(1)
+        dut.clk.value = 0
+        await Timer(1)
+        dut.clk.value = 1
+        print(f"Input: ma_input={xi}, Expected: ma_sum={expected_sum}, ma_out={expected_out}, Got: ma_sum={dut.ma_sum.value}, ma_out={dut.ma_out.value}")
+        assert expected_sum == dut.ma_sum.value
+        assert expected_out - dut.ma_out.value <= 0.001
 
     await Timer(2)
     #assert False, "snorre was here"
