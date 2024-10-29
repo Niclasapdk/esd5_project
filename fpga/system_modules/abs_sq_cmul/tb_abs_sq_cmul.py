@@ -24,6 +24,7 @@ def mul_model(Ix, Qx, Is, Qs):
     """model of multiplication"""
     I = 0
     Q = 0
+    IQtot = 0
     assert len(Ix) == len(Qx) == len(Is) == len(Qs), "vecs should be equal length"
     for Ix, Qx, Is, Qs in zip(Ix, Qx, Is, Qs):
         I += mul_I(Ix, Qx, Is, Qs)
@@ -34,13 +35,13 @@ def abscmul_model(Ix, Qx, Is, Qs):
     """model of abscmul"""
     I = 0
     Q = 0
-    abscmul = 0
+    abs_sqIQ = 0
     assert len(Ix) == len(Qx) == len(Is) == len(Qs), "vecs should be equal length"
     for Ix, Qx, Is, Qs in zip(Ix, Qx, Is, Qs):
         I += mul_I(Ix, Qx, Is, Qs)
         Q += mul_Q(Ix, Qx, Is, Qs)
-    abscmul = m.sqrt((I^2)+(Q^2))
-    return abscmul
+    abs_sqIQ = (I*I)+(Q*Q)
+    return abs_sqIQ
 ###########################################
 ###############test and input values#######
 ###########################################
@@ -73,17 +74,17 @@ async def top_test(dut):
 
 
     await Timer(2)
-    #I_e, Q_e = mul_model(Ix, Qx, Is, Qs)
+    I_e, Q_e = mul_model(Ix, Qx, Is, Qs)
 
-    #abscmul_e = abscmul_model(Ix, Qx, Is, Qs)
+    abs_sqIQ_e = abscmul_model(Ix, Qx, Is, Qs)
 
-    #logprint(f"I_y: {dut.I_y.value.signed_integer}")
-    #logprint(f"Q_y: {dut.Q_y.value.signed_integer}")
-    #assert I_e == dut.I_y.value.signed_integer, "Expected I value"
-    #assert Q_e == dut.Q_y.value.signed_integer, "Expected Q value"
+    logprint(f"I_tot: {dut.I_tot.value.signed_integer}")
+    logprint(f"Q_tot: {dut.Q_tot.value.signed_integer}")
+    assert I_e == dut.I_tot.value.signed_integer, "Expected I value"
+    assert Q_e == dut.Q_tot.value.signed_integer, "Expected Q value"
     
-    #logprint(f"AAAAAAAAAAAAAA: {dut.y_abs_cmul.value}")
-    #assert abscmul_e == dut.y_abs_cmul.value, "Expected abscmul"
+    logprint(f"AAAAAAAAAAAAAAresult: {dut.result_out.value.signed_integer}")
+    assert abs_sqIQ_e == dut.result_out.value.signed_integer, "Expected abs_sqIQ"
 
     await Timer(2)
 

@@ -3,8 +3,9 @@ module ma
 #(
     parameter MA_SNAPSHOT_COUNT = 4,
     parameter MA_ARRAY_LENGTH = MA_SNAPSHOT_COUNT-1,
-    parameter REAL_SIZE = 64,
-    parameter TEMP_MA_AR_SIZE = MA_ARRAY_LENGTH*REAL_SIZE
+    parameter WORD_LENGTH = 16,
+    parameter WORD_LENGTH_IN_FROM_CMUL = (WORD_LENGTH*2+3)*2+1, // WORD LENGTH FROM THE CMUL MODULE
+    parameter TEMP_MA_AR_SIZE = MA_ARRAY_LENGTH*WORD_LENGTH_IN_FROM_CMUL
 )
 (   
     //inout of commul
@@ -26,9 +27,11 @@ always @(posedge clk, posedge rst) begin
     if (rst) begin
         temp_ma_ar = 0;
     end else if (en) begin
-        temp_ma_ar[TEMP_MA_AR_SIZE-1 : REAL_SIZE] <= temp_ma_ar[TEMP_MA_AR_SIZE-1-REAL_SIZE:0];//shift
-        temp_ma_ar[REAL_SIZE-1: 0] <= ma_input;
-        ma_last <= temp_ma_ar[TEMP_MA_AR_SIZE-1 -: REAL_SIZE];
+        temp_ma_ar[TEMP_MA_AR_SIZE-1 : WORD_LENGTH_IN_FROM_CMUL] <= 
+        temp_ma_ar[TEMP_MA_AR_SIZE-1-WORD_LENGTH_IN_FROM_CMUL : 0];//shift
+        
+        temp_ma_ar[WORD_LENGTH_IN_FROM_CMUL-1 : 0] <= ma_input;
+        ma_last <= temp_ma_ar[TEMP_MA_AR_SIZE-1 -: WORD_LENGTH_IN_FROM_CMUL];
         ma_sum <= (ma_sum + ma_input - ma_last);
     end
 end
