@@ -11,7 +11,7 @@ module abs_sq_cmul
 		input signed[WORD_LENGTH-1:0] Q_x1, Q_x2, Q_x3, Q_x4, //input smaple imag 
 		input signed[WORD_LENGTH-1:0] I_s1, I_s2, I_s3, I_s4, //real steering vedtor
 		input signed[WORD_LENGTH-1:0] Q_s1, Q_s2, Q_s3, Q_s4,	//imag steeing vector
-		output wire signed [WORD_LENGTH_OUT-1:0] result_abs_sq_cmul			//output real imag  
+		output wire signed [WORD_LENGTH_OUT-1:0] result_out			//output real imag  
 );   
 
 //#####################################
@@ -20,6 +20,10 @@ module abs_sq_cmul
 wire signed[WORD_LENGTH_CALC-1:0] I_imm1, I_imm2, I_imm3, I_imm4;
 wire signed[WORD_LENGTH_CALC-1:0] Q_imm1, Q_imm2, Q_imm3, Q_imm4;
 wire signed[WORD_LENGTH_CALC-1:0] I_tot, Q_tot;
+
+reg signed[WORD_LENGTH_CALC-1:0] I_imm1_reg, I_imm2_reg, I_imm3_reg, I_imm4_reg;
+reg signed[WORD_LENGTH_CALC-1:0] Q_imm1_reg, Q_imm2_reg, Q_imm3_reg, Q_imm4_reg;
+reg signed[WORD_LENGTH_CALC-1:0] I_tot_reg, Q_tot_reg;
 
 
 //#####################################
@@ -51,19 +55,20 @@ endfunction
 // program begins here
 //#####################################
 
-assign I_imm1 = cmulI(I_x1, I_s1, Q_x1, Q_s1);
-assign I_imm2 = cmulI(I_x2, I_s2, Q_x2, Q_s2);
-assign I_imm3 = cmulI(I_x3, I_s3, Q_x3, Q_s3);
-assign I_imm4 = cmulI(I_x4, I_s4, Q_x4, Q_s4);
+	assign I_imm1 = cmulI(I_x1, I_s1, Q_x1, Q_s1);
+	assign I_imm2 = cmulI(I_x2, I_s2, Q_x2, Q_s2);
+	assign I_imm3 = cmulI(I_x3, I_s3, Q_x3, Q_s3);
+	assign I_imm4 = cmulI(I_x4, I_s4, Q_x4, Q_s4);
 
-assign Q_imm1 = cmulQ(I_x1, I_s1, Q_x1, Q_s1);
-assign Q_imm2 = cmulQ(I_x2, I_s2, Q_x2, Q_s2);
-assign Q_imm3 = cmulQ(I_x3, I_s3, Q_x3, Q_s3);
-assign Q_imm4 = cmulQ(I_x4, I_s4, Q_x4, Q_s4);
+	assign Q_imm1 = cmulQ(I_x1, I_s1, Q_x1, Q_s1);
+	assign Q_imm2 = cmulQ(I_x2, I_s2, Q_x2, Q_s2);
+	assign Q_imm3 = cmulQ(I_x3, I_s3, Q_x3, Q_s3);
+	assign Q_imm4 = cmulQ(I_x4, I_s4, Q_x4, Q_s4);
 
-assign I_tot = I_imm1 + I_imm2 + I_imm3 + I_imm4;
-assign Q_tot = Q_imm1 + Q_imm2 + Q_imm3 + Q_imm4;
+	assign I_tot = I_imm1 + I_imm2 + I_imm3 + I_imm4;
+	assign Q_tot = Q_imm1 + Q_imm2 + Q_imm3 + Q_imm4;
 
-assign result_abs_sq_cmul = abs_sqIQ(I_tot, Q_tot);
+	assign result_out = abs_sqIQ(I_tot, Q_tot);
+
 
 endmodule

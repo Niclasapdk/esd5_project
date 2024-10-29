@@ -9,12 +9,12 @@ module top
 		input signed[WORD_LENGTH-1:0] Q_x1, Q_x2, Q_x3, Q_x4, //input smaple imag 
 		input signed[WORD_LENGTH-1:0] I_s1, I_s2, I_s3, I_s4, //real steering vedtor
 		input signed[WORD_LENGTH-1:0] Q_s1, Q_s2, Q_s3, Q_s4,	//imag steeing vector
-		output wire signed [WORD_LENGTH_OUT-1:0] result_abs_sq_cmul,			//output real imag 
+		output wire signed [WORD_LENGTH_OUT-1:0] cmul_out,			//output real imag 
 
         //input ma module
-        input rst, en, clk,
-	    input [WORD_LENGTH_OUT-1 : 0] ma_input, // input of the sample real 
-	    output wire [WORD_LENGTH_OUT-1 : 0] ma_out 			//output real imag   
+        input wire rst, en, clk,
+	    input [WORD_LENGTH_OUT-1 : 0] s_ma_tdata_in, // input of the sample real 
+	    output wire [WORD_LENGTH_OUT-1 : 0] m_ma_tdata_out 			//output real imag   
 );
 
 abs_sq_cmul #(
@@ -25,7 +25,7 @@ abs_sq_cmul #(
     .Q_x1(Q_x1), .Q_x2(Q_x2), .Q_x3(Q_x3), .Q_x4(Q_x4),
     .I_s1(I_s1), .I_s2(I_s2), .I_s3(I_s3), .I_s4(I_s4),
     .Q_s1(Q_s1), .Q_s2(Q_s2), .Q_s3(Q_s3), .Q_s4(Q_s4),
-    .result_abs_sq_cmul(result_abs_sq_cmul)
+    .result_out(cmul_out)
 );
 
 ma #(
@@ -34,13 +34,13 @@ ma #(
     .rst(rst),
     .en(en),
     .clk(clk),
-    .ma_input(ma_input),
-    .ma_out(ma_out)
+    .s_ma_tdata_in(s_ma_tdata_in),
+    .m_ma_tdata_out(m_ma_tdata_out)
 );
 
 //##################################
 //program
 //##################################
-assign ma_input = result_abs_sq_cmul;
+assign s_ma_tdata_in = cmul_out;
 
 endmodule

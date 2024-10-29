@@ -117,8 +117,8 @@ async def top_test(dut):
         
         
         print(f"Expected: abssqIQ={abssqIQ}")
-        logprint(f"AAAAAAAAAAAAAAresult: {dut.result_abs_sq_cmul.value.signed_integer}")
-        assert abssqIQ == dut.result_abs_sq_cmul.value.signed_integer, "Expected abssqIQ"
+        logprint(f"AAAAAAAAAAAAAAresult: {dut.cmul_out.value.signed_integer}")
+        assert abssqIQ == dut.cmul_out.value.signed_integer, "Expected abssqIQ"
 
 
 
