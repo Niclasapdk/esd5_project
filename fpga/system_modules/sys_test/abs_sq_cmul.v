@@ -40,7 +40,7 @@ function [WORD_LENGTH_CALC-1:0] cmulQ;
 	end
 endfunction
 
-function [WORD_LENGTH_OUT*2-1:0] abs_sqIQ; // skal bare være WORD_LENGTH_CALC grundet root
+function [WORD_LENGTH_OUT-1:0] abs_sqIQ; // skal bare være WORD_LENGTH_CALC grundet root
 		input signed[WORD_LENGTH_CALC-1:0] in_I, in_Q;
 	begin
 		abs_sqIQ = (in_I*in_I) + (in_Q*in_Q);

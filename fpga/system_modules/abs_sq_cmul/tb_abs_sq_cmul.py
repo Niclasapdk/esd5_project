@@ -24,7 +24,6 @@ def mul_model(Ix, Qx, Is, Qs):
     """model of multiplication"""
     I = 0
     Q = 0
-    IQtot = 0
     assert len(Ix) == len(Qx) == len(Is) == len(Qs), "vecs should be equal length"
     for Ix, Qx, Is, Qs in zip(Ix, Qx, Is, Qs):
         I += mul_I(Ix, Qx, Is, Qs)
@@ -83,8 +82,8 @@ async def top_test(dut):
     assert I_e == dut.I_tot.value.signed_integer, "Expected I value"
     assert Q_e == dut.Q_tot.value.signed_integer, "Expected Q value"
     
-    logprint(f"AAAAAAAAAAAAAAresult: {dut.result_out.value.signed_integer}")
-    assert abs_sqIQ_e == dut.result_out.value.signed_integer, "Expected abs_sqIQ"
+    logprint(f"AAAAAAAAAAAAAAresult: {dut.result_abs_sq_cmul.value.signed_integer}")
+    assert abs_sqIQ_e == dut.result_abs_sq_cmul.value.signed_integer, "Expected abs_sqIQ"
 
     await Timer(2)
 
