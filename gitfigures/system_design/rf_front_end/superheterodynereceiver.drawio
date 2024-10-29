@@ -144,6 +144,12 @@
         <mxCell id="dGMlPyoEv6RWTaXQxsTw-52" value="Mixer" style="text;html=1;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" vertex="1" parent="1">
           <mxGeometry x="845" y="350" width="60" height="30" as="geometry" />
         </mxCell>
+        <mxCell id="dGMlPyoEv6RWTaXQxsTw-53" value="&lt;div&gt;LPF&lt;/div&gt;" style="text;html=1;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" vertex="1" parent="1">
+          <mxGeometry x="955" y="266" width="60" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="dGMlPyoEv6RWTaXQxsTw-54" value="LPF" style="text;html=1;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" vertex="1" parent="1">
+          <mxGeometry x="955" y="56" width="60" height="30" as="geometry" />
+        </mxCell>
       </root>
     </mxGraphModel>
   </diagram>
