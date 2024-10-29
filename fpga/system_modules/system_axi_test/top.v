@@ -13,7 +13,12 @@ module top
 
         //input ma module
         input wire rst, en, clk,
-	    input [WORD_LENGTH_OUT-1 : 0] s_ma_tdata_in, // input of the sample real 
+        input wire [WORD_LENGTH_OUT-1 : 0] ma_in,
+        input wire s_ma_tvalid, s_ma_tlast,
+        output wire s_ma_tready,
+        input wire m_ma_tready,
+        output wire m_ma_tvalid, m_ma_tlast,
+	    input wire[WORD_LENGTH_OUT-1 : 0] s_ma_tdata_in, // input of the sample real 
 	    output wire [WORD_LENGTH_OUT-1 : 0] m_ma_tdata_out 			//output real imag   
 );
 
@@ -34,8 +39,11 @@ ma #(
     .rst(rst),
     .en(en),
     .clk(clk),
-    .s_ma_tdata_in(s_ma_tdata_in),
-    .m_ma_tdata_out(m_ma_tdata_out)
+    .ma_in(ma_in),
+    .s_ma_tvalid(s_ma_tvalid), .s_ma_tready(s_ma_tready), 
+    .s_ma_tlast(s_ma_tlast), .s_ma_tdata_in(s_ma_tdata_in),
+    .m_ma_tvalid(m_ma_tvalid), .m_ma_tready(m_ma_tready), 
+    .m_ma_tlast(m_ma_tlast), .m_ma_tdata_out(m_ma_tdata_out)
 );
 
 //##################################
