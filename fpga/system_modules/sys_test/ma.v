@@ -10,15 +10,15 @@ module ma
 (   
     //inout of commul
     input rst, en, clk,
-	input [WORD_LENGTH_IN_FROM_CMUL-1 : 0] ma_input, // input of the sample real 
-	output wire [WORD_LENGTH_IN_FROM_CMUL-1 : 0] ma_out 			//output real imag  
+	input real ma_input, // input of the sample real 
+	output wire real ma_out 			//output real imag  
 );
 
 //######################################
 //registers
 //######################################
 reg [TEMP_MA_AR_SIZE-1:0] temp_ma_ar = 0;
-reg [WORD_LENGTH_IN_FROM_CMUL-1 : 0] ma_sum = 0, ma_last = 0;
+reg real ma_sum = 0, ma_last = 0;
 
 //######################################
 //program
