@@ -5,7 +5,7 @@ Options ResourceUsage=yes UseNutmegFormat=no EnableOptim=no TopDesignName="MyFir
 MSABND:Bend28  N__20 N__32 Subst="MSub1" W=W mm Angle=90 M=0 
 MCFIL:CLin1  N__1 N__10 Subst="MSub1" W=W mm S=s2 mm L=L mm 
 MSABND:Bend29  N__24 N__23 Subst="MSub1" W=W mm Angle=90 M=0 
-model MSub1 MSUB H=1.524 mm Er=3 Mur=1 Cond=5.8E+7 Hu=1e+33 mm T=35 um TanD=0.001 Rough=0 mm DielectricLossModel=1 FreqForEpsrTanD=1.0 GHz LowFreqForTanD=1.0 kHz HighFreqForTanD=1.0 THz RoughnessModel=2 
+model MSub1 MSUB H=1.524 mm Er=3.003 Mur=1 Cond=5.8E+7 Hu=1e+33 mm T=35 um TanD=0.001 Rough=0 mm DielectricLossModel=1 FreqForEpsrTanD=1.0 GHz LowFreqForTanD=1.0 kHz HighFreqForTanD=1.0 THz RoughnessModel=2 
 MCFIL:CLin2  N__0 N__4 Subst="MSub1" W=W mm S=s1 mm L=L mm 
 MSABND:Bend19  N__28 N__1 Subst="MSub1" W=W mm Angle=90 M=0 
 MSABND:Bend18  N__4 N__3 Subst="MSub1" W=W mm Angle=90 M=0 
@@ -32,17 +32,17 @@ MLIN2:TL3  N__26 N__27 Subst="MSub1" W=imp mm L=Lin mm Wall1=2.5e+28 mm Wall2=2.
 MLOC2:TL4  N__22 Subst="MSub1" W=W mm L=Louter mm Wall1=2.5e+28 mm Wall2=2.5e+28 mm Mod=1 
 Port:TermG2  N__27 0 Num=2 Z=50 Ohm Noise=yes 
 
-T=2.30442 tune{ 0.1 to 8 by 0.0387 } opt{ 2 to 5 }
-Wt=1.08257 tune{ 0.1 to 8 by 0.0387 } opt{ 1 to 3.5 }
-Lin=3.5 tune{ 0.1 to 5 by 0.0387 } opt{ 1 to 3.5 }
-imp=1 tune{ 1 to 5 by 0.0387 } opt{ 1 to 5 }
-s3=2.99999 tune{ 0.1 to 1 by 0.0387 } opt{ 0.5 to 3 }
-Louter=5.0001 tune{ 5 to 17.6 by 0.0387 } opt{ 5 to 20 }
-Lmid=1.9999 tune{ 0.1 to 3 by 0.0387 } opt{ 1 to 2 }
-L=18.8527 tune{ 5 to 30 by 0.5 } opt{ 5 to 20 }
-W=1.36519 tune{ 0.2 to 2 by 0.1 } opt{ 1 to 3 }
-s1=0.513608 tune{ 0.1 to 1 by 0.0994 } opt{ 0.5 to 2 }
-s2=2.27917 tune{ 0.1 to 1 by 0.129 } opt{ 0.5 to 3 }
+T=2.3 tune{ 0.1 to 8 by 0.0387 } opt{ discrete 2 to 5 by 0.1 }
+Wt=1.1 tune{ 0.1 to 8 by 0.0387 } opt{ discrete 1 to 3.5 by 0.1 }
+Lin=3.5 tune{ 0.1 to 5 by 0.0387 } opt{ discrete 1 to 3.5 by 0.1 }
+imp=1 tune{ 1 to 5 by 0.0387 } opt{ discrete 1 to 5 by 0.1 }
+s3=3 tune{ 0.1 to 1 by 0.0387 } opt{ discrete 0.5 to 3 by 0.1 }
+Louter=5 tune{ 5 to 17.6 by 0.0387 } opt{ discrete 5 to 20 by 0.1 }
+Lmid=2 tune{ 0.1 to 3 by 0.0387 } opt{ discrete 1 to 2 by 0.1 }
+L=18.8 tune{ 5 to 30 by 0.5 } opt{ discrete 5 to 20 by 0.1 }
+W=1.3 tune{ 0.2 to 2 by 0.1 } opt{ discrete 1 to 3 by 0.1 }
+s1=0.5 tune{ 0.1 to 1 by 0.0994 } opt{ discrete 0.5 to 2 by 0.1 }
+s2=2.2 tune{ 0.1 to 1 by 0.129 } opt{ discrete 0.5 to 3 by 0.1 }
 S_Param:SP1 CalcS=yes CalcY=no CalcZ=no GroupDelayAperture=1e-4 FreqConversion=no FreqConversionPort=1 StatusLevel=2 CalcNoise=no SortNoise=0 BandwidthForNoise=1.0 Hz DevOpPtLevel=0 SPSS_WSP=yes \
 SweepVar="freq" SweepPlan="SP1_stim" OutputPlan="SP1_Output" 
 
@@ -79,5 +79,5 @@ SpecLimitLine[1]="OptimGoal2_limit1"
 SpecLimitLine:"OptimGoal2_limit1" Type="LessThan" Max=-30 Weight=1 \
 IndepVar[1]="freq" IndepMin[1]=2.39e+09 IndepMax[1]=2.49e+09 
 
-Optim:"Optim1" OptimType="hpVMO" ErrorForm="L2" SAProgressReport=0 MaxIters=2000 P=2 DesiredError=0.0 StatusLevel=4 FinalAnalysis="None" NormalizeGoals=yes SetBestValues=yes SaveSolns=yes SaveGoals=yes SaveOptimVars=yes UpdateDataset=yes SaveNominal=no SaveAllIterations=no UseAllOptVars=yes UseAllGoals=yes SaveCurrentEF=no InitialTempControlMode=0 SANumTrialsPerIter=10 NumShootsPerIter=20 SATempControlAlpha=0.8 CoranaSkip=0.0 EnableCockpit=yes NormalizeError=yes SaveAllTrials=no UseAdvTermCriteria=no CostRelativeTol=1.0e-8 LimitOfContSmallImprovement=5 
+Optim:"Optim1" OptimType="random" ErrorForm="L2" SAProgressReport=0 MaxIters=2000 P=2 DesiredError=0.0 StatusLevel=4 FinalAnalysis="None" NormalizeGoals=yes SetBestValues=yes SaveSolns=yes SaveGoals=yes SaveOptimVars=yes UpdateDataset=yes SaveNominal=no SaveAllIterations=no UseAllOptVars=yes UseAllGoals=yes SaveCurrentEF=no InitialTempControlMode=0 SANumTrialsPerIter=10 NumShootsPerIter=20 SATempControlAlpha=0.8 CoranaSkip=0.0 EnableCockpit=yes NormalizeError=yes SaveAllTrials=no UseAdvTermCriteria=no CostRelativeTol=1.0e-8 LimitOfContSmallImprovement=5 
 

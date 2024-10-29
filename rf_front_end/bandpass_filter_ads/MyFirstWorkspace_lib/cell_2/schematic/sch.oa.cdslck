@@ -6,11 +6,11 @@
 LockStakeVersion               1.1
 LoginName                      nicla
 HostName                       Niclas-Laptop
-ProcessIdentifier              30052
-ProcessCreationTime_UTC        1729496476
-ProcessCreationTime_Readable   Mon Oct 21 09:41:16 2024 Romance Daylight Time
+ProcessIdentifier              19904
+ProcessCreationTime_UTC        1730103979
+ProcessCreationTime_Readable   Mon Oct 28 09:26:19 2024 Romance Standard Time
 AppIdentifier                  OA File System Design Manager
 OSType                         win32
 ReasonForPlacingEditLock       OpenAccess edit lock
 FilePathUsedToEditLock         C:\Users\nicla\Documents\GitHub\esd5_project\rf_front_end\bandpass_filter_ads\MyFirstWorkspace_lib\cell_2\schematic\sch.oa.cdslck
-TimeEditLocked                 Mon Oct 21 09:47:35 2024 Romance Daylight Time
+TimeEditLocked                 Mon Oct 28 09:26:42 2024 Romance Standard Time
