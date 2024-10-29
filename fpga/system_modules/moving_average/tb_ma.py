@@ -50,7 +50,7 @@ async def top_test(dut):
         dut.clk.value = 1
         print(f"Input: ma_input={xi}, Expected: ma_sum={expected_sum}, ma_out={expected_out}, Got: ma_sum={dut.ma_sum.value}, ma_out={dut.ma_out.value}")
         assert expected_sum == dut.ma_sum.value
-        assert expected_out - dut.ma_out.value <= 0.001
+        assert expected_out == dut.ma_out.value 
 
     await Timer(2)
     #assert False, "snorre was here"
