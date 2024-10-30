@@ -1,0 +1,458 @@
+options:
+  parameters:
+    author: markus
+    catch_exceptions: 'True'
+    category: '[GRC Hier Blocks]'
+    cmake_opt: ''
+    comment: ''
+    copyright: ''
+    description: ''
+    gen_cmake: 'On'
+    gen_linking: dynamic
+    generate_options: qt_gui
+    hier_block_src_path: '.:'
+    id: reference_implementation_ula_beamscan_2ch
+    max_nouts: '0'
+    output_language: python
+    placement: (0,0)
+    qt_qss_theme: ''
+    realtime_scheduling: ''
+    run: 'True'
+    run_command: '{python} -u {filename}'
+    run_options: prompt
+    sizing_mode: fixed
+    thread_safe_setters: ''
+    title: Beamscan spatial spectrum estimation
+    window_size: (1000,1000)
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [8, 8]
+    rotation: 0
+    state: enabled
+
+blocks:
+- name: phi_scan_max
+  id: variable
+  parameters:
+    comment: ''
+    value: '50'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [416, 12.0]
+    rotation: 0
+    state: enabled
+- name: phi_scan_min
+  id: variable
+  parameters:
+    comment: ''
+    value: '-50'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [304, 12.0]
+    rotation: 0
+    state: enabled
+- name: phi_step
+  id: variable
+  parameters:
+    comment: ''
+    value: '1'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [536, 12.0]
+    rotation: 0
+    state: enabled
+- name: samp_rate
+  id: variable
+  parameters:
+    comment: ''
+    value: '32000'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [200, 12]
+    rotation: 0
+    state: enabled
+- name: spectrum_len
+  id: variable
+  parameters:
+    comment: ''
+    value: 1+(phi_scan_max-phi_scan_min)//phi_step
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [624, 12.0]
+    rotation: 0
+    state: enabled
+- name: analog_noise_source_x_0
+  id: analog_noise_source_x
+  parameters:
+    affinity: ''
+    alias: ''
+    amp: '1'
+    comment: ''
+    maxoutbuf: '0'
+    minoutbuf: '0'
+    noise_type: analog.GR_GAUSSIAN
+    seed: '0'
+    type: float
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [1144, -4.0]
+    rotation: 0
+    state: disabled
+- name: blocks_deinterleave_0
+  id: blocks_deinterleave
+  parameters:
+    affinity: ''
+    alias: ''
+    blocksize: '1'
+    comment: ''
+    maxoutbuf: '0'
+    minoutbuf: '0'
+    num_streams: '4'
+    type: complex
+    vlen: '1'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [528, 304.0]
+    rotation: 0
+    state: enabled
+- name: blocks_file_source_0
+  id: blocks_file_source
+  parameters:
+    affinity: ''
+    alias: ''
+    begin_tag: pmt.PMT_NIL
+    comment: ''
+    file: /home/markus/uni/esd5_project/dsp/simulation_data/ula_4ch_sim_data_1_target.raw
+    length: '0'
+    maxoutbuf: '0'
+    minoutbuf: '0'
+    offset: '0'
+    repeat: 'True'
+    type: complex
+    vlen: '1'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [64, 316.0]
+    rotation: 0
+    state: enabled
+- name: blocks_throttle2_0
+  id: blocks_throttle2
+  parameters:
+    affinity: ''
+    alias: ''
+    comment: ''
+    ignoretag: 'True'
+    limit: auto
+    maximum: '0.1'
+    maxoutbuf: '0'
+    minoutbuf: '0'
+    samples_per_second: samp_rate
+    type: complex
+    vlen: '1'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [320, 340.0]
+    rotation: 0
+    state: enabled
+- name: blocks_throttle2_0_0
+  id: blocks_throttle2
+  parameters:
+    affinity: ''
+    alias: ''
+    comment: ''
+    ignoretag: 'True'
+    limit: auto
+    maximum: '0.1'
+    maxoutbuf: '0'
+    minoutbuf: '0'
+    samples_per_second: samp_rate
+    type: float
+    vlen: '1'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [1200, 60.0]
+    rotation: 0
+    state: disabled
+- name: epy_block_0
+  id: epy_block
+  parameters:
+    _source_code: "\"\"\"\nEmbedded Python Blocks:\n\nEach time this file is saved,\
+      \ GRC will instantiate the first class it finds\nto get ports and parameters\
+      \ of your block. The arguments to __init__  will\nbe the parameters. All of\
+      \ them are required to have default values!\n\"\"\"\n\nimport numpy as np\n\
+      from gnuradio import gr\n\n\nclass blk(gr.basic_block):\n    \"\"\"Beamscan\
+      \ spatial spectrum estimator for 4 channel ULA\"\"\"\n\n    def __init__(self,\
+      \ num_samples=51, signal_freq=2.44e9, array_d=0.5, phi_scan_min=-50, phi_scan_max=50,\
+      \ phi_step=1, rx1_phase_cal=0, rx2_phase_cal=0, rx3_phase_cal=0, rx4_phase_cal=0):\n\
+      \        \"\"\"arguments to this function show up as parameters in GRC\"\"\"\
+      \n        # must change default phi values to pass static vector_len checks\
+      \ (goofy but that's how gnuradio is)\n        self.spectrum_len = 1+(phi_scan_max-phi_scan_min)//phi_step\n\
+      \        gr.basic_block.__init__(\n            self,\n            name='Beamscan\
+      \ spatial spectrum estimator',   # will show up in GRC\n            in_sig=[np.complex64,\
+      \ np.complex64, np.complex64, np.complex64],\n            out_sig=[(np.float32,\
+      \ self.spectrum_len)]\n        )\n        self.logger = gr.logger(self.alias())\n\
+      \        self.num_samples = num_samples\n        self.signal_freq = signal_freq\n\
+      \        self.steering_step = phi_step\n        self.d = array_d\n        self.c\
+      \ = 299792458\n        self.lambda_ = self.c / self.signal_freq\n        self.steering_angles\
+      \ = np.arange(phi_scan_min, phi_scan_max+1, phi_step)\n        steervec = lambda\
+      \ n, cal: np.exp(-1j * (np.pi * n * np.sin(np.deg2rad(self.steering_angles))\
+      \ + np.deg2rad(cal)))\n        self.win = np.hamming(self.num_samples)\n   \
+      \     self.rx1_phase_cal = rx1_phase_cal\n        self.rx2_phase_cal = rx2_phase_cal\n\
+      \        self.rx3_phase_cal = rx3_phase_cal\n        self.rx4_phase_cal = rx4_phase_cal\n\
+      \        self.logger.info(f\"creating block with spectrum length {self.spectrum_len}\"\
+      )\n        # if an attribute with the same name as a parameter is found,\n \
+      \       # a callback is registered (properties work, too).\n        self.steering_vectors\
+      \ = np.asarray([\n                steervec(0, self.rx1_phase_cal),\n       \
+      \         steervec(1, self.rx2_phase_cal),\n                steervec(2, self.rx3_phase_cal),\n\
+      \                steervec(3, self.rx4_phase_cal)]).transpose() # e^{-j*phase_shift}\n\
+      \        # transpose steering vector array so indexing is (phi, antenna)\n \
+      \       self.logger.info(f\"steering_vectors: {self.steering_vectors}\")\n\n\
+      \    def general_work(self, input_items, output_items):\n        signals_in\
+      \ = np.asarray([input_items[0][:self.num_samples],\n                       \
+      \          input_items[1][:self.num_samples],\n                            \
+      \     input_items[2][:self.num_samples],\n                                 input_items[3][:self.num_samples]])\n\
+      \        steervecs = self.steering_vectors\n        sig_beamformed = np.matmul(steervecs,\
+      \ signals_in) # dimension: phi X snapshot\n        spectrum = np.mean(np.square(np.abs(sig_beamformed)),\
+      \ axis=1).astype(\"float32\")\n        output_items[0][:] = spectrum\n     \
+      \   for i in range(4):\n            self.consume(i, self.num_samples)\n    \
+      \    return len(output_items[0])\n"
+    affinity: ''
+    alias: ''
+    array_d: '0.5'
+    comment: ''
+    maxoutbuf: '0'
+    minoutbuf: '0'
+    num_samples: '51'
+    phi_scan_max: phi_scan_max
+    phi_scan_min: phi_scan_min
+    phi_step: phi_step
+    rx1_phase_cal: '0'
+    rx2_phase_cal: '0'
+    rx3_phase_cal: '0'
+    rx4_phase_cal: '0'
+    signal_freq: 2.44e9
+  states:
+    _io_cache: ('Beamscan spatial spectrum estimator', 'blk', [('num_samples', '51'),
+      ('signal_freq', '2440000000.0'), ('array_d', '0.5'), ('phi_scan_min', '-50'),
+      ('phi_scan_max', '50'), ('phi_step', '1'), ('rx1_phase_cal', '0'), ('rx2_phase_cal',
+      '0'), ('rx3_phase_cal', '0'), ('rx4_phase_cal', '0')], [('0', 'complex', 1),
+      ('1', 'complex', 1), ('2', 'complex', 1), ('3', 'complex', 1)], [('0', 'float',
+      101)], 'Beamscan spatial spectrum estimator for 4 channel ULA', ['num_samples',
+      'rx1_phase_cal', 'rx2_phase_cal', 'rx3_phase_cal', 'rx4_phase_cal', 'signal_freq'])
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [760, 292.0]
+    rotation: 0
+    state: enabled
+- name: qtgui_time_sink_x_0
+  id: qtgui_time_sink_x
+  parameters:
+    affinity: ''
+    alias: ''
+    alpha1: '1.0'
+    alpha10: '1.0'
+    alpha2: '1.0'
+    alpha3: '1.0'
+    alpha4: '1.0'
+    alpha5: '1.0'
+    alpha6: '1.0'
+    alpha7: '1.0'
+    alpha8: '1.0'
+    alpha9: '1.0'
+    autoscale: 'False'
+    axislabels: 'True'
+    color1: blue
+    color10: dark blue
+    color2: red
+    color3: green
+    color4: black
+    color5: cyan
+    color6: magenta
+    color7: yellow
+    color8: dark red
+    color9: dark green
+    comment: ''
+    ctrlpanel: 'False'
+    entags: 'True'
+    grid: 'False'
+    gui_hint: ''
+    label1: Signal 1
+    label10: Signal 10
+    label2: Signal 2
+    label3: Signal 3
+    label4: Signal 4
+    label5: Signal 5
+    label6: Signal 6
+    label7: Signal 7
+    label8: Signal 8
+    label9: Signal 9
+    legend: 'True'
+    marker1: '-1'
+    marker10: '-1'
+    marker2: '-1'
+    marker3: '-1'
+    marker4: '-1'
+    marker5: '-1'
+    marker6: '-1'
+    marker7: '-1'
+    marker8: '-1'
+    marker9: '-1'
+    name: '""'
+    nconnections: '4'
+    size: '1024'
+    srate: samp_rate
+    stemplot: 'False'
+    style1: '1'
+    style10: '1'
+    style2: '1'
+    style3: '1'
+    style4: '1'
+    style5: '1'
+    style6: '1'
+    style7: '1'
+    style8: '1'
+    style9: '1'
+    tr_chan: '0'
+    tr_delay: '0'
+    tr_level: '0.0'
+    tr_mode: qtgui.TRIG_MODE_FREE
+    tr_slope: qtgui.TRIG_SLOPE_POS
+    tr_tag: '""'
+    type: complex
+    update_time: '0.10'
+    width1: '1'
+    width10: '1'
+    width2: '1'
+    width3: '1'
+    width4: '1'
+    width5: '1'
+    width6: '1'
+    width7: '1'
+    width8: '1'
+    width9: '1'
+    ylabel: Amplitude
+    ymax: '1'
+    ymin: '-1'
+    yunit: '""'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [824, 104.0]
+    rotation: 0
+    state: disabled
+- name: qtgui_vector_sink_f_0
+  id: qtgui_vector_sink_f
+  parameters:
+    affinity: ''
+    alias: ''
+    alpha1: '1.0'
+    alpha10: '1.0'
+    alpha2: '1.0'
+    alpha3: '1.0'
+    alpha4: '1.0'
+    alpha5: '1.0'
+    alpha6: '1.0'
+    alpha7: '1.0'
+    alpha8: '1.0'
+    alpha9: '1.0'
+    autoscale: 'True'
+    average: '0.05'
+    color1: '"blue"'
+    color10: '"dark blue"'
+    color2: '"red"'
+    color3: '"green"'
+    color4: '"black"'
+    color5: '"cyan"'
+    color6: '"magenta"'
+    color7: '"yellow"'
+    color8: '"dark red"'
+    color9: '"dark green"'
+    comment: ''
+    grid: 'False'
+    gui_hint: ''
+    label1: ''
+    label10: ''
+    label2: ''
+    label3: ''
+    label4: ''
+    label5: ''
+    label6: ''
+    label7: ''
+    label8: ''
+    label9: ''
+    legend: 'True'
+    maxoutbuf: '0'
+    minoutbuf: '0'
+    name: '""'
+    nconnections: '1'
+    ref_level: '0'
+    showports: 'False'
+    update_time: '0.10'
+    vlen: spectrum_len
+    width1: '1'
+    width10: '1'
+    width2: '1'
+    width3: '1'
+    width4: '1'
+    width5: '1'
+    width6: '1'
+    width7: '1'
+    width8: '1'
+    width9: '1'
+    x_axis_label: '"Steering angle"'
+    x_start: phi_scan_min
+    x_step: phi_step
+    x_units: '"degrees"'
+    y_axis_label: '"Power"'
+    y_units: '""'
+    ymax: '10'
+    ymin: '0'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [1184, 356.0]
+    rotation: 0
+    state: enabled
+
+connections:
+- [analog_noise_source_x_0, '0', blocks_throttle2_0_0, '0']
+- [blocks_deinterleave_0, '0', epy_block_0, '0']
+- [blocks_deinterleave_0, '0', qtgui_time_sink_x_0, '0']
+- [blocks_deinterleave_0, '1', epy_block_0, '1']
+- [blocks_deinterleave_0, '1', qtgui_time_sink_x_0, '1']
+- [blocks_deinterleave_0, '2', epy_block_0, '2']
+- [blocks_deinterleave_0, '2', qtgui_time_sink_x_0, '2']
+- [blocks_deinterleave_0, '3', epy_block_0, '3']
+- [blocks_deinterleave_0, '3', qtgui_time_sink_x_0, '3']
+- [blocks_file_source_0, '0', blocks_throttle2_0, '0']
+- [blocks_throttle2_0, '0', blocks_deinterleave_0, '0']
+- [epy_block_0, '0', qtgui_vector_sink_f_0, '0']
+
+metadata:
+  file_format: 1
+  grc_version: 3.10.11.0
