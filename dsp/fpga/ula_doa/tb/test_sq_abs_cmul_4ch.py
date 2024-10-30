@@ -104,7 +104,7 @@ async def run_basic_test(dut, payload_data):
             assert Q_e == dut.Q_tot.value.signed_integer, "Expected Q value"
             assert abs_sqIQ_e == dut.result_abs_sq_cmul.value.signed_integer, "Expected abs_sqIQ"
 
-def payload_word(bitlength, vector_len):
+def payload_data(bitlength, vector_len):
     """
     generator function for 2*vector_len words + 2*vector_len words
     (meant for generating vector_len samples and vector_len steering vectors)
@@ -117,7 +117,7 @@ def payload_word(bitlength, vector_len):
 
 if cocotb.SIM_NAME:
     factory = TestFactory(run_basic_test)
-    factory.add_option("payload_data", [payload_word])
+    factory.add_option("payload_data", [payload_data])
     factory.generate_tests()
    
 ###############
