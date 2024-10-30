@@ -50,8 +50,12 @@ def unsigned_bits_to_signed(x, bitlen):
         # weird edge case happens because:
         # BinaryValue(value=0, n_bits=8).signed_integer fails
         return 0
-    val = BinaryValue(value=x, n_bits=bitlen, binaryRepresentation=BinaryRepresentation.TWOS_COMPLEMENT)
+    val = BinaryValue(value=x, n_bits=bitlen)
     return val.signed_integer
+
+def truncate_val_high_side(x: BinaryValue, raw_bitlen, bitlen):
+    y = BinaryValue(x.binstr.zfill(raw_bitlen)[:bitlen], n_bits=bitlen)
+    return y
 
 ##########
 # cocotb #
@@ -87,22 +91,21 @@ async def run_basic_test(dut, payload_data):
     """test for multiplication using the complex_sample_mul task"""
 
     tb = TB(dut)
-    input_bit_length = dut.WORD_LENGTH.value
+    input_bit_length = dut.WORD_LENGTH_IN.value
+    output_bit_length = dut.WORD_LENGTH_OUT.value
     test_inputs = [payload_data(input_bit_length, 4) for _ in range(100)]
     for Ix, Qx, Is, Qs in test_inputs:
         tb.set_inputs(Ix, Qx, Is, Qs)
         await Timer(1)
         I_e, Q_e = mul_model(Ix, Qx, Is, Qs)
-        abs_sqIQ_e = abscmul_model(Ix, Qx, Is, Qs)
-        try:
-            assert I_e == dut.I_tot.value.signed_integer, "Expected I value"
-            assert Q_e == dut.Q_tot.value.signed_integer, "Expected Q value"
-            assert abs_sqIQ_e == dut.result_abs_sq_cmul.value.signed_integer, "Expected abs_sqIQ"
-        except:
-            tb.log.error(f"{Ix=}, {Qx=}, {Is=}, {Qs=}")
-            assert I_e == dut.I_tot.value.signed_integer, "Expected I value"
-            assert Q_e == dut.Q_tot.value.signed_integer, "Expected Q value"
-            assert abs_sqIQ_e == dut.result_abs_sq_cmul.value.signed_integer, "Expected abs_sqIQ"
+        abs_sqIQ_imm = BinaryValue(abscmul_model(Ix, Qx, Is, Qs))
+        abs_sqIQ_e = truncate_val_high_side(abs_sqIQ_imm, dut.WORD_LENGTH_INT_ABS_SQ.value, output_bit_length)
+        # tb.log.debug(f"{Ix=}, {Qx=}, {Is=}, {Qs=}")
+        # tb.log.debug(f"{dut.imm_out.value=}")
+        # tb.log.debug(f"{abs_sqIQ_imm=}")
+        assert I_e == dut.I_tot.value.signed_integer, "Expected I value"
+        assert Q_e == dut.Q_tot.value.signed_integer, "Expected Q value"
+        assert abs_sqIQ_e.signed_integer == dut.result_abs_sq_cmul.value.signed_integer, "Expected abs_sqIQ"
 
 def payload_data(bitlength, vector_len):
     """
@@ -127,8 +130,9 @@ if cocotb.SIM_NAME:
 tests_dir = os.path.dirname(__file__)
 rtl_dir = os.path.abspath(os.path.join(tests_dir, '..', 'rtl'))
 
-@pytest.mark.parametrize("word_length", [8, 12, 16])
-def test_sq_abs_cmul_4ch(request, word_length):
+@pytest.mark.parametrize("word_length_in", [8, 12, 16])
+@pytest.mark.parametrize("word_length_out", [16, 24, 32])
+def test_sq_abs_cmul_4ch(request, word_length_in, word_length_out):
     dut = "sq_abs_cmul_4ch"
     module = os.path.splitext(os.path.basename(__file__))[0]
     toplevel = dut
@@ -138,7 +142,8 @@ def test_sq_abs_cmul_4ch(request, word_length):
     ]
 
     parameters = {}
-    parameters['WORD_LENGTH'] = word_length
+    parameters['WORD_LENGTH_IN'] = word_length_in
+    parameters['WORD_LENGTH_OUT'] = word_length_out
     extra_env = {f'PARAM_{k}': str(v) for k, v in parameters.items()}
 
     sim_build = os.path.join(tests_dir, "sim_build",
@@ -151,5 +156,5 @@ def test_sq_abs_cmul_4ch(request, word_length):
         module=module,
         parameters=parameters,
         sim_build=sim_build,
-        extra_env=extra_env,
+        extra_env=extra_env
     )
