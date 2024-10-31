@@ -2,9 +2,9 @@
 module sq_abs_cmul_4ch
 #(
 		parameter WORD_LENGTH_IN = 16, 
-		parameter WORD_LENGTH_OUT = 32, 
 		parameter WORD_LENGTH_CALC = WORD_LENGTH_IN*2+8,    // word length of immediate values
-		parameter WORD_LENGTH_INT_ABS_SQ = WORD_LENGTH_CALC*2  // word length of output
+		parameter WORD_LENGTH_INT_ABS_SQ = WORD_LENGTH_CALC*2,  // word length of output
+		parameter WORD_LENGTH_OUT = WORD_LENGTH_INT_ABS_SQ
 )
 (   
 		input signed[WORD_LENGTH_IN-1:0] I_x1, I_x2, I_x3, I_x4,       // sample inputs real part
