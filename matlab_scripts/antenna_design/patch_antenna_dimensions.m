@@ -44,4 +44,16 @@ feedwidth = solve(50 == ((120*pi)/(sqrt(eeff))/((x/h)+1.393+0.667*log((x/h) + 1.
 vpa(feedwidth)
 num2sip(0.002339715109807816757048285620612);
 feedinsert = solve(50 == R*cos((pi/L1)*y)^2,y);
-vpa(feedinsert)
+vpa(feedinsert);
+
+%% 
+ % old_er = 4.7;
+er = 4.2; %solved for after antenna lab visit with found frequency of 2.54GHz
+vo = physconst('Lightspeed');
+fr = 2.46E9;
+h = 1.43e-3;
+mu_0 = 1.26e-6; % permeability of free space in H/m
+epsilon_0 = 8.85e-12; % permittivity of free space in F/m
+
+y = solve(42.5E-3 ==(vo/(2*fr)) * (sqrt(2/(x+1))),x);
+vpa(y)
