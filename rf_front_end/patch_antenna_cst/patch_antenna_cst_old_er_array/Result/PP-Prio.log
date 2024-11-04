@@ -1,0 +1,23 @@
+=========================================
+== CST Matrix Calculation Priority Log ==
+=========================================
+Priorities are sorted in ascending order beginning with the lowest priority
+ 
+Group | Shape-ID | ShapeName | Material | User-priority | 2D/3D-Geometry | Material-attributes | Shape-attributes | Feature-ID | Schemetype
+1 | 11 | </cst/Boundaries/> Low^X | $NFSMaterial$ | n/a | no | normal.vacuum. | boundary. | n/a | FIT_TD
+1 | 12 | </cst/Boundaries/> Low^Y | $NFSMaterial$ | n/a | no | normal.vacuum. | boundary. | n/a | FIT_TD
+1 | 13 | </cst/Boundaries/> Low^Z | $NFSMaterial$ | n/a | no | normal.vacuum. | boundary. | n/a | FIT_TD
+1 | 14 | </cst/Boundaries/> Up^X | $NFSMaterial$ | n/a | no | normal.vacuum. | boundary. | n/a | FIT_TD
+1 | 15 | </cst/Boundaries/> Up^Y | $NFSMaterial$ | n/a | no | normal.vacuum. | boundary. | n/a | FIT_TD
+1 | 16 | </cst/Boundaries/> Up^Z | $NFSMaterial$ | n/a | no | normal.vacuum. | boundary. | n/a | FIT_TD
+2 | 2 | dielectric:solid1 | FR4 | n/a | yes | normal. | solid. | n/a | FIT_TD
+3 | 1 | dielectric:groundplane | Copper (annealed) | n/a | yes | pec.rho.surface-impedance. | solid. | n/a | FIT_TD
+3 | 3 | patch1:feedline | Copper (annealed) | n/a | yes | pec.rho.surface-impedance. | solid. | n/a | FIT_TD
+3 | 4 | patch1:patch1 | Copper (annealed) | n/a | yes | pec.rho.surface-impedance. | solid. | n/a | FIT_TD
+3 | 5 | patch1_1:feedline | Copper (annealed) | n/a | yes | pec.rho.surface-impedance. | solid. | n/a | FIT_TD
+3 | 6 | patch1_1:patch1 | Copper (annealed) | n/a | yes | pec.rho.surface-impedance. | solid. | n/a | FIT_TD
+3 | 7 | patch1_2:feedline | Copper (annealed) | n/a | yes | pec.rho.surface-impedance. | solid. | n/a | FIT_TD
+3 | 8 | patch1_2:patch1 | Copper (annealed) | n/a | yes | pec.rho.surface-impedance. | solid. | n/a | FIT_TD
+3 | 9 | patch1_3:feedline | Copper (annealed) | n/a | yes | pec.rho.surface-impedance. | solid. | n/a | FIT_TD
+3 | 10 | patch1_3:patch1 | Copper (annealed) | n/a | yes | pec.rho.surface-impedance. | solid. | n/a | FIT_TD
+=========================================
