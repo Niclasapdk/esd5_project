@@ -69,3 +69,42 @@ maxp = p(maxidp,:);
 legend('Dimensions: IG = 1mm, PW = 40.5mm, PL = 27.5mm, IW = 2.36mm, IL = 9.86mm');
 % text(2.45,maxp.Var2,'\Leftarrow 2.44GHz and -35.57dB','FontSize',14);
 grid on;
+%% 
+% Assume T is your table with columns 'Var1' and 'Var2'
+% Define the number of rows per segment
+close all
+clear
+
+T = readtable('paramsweepfinal_epsR.txt')
+rows_per_segment = 1003;
+
+num_segments = 8029 / rows_per_segment;
+
+epsilonR = [4.7 4.58 4.47 4.35 4.24 4.12 4.01 3.9];
+
+% Create a single figure for all segments
+figure;
+hold on; % Hold on to plot all segments on the same figure
+% Loop through each segment and plot Var1 vs. Var2
+for i = 1:num_segments
+    % Calculate the row indices for the current segment
+    start_row = (i - 1) * rows_per_segment + 1;
+    end_row = i * rows_per_segment;
+    
+    % Extract the current segment of data
+    segment = T(start_row:end_row, :);
+    
+    % Plot Var1 vs. Var2 for the current segment
+    s(i) = plot(segment.Var1, segment.Var2, 'DisplayName', ['Epsilon value: ' num2str(epsilonR(i))]);
+    s(i).LineWidth = 1.2;
+    xlim([1.8 3.2]);
+    grid on
+end
+
+% Finalize plot
+title('S-Paramters(S1,1)','FontSize',20);
+xlabel('Frequency [GHz]','FontSize',18);
+ylabel('Magnitude [dB]','FontSize',18);
+set(gca,'FontSize',14);
+legend show;
+hold off;
