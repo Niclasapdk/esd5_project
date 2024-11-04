@@ -19,8 +19,8 @@ L = (1 / (2 * fr * sqrt(eeff) * sqrt(mu_0 * epsilon_0))) - (2 * deltaL);
 num2sip(L);
 num2sip(W);
 
-L1 = 29E-3;
-W1 = 39E-3;
+L1 = 27.5E-3; % Brugt til at justere feed length efter simuleringer
+W1 = 40.5E-3; % Brugt til at justere feed length efter simuleringer indsæt W og L fra tidligere til det udregnede.
 
 % Define constants
 a = 51.14;
@@ -44,7 +44,7 @@ feedwidth = solve(50 == ((120*pi)/(sqrt(eeff))/((x/h)+1.393+0.667*log((x/h) + 1.
 vpa(feedwidth)
 num2sip(0.002339715109807816757048285620612);
 feedinsert = solve(50 == R*cos((pi/L1)*y)^2,y);
-vpa(feedinsert);
+vpa(feedinsert)
 
 %% 
  % old_er = 4.7;

@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CSTAuxiliaryGeometry version="20170928">
+  <Objects>
+    <Object name="Ports\port1" id="5">
+      <LineSet points="30.25 -10.1218004 -1.42999995 30.25 10.1218004 -1.42999995 30.25 10.1218004 8.98680019 30.25 -10.1218004 8.98680019 30.25 -10.1218004 -1.42999995" stripped="1" material="$PortMaterial$" text="1" short="1"/>
+    </Object>
+  </Objects>
+  <Materials/>
+  <Groups/>
+</CSTAuxiliaryGeometry>
