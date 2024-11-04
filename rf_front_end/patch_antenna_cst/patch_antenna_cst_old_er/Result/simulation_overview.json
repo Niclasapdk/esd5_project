@@ -1,55 +1,7 @@
 {
-    "date": "2024-11-04, 10:37:10 AM, Rom, normaltid",
+    "date": "2024-11-04, 15:04:06, Rom, normaltid",
     "solver_runs_and_tasks": {
-        "module_name": "standard simulation project",
-        "solver_run": {
-            "license_and_hardware_request": {
-                "in_use": true,
-                "license_type": "CST legacy token",
-                "mpi": {
-                    "consistency_check": true,
-                    "num_different_mpi_nodes": 0,
-                    "num_local_mpi_nodes": 0,
-                    "num_mpi_nodes": 0
-                },
-                "num_cpu_sockets": 1,
-                "num_dc_nodes": 0,
-                "num_gpus": 0,
-                "num_physical_cores": -1,
-                "num_threads": 1024
-            },
-            "opt_par_run_id": -1,
-            "return_code": 3,
-            "solver_hwacc_usage": {
-                "info": "gathered from solver run",
-                "mpi": {
-                    "consistency_check": true,
-                    "num_different_mpi_nodes": 0,
-                    "num_local_mpi_nodes": 0,
-                    "num_mpi_nodes": 0
-                },
-                "num_cpu_sockets": 1,
-                "num_dc_nodes": 0,
-                "num_gpus": 0,
-                "num_threads_or_physical_cores": 4
-            },
-            "solver_used": "Solver_HF_TD",
-            "task_name": "solver run",
-            "time_info": {
-                "details": {
-                    "discretizer": 4,
-                    "solver": 0
-                },
-                "run_time": 7
-            }
-        }
-    },
-    "studio-version": "2023.4 Release from 2023-05-04 (change 1108613)",
-    "version": 1
-}{
-    "date": "2024-11-04, 10:38:26 AM, Rom, normaltid",
-    "solver_runs_and_tasks": {
-        "module_name": "standard simulation project",
+        "module_name": "parameter sweep",
         "solver_run": {
             "license_and_hardware_request": {
                 "in_use": true,
@@ -85,19 +37,19 @@
             "task_name": "solver run",
             "time_info": {
                 "details": {
-                    "discretizer": 14,
-                    "solver": 21
+                    "discretizer": 9,
+                    "solver": 18
                 },
-                "run_time": 42
+                "run_time": 47
             }
         }
     },
     "studio-version": "2023.4 Release from 2023-05-04 (change 1108613)",
     "version": 1
 }{
-    "date": "2024-11-04, 12:18:30 PM, Rom, normaltid",
+    "date": "2024-11-04, 15:06:46, Rom, normaltid",
     "solver_runs_and_tasks": {
-        "module_name": "standard simulation project",
+        "module_name": "parameter sweep",
         "solver_run": {
             "license_and_hardware_request": {
                 "in_use": true,
@@ -133,19 +85,19 @@
             "task_name": "solver run",
             "time_info": {
                 "details": {
-                    "discretizer": 16,
-                    "solver": 22
+                    "discretizer": 9,
+                    "solver": 17
                 },
-                "run_time": 78
+                "run_time": 47
             }
         }
     },
     "studio-version": "2023.4 Release from 2023-05-04 (change 1108613)",
     "version": 1
 }{
-    "date": "2024-11-04, 12:21:08 PM, Rom, normaltid",
+    "date": "2024-11-04, 15:07:41, Rom, normaltid",
     "solver_runs_and_tasks": {
-        "module_name": "standard simulation project",
+        "module_name": "parameter sweep",
         "solver_run": {
             "license_and_hardware_request": {
                 "in_use": true,
@@ -181,19 +133,19 @@
             "task_name": "solver run",
             "time_info": {
                 "details": {
-                    "discretizer": 17,
-                    "solver": 23
+                    "discretizer": 9,
+                    "solver": 18
                 },
-                "run_time": 77
+                "run_time": 50
             }
         }
     },
     "studio-version": "2023.4 Release from 2023-05-04 (change 1108613)",
     "version": 1
 }{
-    "date": "2024-11-04, 12:23:22 PM, Rom, normaltid",
+    "date": "2024-11-04, 15:20:29, Rom, normaltid",
     "solver_runs_and_tasks": {
-        "module_name": "standard simulation project",
+        "module_name": "parameter sweep",
         "solver_run": {
             "license_and_hardware_request": {
                 "in_use": true,
@@ -229,19 +181,19 @@
             "task_name": "solver run",
             "time_info": {
                 "details": {
-                    "discretizer": 15,
+                    "discretizer": 14,
                     "solver": 22
                 },
-                "run_time": 75
+                "run_time": 73
             }
         }
     },
     "studio-version": "2023.4 Release from 2023-05-04 (change 1108613)",
     "version": 1
 }{
-    "date": "2024-11-04, 12:27:35 PM, Rom, normaltid",
+    "date": "2024-11-04, 15:22:29, Rom, normaltid",
     "solver_runs_and_tasks": {
-        "module_name": "standard simulation project",
+        "module_name": "parameter sweep",
         "solver_run": {
             "license_and_hardware_request": {
                 "in_use": true,
@@ -277,19 +229,19 @@
             "task_name": "solver run",
             "time_info": {
                 "details": {
-                    "discretizer": 20,
-                    "solver": 21
+                    "discretizer": 15,
+                    "solver": 54
                 },
-                "run_time": 87
+                "run_time": 110
             }
         }
     },
     "studio-version": "2023.4 Release from 2023-05-04 (change 1108613)",
     "version": 1
 }{
-    "date": "2024-11-04, 12:30:10 PM, Rom, normaltid",
+    "date": "2024-11-04, 15:24:30, Rom, normaltid",
     "solver_runs_and_tasks": {
-        "module_name": "standard simulation project",
+        "module_name": "parameter sweep",
         "solver_run": {
             "license_and_hardware_request": {
                 "in_use": true,
@@ -326,18 +278,18 @@
             "time_info": {
                 "details": {
                     "discretizer": 16,
-                    "solver": 23
+                    "solver": 53
                 },
-                "run_time": 81
+                "run_time": 110
             }
         }
     },
     "studio-version": "2023.4 Release from 2023-05-04 (change 1108613)",
     "version": 1
 }{
-    "date": "2024-11-04, 12:34:33 PM, Rom, normaltid",
+    "date": "2024-11-04, 15:25:52, Rom, normaltid",
     "solver_runs_and_tasks": {
-        "module_name": "standard simulation project",
+        "module_name": "parameter sweep",
         "solver_run": {
             "license_and_hardware_request": {
                 "in_use": true,
@@ -373,19 +325,19 @@
             "task_name": "solver run",
             "time_info": {
                 "details": {
-                    "discretizer": 19,
-                    "solver": 26
+                    "discretizer": 14,
+                    "solver": 20
                 },
-                "run_time": 80
+                "run_time": 72
             }
         }
     },
     "studio-version": "2023.4 Release from 2023-05-04 (change 1108613)",
     "version": 1
 }{
-    "date": "2024-11-04, 12:38:14 PM, Rom, normaltid",
+    "date": "2024-11-04, 15:27:10, Rom, normaltid",
     "solver_runs_and_tasks": {
-        "module_name": "standard simulation project",
+        "module_name": "parameter sweep",
         "solver_run": {
             "license_and_hardware_request": {
                 "in_use": true,
@@ -421,19 +373,19 @@
             "task_name": "solver run",
             "time_info": {
                 "details": {
-                    "discretizer": 16,
-                    "solver": 24
+                    "discretizer": 14,
+                    "solver": 19
                 },
-                "run_time": 85
+                "run_time": 69
             }
         }
     },
     "studio-version": "2023.4 Release from 2023-05-04 (change 1108613)",
     "version": 1
 }{
-    "date": "2024-11-04, 12:44:12 PM, Rom, normaltid",
+    "date": "2024-11-04, 15:28:30, Rom, normaltid",
     "solver_runs_and_tasks": {
-        "module_name": "standard simulation project",
+        "module_name": "parameter sweep",
         "solver_run": {
             "license_and_hardware_request": {
                 "in_use": true,
@@ -469,10 +421,58 @@
             "task_name": "solver run",
             "time_info": {
                 "details": {
-                    "discretizer": 16,
-                    "solver": 24
+                    "discretizer": 15,
+                    "solver": 19
                 },
-                "run_time": 75
+                "run_time": 69
+            }
+        }
+    },
+    "studio-version": "2023.4 Release from 2023-05-04 (change 1108613)",
+    "version": 1
+}{
+    "date": "2024-11-04, 15:29:50, Rom, normaltid",
+    "solver_runs_and_tasks": {
+        "module_name": "parameter sweep",
+        "solver_run": {
+            "license_and_hardware_request": {
+                "in_use": true,
+                "license_type": "CST legacy token",
+                "mpi": {
+                    "consistency_check": true,
+                    "num_different_mpi_nodes": 0,
+                    "num_local_mpi_nodes": 0,
+                    "num_mpi_nodes": 0
+                },
+                "num_cpu_sockets": 1,
+                "num_dc_nodes": 0,
+                "num_gpus": 0,
+                "num_physical_cores": -1,
+                "num_threads": 1024
+            },
+            "opt_par_run_id": 10,
+            "return_code": 1,
+            "solver_hwacc_usage": {
+                "info": "gathered from solver run",
+                "mpi": {
+                    "consistency_check": true,
+                    "num_different_mpi_nodes": 0,
+                    "num_local_mpi_nodes": 0,
+                    "num_mpi_nodes": 0
+                },
+                "num_cpu_sockets": 1,
+                "num_dc_nodes": 0,
+                "num_gpus": 0,
+                "num_threads_or_physical_cores": 4
+            },
+            "solver_used": "Solver_HF_TD",
+            "task_name": "solver run",
+            "time_info": {
+                "details": {
+                    "discretizer": 14,
+                    "solver": 18
+                },
+                "run_time": 71
             }
         }
     },
