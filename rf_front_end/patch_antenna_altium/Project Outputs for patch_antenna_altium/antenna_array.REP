@@ -16,8 +16,6 @@ Used DCodes :
     D12
     D13
     D14
-    D15
-    D16
 *************************************************************
 
 *************************************************************
@@ -31,94 +29,7 @@ Generating : Bottom Layer
 
 Used DCodes :
     D11
-    D16
-*************************************************************
-
-*************************************************************
-Generating : Top Overlay
-      File : antenna_array_Legend_Top.gbr
-
-    Adding Layer      : Top Overlay
-
-
-Used DCodes :
-    D17
-    D18
-    D19
-*************************************************************
-
-*************************************************************
-Generating : Bottom Overlay
-      File : antenna_array_Legend_Bot.gbr
-
-    Adding Layer      : Bottom Overlay
-
-
-Used DCodes :
-*************************************************************
-
-*************************************************************
-Generating : Top Solder
-      File : antenna_array_Soldermask_Top.gbr
-
-    Adding Layer      : Top Solder
-
-    Adding Layer      : Top Layer
-
-    Adding Layer      : Multi-Layer
-
-
-Used DCodes :
-    D10
-    D11
-    D20
-*************************************************************
-
-*************************************************************
-Generating : Bottom Solder
-      File : antenna_array_Soldermask_Bot.gbr
-
-    Adding Layer      : Bottom Solder
-
-    Adding Layer      : Bottom Layer
-
-    Adding Layer      : Multi-Layer
-
-
-Used DCodes :
-    D11
-    D20
-*************************************************************
-
-*************************************************************
-Generating : Top Paste
-      File : antenna_array_Paste_Top.gbr
-
-    Adding Layer      : Top Paste
-
-    Adding Layer      : Top Layer
-
-    Adding Layer      : Multi-Layer
-
-
-Used DCodes :
-    D10
-    D11
-*************************************************************
-
-*************************************************************
-Generating : Bottom Paste
-      File : antenna_array_Paste_Bot.gbr
-
-    Adding Layer      : Bottom Paste
-
-    Adding Layer      : Bottom Layer
-
-    Adding Layer      : Multi-Layer
-
-
-Used DCodes :
-    D11
+    D14
 *************************************************************
 
 *************************************************************
@@ -127,7 +38,7 @@ Generating : Profile
 
 
 Used DCodes :
-    D21
+    D15
 *************************************************************
 
 *************************************************************
@@ -144,6 +55,6 @@ Generating : Plated through-hole drill file
 
 
 Used DCodes :
-    D22
+    D16
 *************************************************************
 

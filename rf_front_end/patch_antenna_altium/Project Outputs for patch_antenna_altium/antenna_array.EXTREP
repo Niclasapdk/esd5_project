@@ -1,5 +1,5 @@
 ------------------------------------------------------------------------------------------
-Gerber File Extension Report For: antenna_array.GBR   22/10/2024  10.56.37
+Gerber File Extension Report For: antenna_array.GBR   30/10/2024  16.45.37
 ------------------------------------------------------------------------------------------
 
 
@@ -8,12 +8,6 @@ Layer Extension     Layer Description
 ------------------------------------------------------------------------------------------
 .gbr                Top Layer                               
 .gbr                Bottom Layer                            
-.gbr                Top Overlay                             
-.gbr                Bottom Overlay                          
-.gbr                Top Solder                              
-.gbr                Bottom Solder                           
-.gbr                Top Paste                               
-.gbr                Bottom Paste                            
 .gbr                Profile                                 
 .gbr                Non-plated through-hole drill file      
 .gbr                Plated through-hole drill file          
