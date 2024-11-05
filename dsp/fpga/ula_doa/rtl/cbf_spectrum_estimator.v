@@ -35,7 +35,8 @@ parameter WORD_LENGTH_SAMPLE_AXIS = WORD_LENGTH_I_AND_Q*8; // should be even num
 parameter WORD_LENGTH_POWER = ((WORD_LENGTH_I_AND_Q*2)+8)*2+MOVING_AVERAGE_SNAPSHOT_COUNT;
 parameter WORD_LENGTH_OUT = WORD_LENGTH_POWER;
 parameter WORD_LENGTH_POWER_SPECTRUM = WORD_LENGTH_POWER*PHI_SCAN_NUM_STEPS;
-parameter PHI_SCAN_NUM_STEPS = $rtoi(((PHI_SCAN_TO-PHI_SCAN_FROM)/PHI_SCAN_STEP)+0.999999);
+parameter PHI_SCAN_NUM_STEPS = $ceil(((PHI_SCAN_TO-PHI_SCAN_FROM)/PHI_SCAN_STEP));
+// parameter integer PHI_SCAN_NUM_STEPS = ((PHI_SCAN_TO - PHI_SCAN_FROM) + PHI_SCAN_STEP - 1) / PHI_SCAN_STEP;
 
 // Convert input axis to 4-sample wordlength tdata
 wire [WORD_LENGTH_SAMPLE_AXIS-1 : 0] input_sample_tdata;
@@ -67,7 +68,7 @@ input_axis_fifo_adapter (
 // power spectrum of entire scan angle area
 wire [WORD_LENGTH_POWER_SPECTRUM-1 : 0] power_spectrum_tdata;
 wire [PHI_SCAN_NUM_STEPS-1 : 0] power_spectrum_slices_valid;
-wire power_spectrum_tvalid = power_spectrum_slices_valid == '1;
+wire power_spectrum_tvalid = &power_spectrum_slices_valid;
 wire power_spectrum_tready;
 
 genvar i;

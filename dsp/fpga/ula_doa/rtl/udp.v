@@ -9,7 +9,8 @@
  */
 module udp_connection #
 (
-    parameter TARGET = "GENERIC"
+    parameter TARGET = "GENERIC",
+	parameter TX_DATA_WIDTH = 8
 )
 (
     // Clock: 125MHz
@@ -556,15 +557,15 @@ tx_udp_data_len_inst (
     .frame_len_valid(tx_udp_data_len_valid)
 );
 
-axis_fifo #(
+axis_fifo_adapter #(
     .DEPTH(8192),
-    .DATA_WIDTH(8),
+    .S_DATA_WIDTH(TX_DATA_WIDTH),
+    .M_DATA_WIDTH(8),
     .KEEP_ENABLE(0),
     .ID_ENABLE(0),
     .DEST_ENABLE(0),
-    .USER_ENABLE(1),
-    .USER_WIDTH(1),
-    .FRAME_FIFO(0)
+    .USER_ENABLE(0),
+    .FRAME_FIFO(1)
 )
 tx_udp_payload_fifo (
     .clk(clk),

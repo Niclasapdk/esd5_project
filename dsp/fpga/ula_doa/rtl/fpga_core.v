@@ -61,13 +61,13 @@ module fpga_core #
 
 // Configuration
 wire [47:0] local_mac      = 48'h02_00_00_00_00_00;
-wire [31:0] local_ip       = {8'd192, 8'd168, 8'd1,   8'd128};
-wire [31:0] gateway_ip     = {8'd192, 8'd168, 8'd1,   8'd1};
+wire [31:0] local_ip       = {8'd192, 8'd168, 8'd10,   8'd128};
+wire [31:0] gateway_ip     = {8'd192, 8'd168, 8'd10,   8'd1};
 wire [31:0] subnet_mask    = {8'd255, 8'd255, 8'd255, 8'd0};
 wire [15:0] rx_dest_port   = 16'd1234;
 wire [15:0] tx_dest_port   = 16'd9000;
-wire [15:0] tx_source_port = 16'd1234;
-wire [31:0] tx_dest_ip     = {8'd192, 8'd168, 8'd1,   8'd20};
+wire [15:0] tx_source_port = 16'd1235;
+wire [31:0] tx_dest_ip     = {8'd192, 8'd168, 8'd10,   8'd10};
 
 // place data onto 7 segment displays
 reg [31:0] seven_segment_reg = 0;
@@ -181,13 +181,45 @@ wire       rx_data_axis_tlast;
 wire       rx_data_axis_tuser;
 
 // loopback
-assign rx_data_axis_tdata = tx_data_axis_tdata;
-assign rx_data_axis_tvalid = tx_data_axis_tvalid;
-assign tx_data_axis_tready = rx_data_axis_tready;
-assign rx_data_axis_tlast = tx_data_axis_tlast;
-assign rx_data_axis_tuser = tx_data_axis_tuser;
+// assign rx_data_axis_tdata = tx_data_axis_tdata;
+// assign rx_data_axis_tvalid = tx_data_axis_tvalid;
+// assign tx_data_axis_tready = rx_data_axis_tready;
+// assign rx_data_axis_tlast = tx_data_axis_tlast;
+// assign rx_data_axis_tuser = tx_data_axis_tuser;
 
-udp_connection # (.TARGET(TARGET))
+// Spectrum estimator
+cbf_spectrum_estimator
+#(
+	.MOVING_AVERAGE_SNAPSHOT_COUNT(8), // should be some 2^x
+	.WORD_LENGTH_I_AND_Q(16), // should be even number of bytes
+	.WORD_LENGTH_IN(8), // should be even number of bytes
+	// Degrees
+	.PHI_SCAN_STEP(2),
+	.PHI_SCAN_FROM(-50), // inclusive
+	.PHI_SCAN_TO(51), // exclusive
+	.angle_calibration0_deg(0),
+	.angle_calibration1_deg(0),
+	.angle_calibration2_deg(0),
+	.angle_calibration3_deg(0))
+cbf_spectrum_estimator_inst (
+	.clk(clk),
+	.rst(rst),
+	// Input axis
+	.s_axis_tdata(rx_data_axis_tdata),
+	.s_axis_tvalid(rx_data_axis_tvalid),
+	.s_axis_tlast(rx_data_axis_tlast),
+	.s_axis_tready(rx_data_axis_tready),
+	// Output axis
+	.m_axis_tdata(tx_data_axis_tdata),
+	.m_axis_tvalid(tx_data_axis_tvalid),
+	.m_axis_tlast(tx_data_axis_tlast),
+	.m_axis_tready(tx_data_axis_tready)
+);
+
+udp_connection #(
+	.TARGET(TARGET),
+	.TX_DATA_WIDTH(88) // TODO fix hardcoded length
+)
 udp_connection_inst
 (
     .clk(clk),
