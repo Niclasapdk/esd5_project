@@ -23,17 +23,19 @@ module cbf_spectrum_estimator
 	input [WORD_LENGTH_IN-1 : 0] s_axis_tdata,
 	input  s_axis_tvalid,
 	input  s_axis_tlast,
-	output s_axis_tready
+	output s_axis_tready,
 	// Output axis
-	// output [WORD_LENGTH_OUT-1 : 0] m_axis_tdata,
-	// output m_axis_tvalid,
-	// input  m_axis_tready
+	output [WORD_LENGTH_OUT-1 : 0] m_axis_tdata,
+	output m_axis_tvalid,
+	output m_axis_tlast,
+	input  m_axis_tready
 );
 
 parameter WORD_LENGTH_SAMPLE_AXIS = WORD_LENGTH_I_AND_Q*8; // should be even number of bytes
 parameter WORD_LENGTH_POWER = ((WORD_LENGTH_I_AND_Q*2)+8)*2+MOVING_AVERAGE_SNAPSHOT_COUNT;
+parameter WORD_LENGTH_OUT = WORD_LENGTH_POWER;
 parameter WORD_LENGTH_POWER_SPECTRUM = WORD_LENGTH_POWER*PHI_SCAN_NUM_STEPS;
-parameter PHI_SCAN_NUM_STEPS = (PHI_SCAN_TO-PHI_SCAN_FROM)/PHI_SCAN_STEP;
+parameter PHI_SCAN_NUM_STEPS = $rtoi(((PHI_SCAN_TO-PHI_SCAN_FROM)/PHI_SCAN_STEP)+0.999999);
 
 // Convert input axis to 4-sample wordlength tdata
 wire [WORD_LENGTH_SAMPLE_AXIS-1 : 0] input_sample_tdata;
@@ -64,14 +66,17 @@ input_axis_fifo_adapter (
 
 // power spectrum of entire scan angle area
 wire [WORD_LENGTH_POWER_SPECTRUM-1 : 0] power_spectrum_tdata;
-wire [PHI_SCAN_NUM_STEPS-1 : 0] power_spectrum_tready;
-wire [PHI_SCAN_NUM_STEPS-1 : 0] power_spectrum_tvalid;
+wire [PHI_SCAN_NUM_STEPS-1 : 0] power_spectrum_slices_valid;
+wire power_spectrum_tvalid = power_spectrum_slices_valid == '1;
+wire power_spectrum_tready;
 
 genvar i;
 generate
 	for (i=0; i<PHI_SCAN_NUM_STEPS; i=i+1) begin : generator_cbf_power_estimator
 		wire [WORD_LENGTH_POWER-1: 0] sliced_power_spectrum_tdata;
-		assign power_spectrum_tdata[WORD_LENGTH_POWER*(i+1)-1 -: WORD_LENGTH_POWER] = sliced_power_spectrum_tdata ;
+		assign power_spectrum_tdata[WORD_LENGTH_POWER*(i+1)-1 -: WORD_LENGTH_POWER] = sliced_power_spectrum_tdata;
+		wire sliced_power_spectrum_tvalid;
+		assign power_spectrum_slices_valid[i] = sliced_power_spectrum_tvalid;
 		cbf_power_estimator #(
 			.MOVING_AVERAGE_SNAPSHOT_COUNT(MOVING_AVERAGE_SNAPSHOT_COUNT), // should be some 2^x
 			.WORD_LENGTH_I_AND_Q(WORD_LENGTH_I_AND_Q), // should be even number of bytes
@@ -91,10 +96,33 @@ generate
 			.s_axis_tready(input_sample_tready),
 			// Output axis
 			.m_axis_tdata(sliced_power_spectrum_tdata),
-			.m_axis_tvalid(power_spectrum_tvalid[i]),
-			.m_axis_tready(power_spectrum_tready[i])
+			.m_axis_tvalid(sliced_power_spectrum_tvalid),
+			.m_axis_tready(power_spectrum_tready)
 		);
 	end
 endgenerate
+
+axis_fifo_adapter #(
+    .DEPTH(4096),
+    .S_DATA_WIDTH(WORD_LENGTH_POWER_SPECTRUM),
+    .M_DATA_WIDTH(WORD_LENGTH_OUT),
+    .ID_ENABLE(0),
+    .DEST_ENABLE(0),
+    .USER_ENABLE(0),
+    .FRAME_FIFO(0))
+output_axis_fifo_adapter (
+    .clk(clk),
+    .rst(rst),
+    // AXI input
+    .s_axis_tdata(power_spectrum_tdata),
+    .s_axis_tvalid(power_spectrum_tvalid),
+    .s_axis_tready(power_spectrum_tready),
+    .s_axis_tlast(1'b1),
+    // AXI output
+    .m_axis_tdata(m_axis_tdata),
+    .m_axis_tvalid(m_axis_tvalid),
+    .m_axis_tready(m_axis_tready),
+    .m_axis_tlast(m_axis_tlast)
+);
 
 endmodule
