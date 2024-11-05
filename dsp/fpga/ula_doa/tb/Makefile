@@ -26,25 +26,21 @@ WAVES ?= 0
 COCOTB_HDL_TIMEUNIT = 1ns
 COCOTB_HDL_TIMEPRECISION = 1ns
 
-DUT      = moving_average
+DUT      = cbf_spectrum_estimator
 TOPLEVEL = $(DUT)
 MODULE   = "test_$(DUT)"
 RTL_DIR  = ../rtl
+LIB_AXIS_RTL_DIR = ../lib/eth/lib/axis/rtl
 VERILOG_SOURCES += $(RTL_DIR)/$(DUT).v
+VERILOG_SOURCES += $(RTL_DIR)/cbf_power_estimator.v
+VERILOG_SOURCES += $(RTL_DIR)/sq_abs_cmul_4ch.v
+VERILOG_SOURCES += $(RTL_DIR)/moving_average.v
+VERILOG_SOURCES += $(LIB_AXIS_RTL_DIR)/axis_fifo_adapter.v
+VERILOG_SOURCES += $(LIB_AXIS_RTL_DIR)/axis_fifo.v
+VERILOG_SOURCES += $(LIB_AXIS_RTL_DIR)/axis_adapter.v
 
 export COCOTB_RESOLVE_X=RANDOM
 export WAVES=1
-
-# module parameters
-# export PARAM_DATA_WIDTH := 32
-# export PARAM_ADDR_WIDTH := 32
-# export PARAM_STRB_WIDTH := $(shell expr $(PARAM_DATA_WIDTH) / 8 )
-# export PARAM_ID_WIDTH := 8
-# export PARAM_AWUSER_WIDTH := 1
-# export PARAM_WUSER_WIDTH := 1
-# export PARAM_BUSER_WIDTH := 1
-# export PARAM_ARUSER_WIDTH := 1
-# export PARAM_RUSER_WIDTH := 1
 
 ifeq ($(SIM), icarus)
 	PLUSARGS += -fst

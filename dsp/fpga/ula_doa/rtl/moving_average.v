@@ -23,7 +23,7 @@ module moving_average
 	// Output axis
 	output [WORD_LENGTH_OUT-1 : 0] m_axis_tdata,
 	output m_axis_tvalid,
-	input  m_axis_tready // ignored
+	input  m_axis_tready
 );
 
 // registers

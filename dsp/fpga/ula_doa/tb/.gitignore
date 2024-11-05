@@ -2,3 +2,6 @@ sim_build
 __pycache__
 a.out
 .venv
+iverilog_dump.v
+*.fst
+results.xml
