@@ -108,3 +108,30 @@ ylabel('Magnitude [dB]','FontSize',18);
 set(gca,'FontSize',14);
 legend show;
 hold off;
+%% S21 Coupler
+close all
+clear 
+c1 = readtable('TRACE11.CSV');
+c2 = readtable('TRACE12.CSV');
+c3 = readtable('TRACE13.CSV');
+c4 = readtable('TRACE14.CSV');
+
+s1 = plot(c1.Frequency,c1.FormattedData);
+s1.LineWidth = 1.6;
+hold on
+s2 = plot(c2.Frequency,c2.FormattedData);
+s2.LineWidth = 1.6;
+hold on
+s3 = plot(c3.Frequency,c3.FormattedData);
+s3.LineWidth = 1.6;
+hold on
+s4 = plot(c4.Frequency,c4.FormattedData);
+s4.LineWidth = 1.6;
+ylabel('Magnitude [dB]','FontSize',16);
+xlabel('Frequency [Hz]','FontSize',16);
+ylim([-10 0])
+ax = gca;
+ax.FontSize = 12;
+legend('Port 1','Port 2','Port 3','Port 4')
+title('S_{21} for antenna coupler');
+grid on
