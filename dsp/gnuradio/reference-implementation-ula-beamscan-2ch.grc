@@ -49,7 +49,7 @@ blocks:
   id: variable
   parameters:
     comment: ''
-    value: '40'
+    value: '80'
   states:
     bus_sink: false
     bus_source: false
@@ -117,25 +117,6 @@ blocks:
     coordinate: [624, 12.0]
     rotation: 0
     state: enabled
-- name: analog_noise_source_x_0
-  id: analog_noise_source_x
-  parameters:
-    affinity: ''
-    alias: ''
-    amp: '1'
-    comment: ''
-    maxoutbuf: '0'
-    minoutbuf: '0'
-    noise_type: analog.GR_GAUSSIAN
-    seed: '0'
-    type: float
-  states:
-    bus_sink: false
-    bus_source: false
-    bus_structure: null
-    coordinate: [1144, -4.0]
-    rotation: 0
-    state: disabled
 - name: blocks_deinterleave_0
   id: blocks_deinterleave
   parameters:
@@ -198,27 +179,6 @@ blocks:
     coordinate: [304, 244.0]
     rotation: 0
     state: disabled
-- name: blocks_throttle2_0_0
-  id: blocks_throttle2
-  parameters:
-    affinity: ''
-    alias: ''
-    comment: ''
-    ignoretag: 'True'
-    limit: auto
-    maximum: '0.1'
-    maxoutbuf: '0'
-    minoutbuf: '0'
-    samples_per_second: samp_rate
-    type: float
-    vlen: '1'
-  states:
-    bus_sink: false
-    bus_source: false
-    bus_structure: null
-    coordinate: [1200, 60.0]
-    rotation: 0
-    state: disabled
 - name: epy_block_0
   id: epy_block
   parameters:
@@ -253,12 +213,14 @@ blocks:
       \                steervec(3, self.rx4_phase_cal)]).transpose() # e^{-j*phase_shift}\n\
       \        # transpose steering vector array so indexing is (phi, antenna)\n \
       \       self.logger.info(f\"steering_vectors: {self.steering_vectors}\")\n\n\
-      \    def general_work(self, input_items, output_items):\n        signals_in\
-      \ = np.asarray([input_items[0][:self.num_samples],\n                       \
-      \          input_items[1][:self.num_samples],\n                            \
-      \     input_items[2][:self.num_samples],\n                                 input_items[3][:self.num_samples]])\n\
-      \        steervecs = self.steering_vectors\n        sig_beamformed = np.matmul(steervecs,\
-      \ signals_in) # dimension: phi X snapshot\n        spectrum = np.mean(np.square(np.abs(sig_beamformed)),\
+      \    def general_work(self, input_items, output_items):\n        for i in range(4):\n\
+      \            if len(input_items[i]) < self.num_samples:\n                return\
+      \ 0\n        signals_in = np.asarray([input_items[0][:self.num_samples],\n \
+      \                                input_items[1][:self.num_samples],\n      \
+      \                           input_items[2][:self.num_samples],\n           \
+      \                      input_items[3][:self.num_samples]])\n        steervecs\
+      \ = self.steering_vectors\n        sig_beamformed = np.matmul(steervecs, signals_in)\
+      \ # dimension: phi X snapshot\n        spectrum = np.mean(np.square(np.abs(sig_beamformed)),\
       \ axis=1).astype(\"float32\")\n        output_items[0][:] = spectrum\n     \
       \   for i in range(4):\n            self.consume(i, self.num_samples)\n    \
       \    return len(output_items[0])\n"
@@ -268,7 +230,7 @@ blocks:
     comment: ''
     maxoutbuf: '0'
     minoutbuf: '0'
-    num_samples: '51'
+    num_samples: '128'
     phi_scan_max: phi_scan_max
     phi_scan_min: phi_scan_min
     phi_step: phi_step
@@ -290,7 +252,7 @@ blocks:
     bus_structure: null
     coordinate: [760, 292.0]
     rotation: 0
-    state: disabled
+    state: enabled
 - name: qtgui_time_sink_x_0
   id: qtgui_time_sink_x
   parameters:
@@ -385,7 +347,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [824, 104.0]
+    coordinate: [800, 120.0]
     rotation: 0
     state: enabled
 - name: qtgui_vector_sink_f_0
@@ -403,7 +365,7 @@ blocks:
     alpha7: '1.0'
     alpha8: '1.0'
     alpha9: '1.0'
-    autoscale: 'True'
+    autoscale: 'False'
     average: '0.05'
     color1: '"blue"'
     color10: '"dark blue"'
@@ -453,15 +415,15 @@ blocks:
     x_units: '"degrees"'
     y_axis_label: '"Power"'
     y_units: '""'
-    ymax: '10'
+    ymax: '0.5'
     ymin: '0'
   states:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [1128, 348.0]
+    coordinate: [1112, 364.0]
     rotation: 0
-    state: disabled
+    state: enabled
 - name: uhd_usrp_source_0
   id: uhd_usrp_source
   parameters:
@@ -1336,7 +1298,6 @@ blocks:
     state: enabled
 
 connections:
-- [analog_noise_source_x_0, '0', blocks_throttle2_0_0, '0']
 - [blocks_deinterleave_0, '0', epy_block_0, '0']
 - [blocks_deinterleave_0, '0', qtgui_time_sink_x_0, '0']
 - [blocks_deinterleave_0, '1', epy_block_0, '1']

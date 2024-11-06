@@ -49,6 +49,9 @@ class blk(gr.basic_block):
         self.logger.info(f"steering_vectors: {self.steering_vectors}")
 
     def general_work(self, input_items, output_items):
+        for i in range(4):
+            if len(input_items[i]) < self.num_samples:
+                return 0
         signals_in = np.asarray([input_items[0][:self.num_samples],
                                  input_items[1][:self.num_samples],
                                  input_items[2][:self.num_samples],
