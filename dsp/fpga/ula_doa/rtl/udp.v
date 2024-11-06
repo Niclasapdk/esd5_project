@@ -561,7 +561,6 @@ axis_fifo_adapter #(
     .DEPTH(8192),
     .S_DATA_WIDTH(TX_DATA_WIDTH),
     .M_DATA_WIDTH(8),
-    .KEEP_ENABLE(0),
     .ID_ENABLE(0),
     .DEST_ENABLE(0),
     .USER_ENABLE(0),

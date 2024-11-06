@@ -194,9 +194,9 @@ cbf_spectrum_estimator
 	.WORD_LENGTH_I_AND_Q(16), // should be even number of bytes
 	.WORD_LENGTH_IN(8), // should be even number of bytes
 	// Degrees
-	.PHI_SCAN_STEP(2),
-	.PHI_SCAN_FROM(-50), // inclusive
-	.PHI_SCAN_TO(51), // exclusive
+	.PHI_SCAN_STEP(3),
+	.PHI_SCAN_FROM(-30), // inclusive
+	.PHI_SCAN_TO(31), // exclusive
 	.angle_calibration0_deg(0),
 	.angle_calibration1_deg(0),
 	.angle_calibration2_deg(0),
