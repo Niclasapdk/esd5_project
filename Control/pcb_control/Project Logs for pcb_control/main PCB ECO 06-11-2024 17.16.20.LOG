@@ -1,0 +1,80 @@
+Added Component: Designator=M1(M3 Hole)
+Added Component: Designator=M2(M3 Hole)
+Added Component: Designator=M3(M3 Hole)
+Added Component: Designator=M4(M3 Hole)
+Added Component: Designator=M5(M3 Hole)
+Added Component: Designator=M6(M3 Hole)
+Added Component: Designator=M7(M3 Hole)
+Added Component: Designator=Quadratur(Header 1x4)
+Added Component: Designator=R1(RES THT 9mm)
+Add component (AddParameter): Name = "Value"; Value = "10k"; VariantName = "[No Variations]"
+Added Component: Designator=R2(RES THT 9mm)
+Add component (AddParameter): Name = "Value"; Value = "10k"; VariantName = "[No Variations]"
+Added Component: Designator=R3(RES THT 9mm)
+Add component (AddParameter): Name = "Value"; Value = "1k"; VariantName = "[No Variations]"
+Added Component: Designator=S1(Screw-2)
+Added Component: Designator=U1(DIP794W45P254L1969H508Q14)
+Add component (AddParameter): Name = "Availability"; Value = "In Stock"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Check_prices"; Value = "https://www.snapeda.com/parts/SN74HC14N/Texas+Instruments/view-part/?ref=eda"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "MF"; Value = "Texas Instruments"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "MP"; Value = "SN74HC14N"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Package"; Value = "PDIP-14 Texas Instruments"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Price"; Value = "None"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Purchase-URL"; Value = "https://pricing.snapeda.com/search/part/SN74HC14N/?ref=eda"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "SnapEDA_Link"; Value = "https://www.snapeda.com/parts/SN74HC14N/Texas+Instruments/view-part/?ref=snap"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Value"; Value = ""; VariantName = "[No Variations]"
+Added Pin To Net: NetName=+5 Pin=A1-5V
+Added Pin To Net: NetName=+5 Pin=R1-2
+Added Pin To Net: NetName=+5 Pin=R2-2
+Added Pin To Net: NetName=+5 Pin=R3-1
+Added Pin To Net: NetName=+5 Pin=U1-14
+Added Net: Name=+5
+Added Pin To Net: NetName=+12 Pin=A1-VIN
+Added Pin To Net: NetName=+12 Pin=S1-1
+Added Net: Name=+12
+Added Pin To Net: NetName=Encoder_A Pin=Quadratur-1
+Added Pin To Net: NetName=Encoder_A Pin=R1-1
+Added Pin To Net: NetName=Encoder_A Pin=U1-1
+Added Net: Name=Encoder_A
+Added Pin To Net: NetName=Encoder_B Pin=Quadratur-2
+Added Pin To Net: NetName=Encoder_B Pin=R2-1
+Added Pin To Net: NetName=Encoder_B Pin=U1-3
+Added Net: Name=Encoder_B
+Added Pin To Net: NetName=GND Pin=A1-GND_1
+Added Pin To Net: NetName=GND Pin=A1-GND_2
+Added Pin To Net: NetName=GND Pin=M1-1
+Added Pin To Net: NetName=GND Pin=M2-1
+Added Pin To Net: NetName=GND Pin=M3-1
+Added Pin To Net: NetName=GND Pin=M4-1
+Added Pin To Net: NetName=GND Pin=M5-1
+Added Pin To Net: NetName=GND Pin=M6-1
+Added Pin To Net: NetName=GND Pin=M7-1
+Added Pin To Net: NetName=GND Pin=Quadratur-4
+Added Pin To Net: NetName=GND Pin=S1-2
+Added Pin To Net: NetName=GND Pin=U1-7
+Added Net: Name=GND
+Added Pin To Net: NetName=NetQuadratur_3 Pin=Quadratur-3
+Added Pin To Net: NetName=NetQuadratur_3 Pin=R3-2
+Added Net: Name=NetQuadratur_3
+Added Pin To Net: NetName=Schmitt_A Pin=A1-D2
+Added Pin To Net: NetName=Schmitt_A Pin=U1-2
+Added Net: Name=Schmitt_A
+Added Pin To Net: NetName=Schmitt_B Pin=A1-D3
+Added Pin To Net: NetName=Schmitt_B Pin=U1-4
+Added Net: Name=Schmitt_B
+Added Member To Class: ClassName=main Member=Component M1 Screw Hole
+Added Member To Class: ClassName=main Member=Component M2 Screw Hole
+Added Member To Class: ClassName=main Member=Component M3 Screw Hole
+Added Member To Class: ClassName=main Member=Component M4 Screw Hole
+Added Member To Class: ClassName=main Member=Component M5 Screw Hole
+Added Member To Class: ClassName=main Member=Component M6 Screw Hole
+Added Member To Class: ClassName=main Member=Component M7 Screw Hole
+Added Member To Class: ClassName=main Member=Component Quadratur Header 1x4
+Added Member To Class: ClassName=main Member=Component R1 Resistor
+Added Member To Class: ClassName=main Member=Component R2 Resistor
+Added Member To Class: ClassName=main Member=Component R3 Resistor
+Added Member To Class: ClassName=main Member=Component S1 Power_in
+Added Member To Class: ClassName=main Member=Component U1 SN74HC14N
+Added Rule: Name=Schematic Supply Nets
+Added Rule: Name=Schematic Supply Nets_1
+Added Rule: Name=Schematic Supply Nets_2
