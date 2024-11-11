@@ -85,7 +85,7 @@ blocks:
   id: variable
   parameters:
     comment: ''
-    value: '1'
+    value: '2'
   states:
     bus_sink: false
     bus_source: false
@@ -135,7 +135,25 @@ blocks:
     bus_structure: null
     coordinate: [504, 208.0]
     rotation: 0
-    state: disabled
+    state: enabled
+- name: blocks_file_sink_0
+  id: blocks_file_sink
+  parameters:
+    affinity: ''
+    alias: ''
+    append: 'False'
+    comment: ''
+    file: /home/markus/uni/esd5_project/dsp/simulation_data/results_cbf_py/results
+    type: float
+    unbuffered: 'False'
+    vlen: spectrum_len
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [1112, 508.0]
+    rotation: 0
+    state: enabled
 - name: blocks_file_source_0
   id: blocks_file_source
   parameters:
@@ -148,7 +166,7 @@ blocks:
     maxoutbuf: '0'
     minoutbuf: '0'
     offset: '0'
-    repeat: 'True'
+    repeat: 'False'
     type: complex
     vlen: '1'
   states:
@@ -157,7 +175,7 @@ blocks:
     bus_structure: null
     coordinate: [56, 220.0]
     rotation: 0
-    state: disabled
+    state: enabled
 - name: blocks_throttle2_0
   id: blocks_throttle2
   parameters:
@@ -178,7 +196,7 @@ blocks:
     bus_structure: null
     coordinate: [304, 244.0]
     rotation: 0
-    state: disabled
+    state: enabled
 - name: epy_block_0
   id: epy_block
   parameters:
@@ -189,7 +207,7 @@ blocks:
       from gnuradio import gr\n\n\nclass blk(gr.basic_block):\n    \"\"\"Beamscan\
       \ spatial spectrum estimator for 4 channel ULA\"\"\"\n\n    def __init__(self,\
       \ num_samples=51, signal_freq=2.44e9, array_d=0.5, phi_scan_min=-50, phi_scan_max=50,\
-      \ phi_step=1, rx1_phase_cal=0, rx2_phase_cal=0, rx3_phase_cal=0, rx4_phase_cal=0):\n\
+      \ phi_step=2, rx1_phase_cal=0, rx2_phase_cal=0, rx3_phase_cal=0, rx4_phase_cal=0):\n\
       \        \"\"\"arguments to this function show up as parameters in GRC\"\"\"\
       \n        # must change default phi values to pass static vector_len checks\
       \ (goofy but that's how gnuradio is)\n        self.spectrum_len = 1+(phi_scan_max-phi_scan_min)//phi_step\n\
@@ -242,10 +260,10 @@ blocks:
   states:
     _io_cache: ('Beamscan spatial spectrum estimator', 'blk', [('num_samples', '51'),
       ('signal_freq', '2440000000.0'), ('array_d', '0.5'), ('phi_scan_min', '-50'),
-      ('phi_scan_max', '50'), ('phi_step', '1'), ('rx1_phase_cal', '0'), ('rx2_phase_cal',
+      ('phi_scan_max', '50'), ('phi_step', '2'), ('rx1_phase_cal', '0'), ('rx2_phase_cal',
       '0'), ('rx3_phase_cal', '0'), ('rx4_phase_cal', '0')], [('0', 'complex', 1),
       ('1', 'complex', 1), ('2', 'complex', 1), ('3', 'complex', 1)], [('0', 'float',
-      101)], 'Beamscan spatial spectrum estimator for 4 channel ULA', ['num_samples',
+      51)], 'Beamscan spatial spectrum estimator for 4 channel ULA', ['num_samples',
       'rx1_phase_cal', 'rx2_phase_cal', 'rx3_phase_cal', 'rx4_phase_cal', 'signal_freq'])
     bus_sink: false
     bus_source: false
@@ -349,7 +367,7 @@ blocks:
     bus_structure: null
     coordinate: [800, 120.0]
     rotation: 0
-    state: enabled
+    state: disabled
 - name: qtgui_vector_sink_f_0
   id: qtgui_vector_sink_f
   parameters:
@@ -423,7 +441,7 @@ blocks:
     bus_structure: null
     coordinate: [1112, 364.0]
     rotation: 0
-    state: enabled
+    state: disabled
 - name: uhd_usrp_source_0
   id: uhd_usrp_source
   parameters:
@@ -859,7 +877,7 @@ blocks:
     bus_structure: null
     coordinate: [312, 396.0]
     rotation: 0
-    state: enabled
+    state: disabled
 - name: uhd_usrp_source_0_0
   id: uhd_usrp_source
   parameters:
@@ -1295,7 +1313,7 @@ blocks:
     bus_structure: null
     coordinate: [312, 620.0]
     rotation: 0
-    state: enabled
+    state: disabled
 
 connections:
 - [blocks_deinterleave_0, '0', epy_block_0, '0']
@@ -1308,6 +1326,7 @@ connections:
 - [blocks_deinterleave_0, '3', qtgui_time_sink_x_0, '3']
 - [blocks_file_source_0, '0', blocks_throttle2_0, '0']
 - [blocks_throttle2_0, '0', blocks_deinterleave_0, '0']
+- [epy_block_0, '0', blocks_file_sink_0, '0']
 - [epy_block_0, '0', qtgui_vector_sink_f_0, '0']
 - [uhd_usrp_source_0, '0', epy_block_0, '0']
 - [uhd_usrp_source_0, '0', qtgui_time_sink_x_0, '0']

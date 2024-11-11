@@ -11,6 +11,8 @@
 
 from PyQt5 import Qt
 from gnuradio import qtgui
+from gnuradio import blocks
+import pmt
 from gnuradio import gr
 from gnuradio.filter import firdes
 from gnuradio.fft import window
@@ -20,10 +22,7 @@ from PyQt5 import Qt
 from argparse import ArgumentParser
 from gnuradio.eng_arg import eng_float, intx
 from gnuradio import eng_notation
-from gnuradio import uhd
-import time
 import reference_implementation_ula_beamscan_2ch_epy_block_0 as epy_block_0  # embedded python block
-import sip
 import threading
 
 
@@ -64,7 +63,7 @@ class reference_implementation_ula_beamscan_2ch(gr.top_block, Qt.QWidget):
         ##################################################
         # Variables
         ##################################################
-        self.phi_step = phi_step = 1
+        self.phi_step = phi_step = 2
         self.phi_scan_min = phi_scan_min = -50
         self.phi_scan_max = phi_scan_max = 50
         self.spectrum_len = spectrum_len = 1+(phi_scan_max-phi_scan_min)//phi_step
@@ -76,147 +75,25 @@ class reference_implementation_ula_beamscan_2ch(gr.top_block, Qt.QWidget):
         # Blocks
         ##################################################
 
-        self.uhd_usrp_source_0_0 = uhd.usrp_source(
-            ",".join(("addr0=192.168.10.3,addr1=192.168.10.4", "", "master_clock_rate=200e6")),
-            uhd.stream_args(
-                cpu_format="fc32",
-                args='',
-                channels=list(range(0,2)),
-            ),
-        )
-        self.uhd_usrp_source_0_0.set_samp_rate(samp_rate)
-        self.uhd_usrp_source_0_0.set_time_now(uhd.time_spec(time.time()), uhd.ALL_MBOARDS)
-
-        self.uhd_usrp_source_0_0.set_center_freq(center_freq, 0)
-        self.uhd_usrp_source_0_0.set_antenna("TX/RX", 0)
-        self.uhd_usrp_source_0_0.set_gain(gain, 0)
-
-        self.uhd_usrp_source_0_0.set_center_freq(center_freq, 1)
-        self.uhd_usrp_source_0_0.set_antenna("TX/RX", 1)
-        self.uhd_usrp_source_0_0.set_gain(gain, 1)
-        self.uhd_usrp_source_0 = uhd.usrp_source(
-            ",".join(("addr0=192.168.10.2", "", "master_clock_rate=200e6")),
-            uhd.stream_args(
-                cpu_format="fc32",
-                args='',
-                channels=list(range(0,2)),
-            ),
-        )
-        self.uhd_usrp_source_0.set_samp_rate(samp_rate)
-        self.uhd_usrp_source_0.set_time_now(uhd.time_spec(time.time()), uhd.ALL_MBOARDS)
-
-        self.uhd_usrp_source_0.set_center_freq(center_freq, 0)
-        self.uhd_usrp_source_0.set_antenna("TX/RX", 0)
-        self.uhd_usrp_source_0.set_gain(gain, 0)
-
-        self.uhd_usrp_source_0.set_center_freq(center_freq, 1)
-        self.uhd_usrp_source_0.set_antenna("TX/RX", 1)
-        self.uhd_usrp_source_0.set_gain(gain, 1)
-        self.qtgui_vector_sink_f_0 = qtgui.vector_sink_f(
-            spectrum_len,
-            phi_scan_min,
-            phi_step,
-            "Steering angle",
-            "Power",
-            "",
-            1, # Number of inputs
-            None # parent
-        )
-        self.qtgui_vector_sink_f_0.set_update_time(0.10)
-        self.qtgui_vector_sink_f_0.set_y_axis(0, 5)
-        self.qtgui_vector_sink_f_0.enable_autoscale(False)
-        self.qtgui_vector_sink_f_0.enable_grid(False)
-        self.qtgui_vector_sink_f_0.set_x_axis_units("degrees")
-        self.qtgui_vector_sink_f_0.set_y_axis_units("")
-        self.qtgui_vector_sink_f_0.set_ref_level(0)
-
-
-        labels = ['', '', '', '', '',
-            '', '', '', '', '']
-        widths = [1, 1, 1, 1, 1,
-            1, 1, 1, 1, 1]
-        colors = ["blue", "red", "green", "black", "cyan",
-            "magenta", "yellow", "dark red", "dark green", "dark blue"]
-        alphas = [1.0, 1.0, 1.0, 1.0, 1.0,
-            1.0, 1.0, 1.0, 1.0, 1.0]
-
-        for i in range(1):
-            if len(labels[i]) == 0:
-                self.qtgui_vector_sink_f_0.set_line_label(i, "Data {0}".format(i))
-            else:
-                self.qtgui_vector_sink_f_0.set_line_label(i, labels[i])
-            self.qtgui_vector_sink_f_0.set_line_width(i, widths[i])
-            self.qtgui_vector_sink_f_0.set_line_color(i, colors[i])
-            self.qtgui_vector_sink_f_0.set_line_alpha(i, alphas[i])
-
-        self._qtgui_vector_sink_f_0_win = sip.wrapinstance(self.qtgui_vector_sink_f_0.qwidget(), Qt.QWidget)
-        self.top_layout.addWidget(self._qtgui_vector_sink_f_0_win)
-        self.qtgui_time_sink_x_0 = qtgui.time_sink_c(
-            1024, #size
-            samp_rate, #samp_rate
-            "", #name
-            4, #number of inputs
-            None # parent
-        )
-        self.qtgui_time_sink_x_0.set_update_time(0.10)
-        self.qtgui_time_sink_x_0.set_y_axis(-1, 1)
-
-        self.qtgui_time_sink_x_0.set_y_label('Amplitude', "")
-
-        self.qtgui_time_sink_x_0.enable_tags(True)
-        self.qtgui_time_sink_x_0.set_trigger_mode(qtgui.TRIG_MODE_FREE, qtgui.TRIG_SLOPE_POS, 0.0, 0, 0, "")
-        self.qtgui_time_sink_x_0.enable_autoscale(False)
-        self.qtgui_time_sink_x_0.enable_grid(False)
-        self.qtgui_time_sink_x_0.enable_axis_labels(True)
-        self.qtgui_time_sink_x_0.enable_control_panel(False)
-        self.qtgui_time_sink_x_0.enable_stem_plot(False)
-
-
-        labels = ['Signal 1', 'Signal 2', 'Signal 3', 'Signal 4', 'Signal 5',
-            'Signal 6', 'Signal 7', 'Signal 8', 'Signal 9', 'Signal 10']
-        widths = [1, 1, 1, 1, 1,
-            1, 1, 1, 1, 1]
-        colors = ['blue', 'red', 'green', 'black', 'cyan',
-            'magenta', 'yellow', 'dark red', 'dark green', 'dark blue']
-        alphas = [1.0, 1.0, 1.0, 1.0, 1.0,
-            1.0, 1.0, 1.0, 1.0, 1.0]
-        styles = [1, 1, 1, 1, 1,
-            1, 1, 1, 1, 1]
-        markers = [-1, -1, -1, -1, -1,
-            -1, -1, -1, -1, -1]
-
-
-        for i in range(8):
-            if len(labels[i]) == 0:
-                if (i % 2 == 0):
-                    self.qtgui_time_sink_x_0.set_line_label(i, "Re{{Data {0}}}".format(i/2))
-                else:
-                    self.qtgui_time_sink_x_0.set_line_label(i, "Im{{Data {0}}}".format(i/2))
-            else:
-                self.qtgui_time_sink_x_0.set_line_label(i, labels[i])
-            self.qtgui_time_sink_x_0.set_line_width(i, widths[i])
-            self.qtgui_time_sink_x_0.set_line_color(i, colors[i])
-            self.qtgui_time_sink_x_0.set_line_style(i, styles[i])
-            self.qtgui_time_sink_x_0.set_line_marker(i, markers[i])
-            self.qtgui_time_sink_x_0.set_line_alpha(i, alphas[i])
-
-        self._qtgui_time_sink_x_0_win = sip.wrapinstance(self.qtgui_time_sink_x_0.qwidget(), Qt.QWidget)
-        self.top_layout.addWidget(self._qtgui_time_sink_x_0_win)
         self.epy_block_0 = epy_block_0.blk(num_samples=128, signal_freq=2.44e9, array_d=0.5, phi_scan_min=phi_scan_min, phi_scan_max=phi_scan_max, phi_step=phi_step, rx1_phase_cal=0, rx2_phase_cal=0, rx3_phase_cal=0, rx4_phase_cal=0)
+        self.blocks_throttle2_0 = blocks.throttle( gr.sizeof_gr_complex*1, samp_rate, True, 0 if "auto" == "auto" else max( int(float(0.1) * samp_rate) if "auto" == "time" else int(0.1), 1) )
+        self.blocks_file_source_0 = blocks.file_source(gr.sizeof_gr_complex*1, '/home/markus/uni/esd5_project/dsp/simulation_data/ula_4ch_sim_data_1_target.raw', False, 0, 0)
+        self.blocks_file_source_0.set_begin_tag(pmt.PMT_NIL)
+        self.blocks_file_sink_0 = blocks.file_sink(gr.sizeof_float*spectrum_len, '/home/markus/uni/esd5_project/dsp/simulation_data/results_cbf_py/results', False)
+        self.blocks_file_sink_0.set_unbuffered(False)
+        self.blocks_deinterleave_0 = blocks.deinterleave(gr.sizeof_gr_complex*1, 1)
 
 
         ##################################################
         # Connections
         ##################################################
-        self.connect((self.epy_block_0, 0), (self.qtgui_vector_sink_f_0, 0))
-        self.connect((self.uhd_usrp_source_0, 0), (self.epy_block_0, 0))
-        self.connect((self.uhd_usrp_source_0, 1), (self.epy_block_0, 1))
-        self.connect((self.uhd_usrp_source_0, 1), (self.qtgui_time_sink_x_0, 1))
-        self.connect((self.uhd_usrp_source_0, 0), (self.qtgui_time_sink_x_0, 0))
-        self.connect((self.uhd_usrp_source_0_0, 0), (self.epy_block_0, 2))
-        self.connect((self.uhd_usrp_source_0_0, 1), (self.epy_block_0, 3))
-        self.connect((self.uhd_usrp_source_0_0, 0), (self.qtgui_time_sink_x_0, 2))
-        self.connect((self.uhd_usrp_source_0_0, 1), (self.qtgui_time_sink_x_0, 3))
+        self.connect((self.blocks_deinterleave_0, 1), (self.epy_block_0, 1))
+        self.connect((self.blocks_deinterleave_0, 3), (self.epy_block_0, 3))
+        self.connect((self.blocks_deinterleave_0, 2), (self.epy_block_0, 2))
+        self.connect((self.blocks_deinterleave_0, 0), (self.epy_block_0, 0))
+        self.connect((self.blocks_file_source_0, 0), (self.blocks_throttle2_0, 0))
+        self.connect((self.blocks_throttle2_0, 0), (self.blocks_deinterleave_0, 0))
+        self.connect((self.epy_block_0, 0), (self.blocks_file_sink_0, 0))
 
 
     def closeEvent(self, event):
@@ -233,7 +110,6 @@ class reference_implementation_ula_beamscan_2ch(gr.top_block, Qt.QWidget):
     def set_phi_step(self, phi_step):
         self.phi_step = phi_step
         self.set_spectrum_len(1+(self.phi_scan_max-self.phi_scan_min)//self.phi_step)
-        self.qtgui_vector_sink_f_0.set_x_axis(self.phi_scan_min, self.phi_step)
 
     def get_phi_scan_min(self):
         return self.phi_scan_min
@@ -241,7 +117,6 @@ class reference_implementation_ula_beamscan_2ch(gr.top_block, Qt.QWidget):
     def set_phi_scan_min(self, phi_scan_min):
         self.phi_scan_min = phi_scan_min
         self.set_spectrum_len(1+(self.phi_scan_max-self.phi_scan_min)//self.phi_step)
-        self.qtgui_vector_sink_f_0.set_x_axis(self.phi_scan_min, self.phi_step)
 
     def get_phi_scan_max(self):
         return self.phi_scan_max
@@ -261,37 +136,19 @@ class reference_implementation_ula_beamscan_2ch(gr.top_block, Qt.QWidget):
 
     def set_samp_rate(self, samp_rate):
         self.samp_rate = samp_rate
-        self.qtgui_time_sink_x_0.set_samp_rate(self.samp_rate)
-        self.uhd_usrp_source_0.set_samp_rate(self.samp_rate)
-        self.uhd_usrp_source_0_0.set_samp_rate(self.samp_rate)
+        self.blocks_throttle2_0.set_sample_rate(self.samp_rate)
 
     def get_gain(self):
         return self.gain
 
     def set_gain(self, gain):
         self.gain = gain
-        self.uhd_usrp_source_0.set_gain(self.gain, 0)
-        self.uhd_usrp_source_0.set_gain(self.gain, 1)
-        self.uhd_usrp_source_0.set_gain(self.gain, 2)
-        self.uhd_usrp_source_0.set_gain(self.gain, 3)
-        self.uhd_usrp_source_0_0.set_gain(self.gain, 0)
-        self.uhd_usrp_source_0_0.set_gain(self.gain, 1)
-        self.uhd_usrp_source_0_0.set_gain(self.gain, 2)
-        self.uhd_usrp_source_0_0.set_gain(self.gain, 3)
 
     def get_center_freq(self):
         return self.center_freq
 
     def set_center_freq(self, center_freq):
         self.center_freq = center_freq
-        self.uhd_usrp_source_0.set_center_freq(self.center_freq, 0)
-        self.uhd_usrp_source_0.set_center_freq(self.center_freq, 1)
-        self.uhd_usrp_source_0.set_center_freq(self.center_freq, 2)
-        self.uhd_usrp_source_0.set_center_freq(self.center_freq, 3)
-        self.uhd_usrp_source_0_0.set_center_freq(self.center_freq, 0)
-        self.uhd_usrp_source_0_0.set_center_freq(self.center_freq, 1)
-        self.uhd_usrp_source_0_0.set_center_freq(self.center_freq, 2)
-        self.uhd_usrp_source_0_0.set_center_freq(self.center_freq, 3)
 
 
 

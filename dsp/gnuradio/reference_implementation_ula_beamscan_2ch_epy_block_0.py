@@ -13,7 +13,7 @@ from gnuradio import gr
 class blk(gr.basic_block):
     """Beamscan spatial spectrum estimator for 4 channel ULA"""
 
-    def __init__(self, num_samples=51, signal_freq=2.44e9, array_d=0.5, phi_scan_min=-50, phi_scan_max=50, phi_step=1, rx1_phase_cal=0, rx2_phase_cal=0, rx3_phase_cal=0, rx4_phase_cal=0):
+    def __init__(self, num_samples=51, signal_freq=2.44e9, array_d=0.5, phi_scan_min=-50, phi_scan_max=50, phi_step=2, rx1_phase_cal=0, rx2_phase_cal=0, rx3_phase_cal=0, rx4_phase_cal=0):
         """arguments to this function show up as parameters in GRC"""
         # must change default phi values to pass static vector_len checks (goofy but that's how gnuradio is)
         self.spectrum_len = 1+(phi_scan_max-phi_scan_min)//phi_step
