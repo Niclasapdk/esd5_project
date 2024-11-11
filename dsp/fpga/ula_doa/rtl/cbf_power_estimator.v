@@ -44,7 +44,7 @@ wire signed [WORD_LENGTH_I_AND_Q-1: 0] Ix4 = s_axis_tdata[7*WORD_LENGTH_I_AND_Q-
 wire signed [WORD_LENGTH_I_AND_Q-1: 0] Qx4 = s_axis_tdata[8*WORD_LENGTH_I_AND_Q-1 -: WORD_LENGTH_I_AND_Q];
 
 // Output from sq_abs_cmul_4ch
-wire signed [WORD_LENGTH_POWER_MOMENTARY-1: 0] result_abs_sq_cmul;
+wire [WORD_LENGTH_POWER_MOMENTARY-1: 0] result_abs_sq_cmul;
 
 sq_abs_cmul_4ch #(.WORD_LENGTH_IN(WORD_LENGTH_I_AND_Q))
 sq_abs_cmul_4ch_inst (

@@ -38,8 +38,8 @@ VERILOG_SOURCES += $(RTL_DIR)/moving_average.v
 VERILOG_SOURCES += $(LIB_AXIS_RTL_DIR)/axis_fifo_adapter.v
 VERILOG_SOURCES += $(LIB_AXIS_RTL_DIR)/axis_fifo.v
 VERILOG_SOURCES += $(LIB_AXIS_RTL_DIR)/axis_adapter.v
+VERILOG_INCLUDE_DIRS += $(RTL_DIR)
 
-export COCOTB_RESOLVE_X=RANDOM
 export WAVES=1
 
 ifeq ($(SIM), icarus)

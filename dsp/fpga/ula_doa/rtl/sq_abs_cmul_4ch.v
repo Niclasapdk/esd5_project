@@ -11,14 +11,14 @@ module sq_abs_cmul_4ch
 		input signed[WORD_LENGTH_IN-1:0] Q_x1, Q_x2, Q_x3, Q_x4,       //smaple inputs imag part
 		input signed[WORD_LENGTH_IN-1:0] I_s1, I_s2, I_s3, I_s4,       // steering vector real part
 		input signed[WORD_LENGTH_IN-1:0] Q_s1, Q_s2, Q_s3, Q_s4,       // steering vector imag part
-		output wire signed [WORD_LENGTH_OUT-1:0] result_abs_sq_cmul	// output real number
+		output [WORD_LENGTH_OUT-1:0] result_abs_sq_cmul	// output real number
 );
 
 // internal registers
 wire signed[WORD_LENGTH_CALC-1:0] I_imm1, I_imm2, I_imm3, I_imm4;
 wire signed[WORD_LENGTH_CALC-1:0] Q_imm1, Q_imm2, Q_imm3, Q_imm4;
 wire signed[WORD_LENGTH_CALC-1:0] I_tot, Q_tot;
-wire signed[WORD_LENGTH_INT_ABS_SQ-1: 0] imm_out;
+wire [WORD_LENGTH_INT_ABS_SQ-1: 0] imm_out;
 
 // helper functions
 function [WORD_LENGTH_CALC-1:0] cmulI;

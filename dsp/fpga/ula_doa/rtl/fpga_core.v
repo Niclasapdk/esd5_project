@@ -167,8 +167,9 @@ hex_display_7 (
 assign ledr = sw;
 assign gpio = 0;
 
+localparam CBF_power_len = 88;
 // TX data
-wire [7:0] tx_data_axis_tdata;
+wire [CBF_power_len-1:0] tx_data_axis_tdata;
 wire       tx_data_axis_tvalid;
 wire       tx_data_axis_tready;
 wire       tx_data_axis_tlast;
@@ -193,14 +194,7 @@ cbf_spectrum_estimator
 	.MOVING_AVERAGE_SNAPSHOT_COUNT(8), // should be some 2^x
 	.WORD_LENGTH_I_AND_Q(16), // should be even number of bytes
 	.WORD_LENGTH_IN(8), // should be even number of bytes
-	// Degrees
-	.PHI_SCAN_STEP(3),
-	.PHI_SCAN_FROM(-30), // inclusive
-	.PHI_SCAN_TO(31), // exclusive
-	.angle_calibration0_deg(0),
-	.angle_calibration1_deg(0),
-	.angle_calibration2_deg(0),
-	.angle_calibration3_deg(0))
+	.WORD_LENGTH_POWER(CBF_power_len))
 cbf_spectrum_estimator_inst (
 	.clk(clk),
 	.rst(rst),
@@ -218,7 +212,7 @@ cbf_spectrum_estimator_inst (
 
 udp_connection #(
 	.TARGET(TARGET),
-	.TX_DATA_WIDTH(88) // TODO fix hardcoded length
+	.TX_DATA_WIDTH(CBF_power_len)
 )
 udp_connection_inst
 (

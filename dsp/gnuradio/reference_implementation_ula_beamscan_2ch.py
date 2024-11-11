@@ -69,7 +69,7 @@ class reference_implementation_ula_beamscan_2ch(gr.top_block, Qt.QWidget):
         self.phi_scan_max = phi_scan_max = 50
         self.spectrum_len = spectrum_len = 1+(phi_scan_max-phi_scan_min)//phi_step
         self.samp_rate = samp_rate = 5e6
-        self.gain = gain = 80
+        self.gain = gain = 50
         self.center_freq = center_freq = 2.44e9
 
         ##################################################
@@ -123,7 +123,7 @@ class reference_implementation_ula_beamscan_2ch(gr.top_block, Qt.QWidget):
             None # parent
         )
         self.qtgui_vector_sink_f_0.set_update_time(0.10)
-        self.qtgui_vector_sink_f_0.set_y_axis(0, 0.5)
+        self.qtgui_vector_sink_f_0.set_y_axis(0, 5)
         self.qtgui_vector_sink_f_0.enable_autoscale(False)
         self.qtgui_vector_sink_f_0.enable_grid(False)
         self.qtgui_vector_sink_f_0.set_x_axis_units("degrees")
@@ -209,12 +209,12 @@ class reference_implementation_ula_beamscan_2ch(gr.top_block, Qt.QWidget):
         # Connections
         ##################################################
         self.connect((self.epy_block_0, 0), (self.qtgui_vector_sink_f_0, 0))
-        self.connect((self.uhd_usrp_source_0, 1), (self.epy_block_0, 1))
         self.connect((self.uhd_usrp_source_0, 0), (self.epy_block_0, 0))
-        self.connect((self.uhd_usrp_source_0, 0), (self.qtgui_time_sink_x_0, 0))
+        self.connect((self.uhd_usrp_source_0, 1), (self.epy_block_0, 1))
         self.connect((self.uhd_usrp_source_0, 1), (self.qtgui_time_sink_x_0, 1))
-        self.connect((self.uhd_usrp_source_0_0, 1), (self.epy_block_0, 3))
+        self.connect((self.uhd_usrp_source_0, 0), (self.qtgui_time_sink_x_0, 0))
         self.connect((self.uhd_usrp_source_0_0, 0), (self.epy_block_0, 2))
+        self.connect((self.uhd_usrp_source_0_0, 1), (self.epy_block_0, 3))
         self.connect((self.uhd_usrp_source_0_0, 0), (self.qtgui_time_sink_x_0, 2))
         self.connect((self.uhd_usrp_source_0_0, 1), (self.qtgui_time_sink_x_0, 3))
 
