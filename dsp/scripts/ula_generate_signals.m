@@ -10,7 +10,7 @@ ang2 = [-20];         % Second signal
 
 pos = getElementPosition(ula)/lambda;
 
-Nsamp = 1000;
+Nsamp = 128;
 
 nPower = 0.01; % thermal noise [W] at each antenna
 nSignal = 1; % signal power [W] at each antenna
