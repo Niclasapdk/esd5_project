@@ -72,13 +72,9 @@ async def run_test(dut, payload_data: Callable, idle_inserter: Callable):
     while tb.sink.empty():
         await RisingEdge(tb.dut.clk)
 
-    done = False
-    cnt = 0
+    expected_spectrum_samps = snapshot_count-1
     spectrums = []
-    while not done:
-        for _ in range(tb.dut.MOVING_AVERAGE_SNAPSHOT_COUNT.value * spectrum_steps*10):
-            await RisingEdge(tb.dut.clk)
-        cnt += 1
+    for _ in range(expected_spectrum_samps):
         data = await tb.sink.recv()
         raw = data.tdata
         spectrum = np.zeros(spectrum_steps, dtype=np.float64)
@@ -88,7 +84,6 @@ async def run_test(dut, payload_data: Callable, idle_inserter: Callable):
             p = int.from_bytes(s, byteorder="little")
             spectrum[i] = p
         spectrums.append(spectrum)
-        done = tb.sink.empty()
     spectrum_samples = np.asarray(spectrums)
     normalizing_constant = np.max(np.abs(spectrum_samples))
     spectrum_samples = spectrum_samples / normalizing_constant
@@ -98,7 +93,7 @@ async def run_test(dut, payload_data: Callable, idle_inserter: Callable):
         f.write(f"Moving average snapshots: {snapshot_count}\n")
         f.write(f"Phi scan steps: {spectrum_steps}\n")
         f.write(f"Normalizing constant (absmax): {normalizing_constant}\n")
-    tb.log.info(f"saving {cnt} spectrums of length {spectrum_steps} to {out_filename}")
+        f.write(f"Number of spectrum samples: {expected_spectrum_samps}")
     np.save(out_filename, spectrum_samples, allow_pickle=False)
         
     assert False, "haven't implemented testbench yet"
@@ -127,7 +122,7 @@ if cocotb.SIM_NAME:
 
 # cocotb-test
 
-@pytest.mark.parametrize("moving_average_snapshot_count", [8, 16, 32])
+@pytest.mark.parametrize("moving_average_snapshot_count", [8, 16, 32, 64, 128])
 @pytest.mark.parametrize("word_length_power", [32, 64, 88])
 def test_cbf_spectrum_estimator(request, moving_average_snapshot_count, word_length_power):
     dut = "cbf_spectrum_estimator"
