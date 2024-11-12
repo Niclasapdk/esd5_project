@@ -2,6 +2,7 @@ import os
 import numpy as np
 import matplotlib as mpl
 import matplotlib.pyplot as plt
+import scienceplots
 
 data_dir = os.path.abspath(os.path.join(__file__, "..", "..", "simulation_data"))
 cbf_dir = os.path.join(data_dir, "results_cbf_parallel_spectrum_estimator")
@@ -10,9 +11,8 @@ fig_out_dir = os.path.abspath(os.path.join(data_dir, "..", "..", "gitfigures", "
 
 py_fname = os.path.join(py_dir, "python_results.npy")
 
-mpl.rcParams['pdf.fonttype'] = 42
-mpl.rcParams['ps.fonttype'] = 42
-mpl.rcParams['font.family'] = 'serif'
+plt.style.use(['science','ieee'])
+plt.rcParams.update({'font.size': '14'})
 
 def sim_basename(snapshots, word_length_power, basedir=cbf_dir):
     f = f"{snapshots}_snapshots_{word_length_power}_word_length_power"
@@ -35,7 +35,7 @@ def get_py_sim_data(snapshots, basedir=py_dir):
     return data[-1]
 
 def gen_snapshot_plot(word_length_power:int, snapshots:list, source_locations=[-20, 40]):
-    fig = plt.figure(figsize=(10,6))
+    fig = plt.figure()
     plt.title(f"Moving average snapshot count (simulated, fixed-point, WL={word_length_power})")
     plt.xlabel("Steering angle [degrees]")
     plt.ylabel("Normalized power")
@@ -50,7 +50,7 @@ def gen_snapshot_plot(word_length_power:int, snapshots:list, source_locations=[-
     return fig
 
 def gen_wordlength_plot(word_length_power:list, snapshots:int, source_locations=[-20, 40]):
-    fig = plt.figure(figsize=(10,6))
+    fig = plt.figure()
     plt.title(f"Word length for power (simulated, fixed-point, N={snapshots})")
     plt.xlabel("Steering angle [degrees]")
     plt.ylabel("Normalized power")
