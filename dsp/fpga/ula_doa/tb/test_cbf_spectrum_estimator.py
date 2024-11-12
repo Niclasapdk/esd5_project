@@ -104,7 +104,7 @@ def cycle_pause():
 def signal_payload(num_samples):
     # bytes = samples * antennas * complex and real * float32
     num_bytes = num_samples * 4 * 2 * 4
-    with open(os.path.join(sim_data_dir, 'ula_4ch_sim_data_1_target.raw'), "rb") as f:
+    with open(os.path.join(sim_data_dir, 'ula_4ch_sim_data_2_targets.raw'), "rb") as f:
         raw = f.read()
     conv = lambda x: int(struct.unpack("f", x)[0]*0x7ff)
     twos_complement = lambda x: ctypes.c_ushort(x).value
