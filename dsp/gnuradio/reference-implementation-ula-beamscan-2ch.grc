@@ -105,6 +105,18 @@ blocks:
     coordinate: [200, 12]
     rotation: 0
     state: enabled
+- name: snapshot_count
+  id: variable
+  parameters:
+    comment: ''
+    value: '8'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [416, 76.0]
+    rotation: 0
+    state: enabled
 - name: spectrum_len
   id: variable
   parameters:
@@ -161,7 +173,7 @@ blocks:
     alias: ''
     begin_tag: pmt.PMT_NIL
     comment: ''
-    file: /home/markus/uni/esd5_project/dsp/simulation_data/ula_4ch_sim_data_1_target.raw
+    file: /home/markus/uni/esd5_project/dsp/simulation_data/ula_4ch_sim_data_2_targets.raw
     length: '0'
     maxoutbuf: '0'
     minoutbuf: '0'
@@ -248,7 +260,7 @@ blocks:
     comment: ''
     maxoutbuf: '0'
     minoutbuf: '0'
-    num_samples: '128'
+    num_samples: snapshot_count
     phi_scan_max: phi_scan_max
     phi_scan_min: phi_scan_min
     phi_step: phi_step

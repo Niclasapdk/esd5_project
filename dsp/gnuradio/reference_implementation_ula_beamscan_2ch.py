@@ -67,6 +67,7 @@ class reference_implementation_ula_beamscan_2ch(gr.top_block, Qt.QWidget):
         self.phi_scan_min = phi_scan_min = -50
         self.phi_scan_max = phi_scan_max = 50
         self.spectrum_len = spectrum_len = 1+(phi_scan_max-phi_scan_min)//phi_step
+        self.snapshot_count = snapshot_count = 8
         self.samp_rate = samp_rate = 5e6
         self.gain = gain = 50
         self.center_freq = center_freq = 2.44e9
@@ -75,9 +76,9 @@ class reference_implementation_ula_beamscan_2ch(gr.top_block, Qt.QWidget):
         # Blocks
         ##################################################
 
-        self.epy_block_0 = epy_block_0.blk(num_samples=128, signal_freq=2.44e9, array_d=0.5, phi_scan_min=phi_scan_min, phi_scan_max=phi_scan_max, phi_step=phi_step, rx1_phase_cal=0, rx2_phase_cal=0, rx3_phase_cal=0, rx4_phase_cal=0)
+        self.epy_block_0 = epy_block_0.blk(num_samples=snapshot_count, signal_freq=2.44e9, array_d=0.5, phi_scan_min=phi_scan_min, phi_scan_max=phi_scan_max, phi_step=phi_step, rx1_phase_cal=0, rx2_phase_cal=0, rx3_phase_cal=0, rx4_phase_cal=0)
         self.blocks_throttle2_0 = blocks.throttle( gr.sizeof_gr_complex*1, samp_rate, True, 0 if "auto" == "auto" else max( int(float(0.1) * samp_rate) if "auto" == "time" else int(0.1), 1) )
-        self.blocks_file_source_0 = blocks.file_source(gr.sizeof_gr_complex*1, '/home/markus/uni/esd5_project/dsp/simulation_data/ula_4ch_sim_data_1_target.raw', False, 0, 0)
+        self.blocks_file_source_0 = blocks.file_source(gr.sizeof_gr_complex*1, '/home/markus/uni/esd5_project/dsp/simulation_data/ula_4ch_sim_data_2_targets.raw', False, 0, 0)
         self.blocks_file_source_0.set_begin_tag(pmt.PMT_NIL)
         self.blocks_file_sink_0 = blocks.file_sink(gr.sizeof_float*spectrum_len, '/home/markus/uni/esd5_project/dsp/simulation_data/results_cbf_py/results', False)
         self.blocks_file_sink_0.set_unbuffered(False)
@@ -88,8 +89,8 @@ class reference_implementation_ula_beamscan_2ch(gr.top_block, Qt.QWidget):
         # Connections
         ##################################################
         self.connect((self.blocks_deinterleave_0, 1), (self.epy_block_0, 1))
-        self.connect((self.blocks_deinterleave_0, 3), (self.epy_block_0, 3))
         self.connect((self.blocks_deinterleave_0, 2), (self.epy_block_0, 2))
+        self.connect((self.blocks_deinterleave_0, 3), (self.epy_block_0, 3))
         self.connect((self.blocks_deinterleave_0, 0), (self.epy_block_0, 0))
         self.connect((self.blocks_file_source_0, 0), (self.blocks_throttle2_0, 0))
         self.connect((self.blocks_throttle2_0, 0), (self.blocks_deinterleave_0, 0))
@@ -130,6 +131,13 @@ class reference_implementation_ula_beamscan_2ch(gr.top_block, Qt.QWidget):
 
     def set_spectrum_len(self, spectrum_len):
         self.spectrum_len = spectrum_len
+
+    def get_snapshot_count(self):
+        return self.snapshot_count
+
+    def set_snapshot_count(self, snapshot_count):
+        self.snapshot_count = snapshot_count
+        self.epy_block_0.num_samples = self.snapshot_count
 
     def get_samp_rate(self):
         return self.samp_rate
