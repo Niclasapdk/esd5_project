@@ -125,8 +125,8 @@ s5(2).LineWidth = 1.4;
 s5(3).LineWidth = 1.4;
 grid on
 xlim([1.5 3.5]);
-xlabel('Frequency [GHz]','FontSize',30);
-ylabel('Magnitude [dB]','FontSize',30);
+xlabel('Frequency [GHz]','FontSize',24);
+ylabel('Magnitude [dB]','FontSize',24);
 set(gca,'FontSize',14);
 title('Monte Carlo Simulation S_{21}','FontSize',24);
 hold off
