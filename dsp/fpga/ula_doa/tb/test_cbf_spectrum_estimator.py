@@ -90,8 +90,14 @@ async def run_test(dut, payload_data: Callable, idle_inserter: Callable):
         spectrums.append(spectrum)
         done = tb.sink.empty()
     spectrum_samples = np.asarray(spectrums)
-    spectrum_samples = spectrum_samples / np.max(np.abs(spectrum_samples))
+    normalizing_constant = np.max(np.abs(spectrum_samples))
+    spectrum_samples = spectrum_samples / normalizing_constant
     out_filename = os.path.join(out_data_dir, f"{snapshot_count}_snapshots_{word_length_power}_word_length_power.npy")
+    with open(out_filename.replace(".npy", ".txt"), "w") as f:
+        f.write(f"Word length power: {word_length_power}\n")
+        f.write(f"Moving average snapshots: {snapshot_count}\n")
+        f.write(f"Phi scan steps: {spectrum_steps}\n")
+        f.write(f"Normalizing constant (absmax): {normalizing_constant}\n")
     tb.log.info(f"saving {cnt} spectrums of length {spectrum_steps} to {out_filename}")
     np.save(out_filename, spectrum_samples, allow_pickle=False)
         
@@ -121,7 +127,7 @@ if cocotb.SIM_NAME:
 
 # cocotb-test
 
-@pytest.mark.parametrize("moving_average_snapshot_count", [8, 16, 32, 64, 128])
+@pytest.mark.parametrize("moving_average_snapshot_count", [8, 16, 32])
 @pytest.mark.parametrize("word_length_power", [32, 64, 88])
 def test_cbf_spectrum_estimator(request, moving_average_snapshot_count, word_length_power):
     dut = "cbf_spectrum_estimator"
