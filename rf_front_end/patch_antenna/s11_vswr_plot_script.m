@@ -19,7 +19,7 @@ P3 = plot(data5, data6);
 P3.LineWidth = 1.4;
 xlabel('Frequency [GHz]','FontSize',12);
 ylabel('Magnitude [dB]','FontSize',12);
-set(gca,'FontSize',14);
+set(gca,'FontSize',18);
 grid on
 hold on
 S1 = plot(y.Var1(1:1001),y.Var2(1:1001));
@@ -27,7 +27,7 @@ S1.LineWidth = 1.4;
 hold on
 [~,maxidx] = max(abs(y.Var2));
 max = y(maxidx,:);
-% plot(max.Var1,max.Var2,'r.', 'LineWidth', 2, 'MarkerSize', 14);
+plot(max.Var1,max.Var2,'r.', 'LineWidth', 2, 'MarkerSize', 14);
 title('S-Paramters(S1,1)');
 % text(2.45,max.Var2,'\Leftarrow 2.44GHz and -26.21dB','FontSize',14);
 legend('IG = 1mm', 'IG = 1.5mm', 'IG = 2mm', "IG = 1mm, PW = 40.5mm, PL = 27.5mm");
@@ -42,13 +42,13 @@ grid on
 hold on
 Z1.LineWidth = 1.4;
 xlabel('Frequency [GHz]','FontSize',12);
-set(gca,'FontSize',14);
-xlim([1.8 3.2]);
+set(gca,'FontSize',18);
+xlim([2.3 2.5]);
 title('VSWR');
-[~,minidx] = min(abs(z.VSWR1_3__Magnitude_));
-minz = z(minidx,:)
-plot(minz.Frequency_GHz, minz.VSWR1_3__Magnitude_,'r.','LineWidth',2,'MarkerSize',14);
-text(minz.Frequency_GHz,minz.VSWR1_3__Magnitude_+80,{'2.4GHz and 1.622','\Downarrow'},'FontSize',14,'HorizontalAlignment','center');
+% [~,minidx] = min(abs(z.VSWR1_3__Magnitude_));
+% minz = z(minidx,:)
+% plot(minz.Frequency_GHz, minz.VSWR1_3__Magnitude_,'r.','LineWidth',2,'MarkerSize',14);
+% text(minz.Frequency_GHz,minz.VSWR1_3__Magnitude_+80,{'2.4GHz and 1.622','\Downarrow'},'FontSize',14,'HorizontalAlignment','center');
 title('VSWR');
 
 %% Final antenna S11
@@ -61,12 +61,12 @@ plot1.LineWidth = 1.4;
 xlim([1.8 3.2]);
 xlabel('Frequency [GHz]','FontSize',12);
 ylabel('Magnitude [dB]','FontSize',12);
-set(gca,'FontSize',14);
-title('S-Paramters(S1,1)');
+set(gca,'FontSize',18);
+title('S-Parameters(S1,1)');
 [value,maxidp] = max(abs(p.Var2));
 maxp = p(maxidp,:);
 % plot(maxp.Var1,maxp.Var2,'r.', 'LineWidth', 3, 'MarkerSize', 16);
-legend('Dimensions: IG = 1mm, PW = 40.5mm, PL = 27.5mm, IW = 2.36mm, IL = 9.86mm');
+legend('Dimensions: IG = 1mm, PW = 40.5mm, \newlinePL = 27.5mm, IW = 2.36mm, IL = 9.86mm');
 % text(2.45,maxp.Var2,'\Leftarrow 2.44GHz and -35.57dB','FontSize',14);
 grid on;
 %% 
@@ -81,7 +81,7 @@ rows_per_segment = 1003;
 num_segments = 8029 / rows_per_segment;
 
 epsilonR = [4.7 4.58 4.47 4.35 4.24 4.12 4.01 3.9];
-
+color1 = ["#0072BD" "#D95319" "#EDB120" "#7E2F8E" "#77AC30" "#4DBEEE" "#A2142F" "#44475a"];
 % Create a single figure for all segments
 figure;
 hold on; % Hold on to plot all segments on the same figure
@@ -95,17 +95,18 @@ for i = 1:num_segments
     segment = T(start_row:end_row, :);
     
     % Plot Var1 vs. Var2 for the current segment
-    s(i) = plot(segment.Var1, segment.Var2, 'DisplayName', ['Epsilon value: ' num2str(epsilonR(i))]);
-    s(i).LineWidth = 1.2;
+    s(i) = plot(segment.Var1, segment.Var2, 'DisplayName', ['\epsilon_r=' num2str(epsilonR(i))],'Color',color1(i));
+    s(i).LineWidth = 1.4;
     xlim([1.8 3.2]);
     grid on
-end
+end 
+
 
 % Finalize plot
-title('S-Paramters(S1,1)','FontSize',20);
+title('S-Parameters(S1,1)','FontSize',20);
 xlabel('Frequency [GHz]','FontSize',18);
 ylabel('Magnitude [dB]','FontSize',18);
-set(gca,'FontSize',14);
+set(gca,'FontSize',18);
 legend show;
 hold off;
 %% S21 Coupler
