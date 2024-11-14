@@ -1,0 +1,12 @@
+Added Component: Designator=TP*1(TP_loop_pin_1249)
+Added Component: Designator=TP*2(TP_loop_pin_1249)
+Added Component: Designator=TP*3(TP_loop_pin_1249)
+Added Component: Designator=TP*(TP_loop_pin_1249)
+Added Pin To Net: NetName=Position_filtered Pin=TP*1-TP
+Added Pin To Net: NetName=Schmitt_A Pin=TP*2-TP
+Added Pin To Net: NetName=Schmitt_B Pin=TP*3-TP
+Added Pin To Net: NetName=Power_filtered Pin=TP*-TP
+Added Member To Class: ClassName=main Member=Component TP*1 Test Point
+Added Member To Class: ClassName=main Member=Component TP*2 Test Point
+Added Member To Class: ClassName=main Member=Component TP*3 Test Point
+Added Member To Class: ClassName=main Member=Component TP* Test Point

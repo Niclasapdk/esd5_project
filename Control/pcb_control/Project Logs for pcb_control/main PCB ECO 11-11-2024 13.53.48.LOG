@@ -1,0 +1,23 @@
+Change Physical Footprint: Designator=A1 Old Footprint=ARDUINO_A000066 New Footprint=ARDUINO_A000066
+Change Physical Footprint: Designator=Analog_com Old Footprint=Header 1x3 New Footprint=Header 1x3
+Change Physical Footprint: Designator=C1 Old Footprint=Cap-1 New Footprint=Cap-1
+Change Physical Footprint: Designator=C2 Old Footprint=Cap Lyt Ø8 New Footprint=Cap Lyt Ø8
+Change Physical Footprint: Designator=C3 Old Footprint=Cap-1 New Footprint=Cap-1
+Change Physical Footprint: Designator=C4 Old Footprint=Cap-1 New Footprint=Cap-1
+Change Physical Footprint: Designator=H-bridge Old Footprint=Header 1x5 New Footprint=Header 1x5
+Change Physical Footprint: Designator=M1 Old Footprint=M3 Hole New Footprint=M3 Hole
+Change Physical Footprint: Designator=M2 Old Footprint=M3 Hole New Footprint=M3 Hole
+Change Physical Footprint: Designator=M3 Old Footprint=M3 Hole New Footprint=M3 Hole
+Change Physical Footprint: Designator=M4 Old Footprint=M3 Hole New Footprint=M3 Hole
+Change Physical Footprint: Designator=M5 Old Footprint=M3 Hole New Footprint=M3 Hole
+Change Physical Footprint: Designator=M6 Old Footprint=M3 Hole New Footprint=M3 Hole
+Change Physical Footprint: Designator=M7 Old Footprint=M3 Hole New Footprint=M3 Hole
+Change Physical Footprint: Designator=Quadratur Old Footprint=Header 1x4 New Footprint=Header 1x4
+Change Physical Footprint: Designator=R1 Old Footprint=RES THT 9mm New Footprint=RES THT 9mm
+Change Physical Footprint: Designator=R2 Old Footprint=RES THT 9mm New Footprint=RES THT 9mm
+Change Physical Footprint: Designator=R3 Old Footprint=RES THT 9mm New Footprint=RES THT 9mm
+Change Physical Footprint: Designator=R4 Old Footprint=RES THT 9mm New Footprint=RES THT 9mm
+Change Physical Footprint: Designator=R5 Old Footprint=RES THT 9mm New Footprint=RES THT 9mm
+Change Physical Footprint: Designator=S1 Old Footprint=Screw-2 New Footprint=Screw-2
+Change Physical Footprint: Designator=Stepper_motor Old Footprint=Header 1x5 New Footprint=Header 1x5
+Change Physical Footprint: Designator=U1 Old Footprint=DIP794W45P254L1969H508Q14 New Footprint=DIP794W45P254L1969H508Q14

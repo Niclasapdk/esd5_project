@@ -1,0 +1,36 @@
+Added Component: Designator=Analog_com(Header 1x3)
+Added Component: Designator=C2(Cap Lyt Ø8)
+Add component (AddParameter): Name = "Value"; Value = "100uF"; VariantName = "[No Variations]"
+Added Component: Designator=C3(Cap-1)
+Add component (AddParameter): Name = "Value"; Value = "22nF"; VariantName = "[No Variations]"
+Added Component: Designator=C4(Cap-1)
+Add component (AddParameter): Name = "Value"; Value = "22nF"; VariantName = "[No Variations]"
+Added Component: Designator=R4(RES SMD 0201)
+Add component (AddParameter): Name = "Value"; Value = "1K"; VariantName = "[No Variations]"
+Added Component: Designator=R5(RES SMD 0201)
+Add component (AddParameter): Name = "Value"; Value = "1K"; VariantName = "[No Variations]"
+Added Pin To Net: NetName=GND Pin=Analog_com-3
+Added Pin To Net: NetName=+12 Pin=C2-1
+Added Pin To Net: NetName=GND Pin=C2-2
+Added Pin To Net: NetName=GND Pin=C3-1
+Added Pin To Net: NetName=GND Pin=C4-1
+Added Pin To Net: NetName=Position_filtered Pin=A1-A0
+Added Pin To Net: NetName=Position_filtered Pin=C3-2
+Added Pin To Net: NetName=Position_filtered Pin=R4-2
+Added Net: Name=Position_filtered
+Added Pin To Net: NetName=Position Pin=Analog_com-1
+Added Pin To Net: NetName=Position Pin=R4-1
+Added Net: Name=Position
+Added Pin To Net: NetName=Power_filtered Pin=A1-A1
+Added Pin To Net: NetName=Power_filtered Pin=C4-2
+Added Pin To Net: NetName=Power_filtered Pin=R5-2
+Added Net: Name=Power_filtered
+Added Pin To Net: NetName=Power Pin=Analog_com-2
+Added Pin To Net: NetName=Power Pin=R5-1
+Added Net: Name=Power
+Added Member To Class: ClassName=main Member=Component Analog_com Header 1x3
+Added Member To Class: ClassName=main Member=Component C2 Cap
+Added Member To Class: ClassName=main Member=Component C3 Cap
+Added Member To Class: ClassName=main Member=Component C4 Cap
+Added Member To Class: ClassName=main Member=Component R4 Resistor
+Added Member To Class: ClassName=main Member=Component R5 Resistor

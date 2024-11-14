@@ -1,0 +1,7 @@
+Removed Pin From Net: NetName=D0 Pin=Digital_pins-1
+Removed Pin From Net: NetName=D1 Pin=Digital_pins-2
+Removed Pin From Net: NetName=D8 Pin=Digital_pins-3
+Removed Pin From Net: NetName=D11 Pin=Digital_pins-4
+Removed Pin From Net: NetName=D12 Pin=Digital_pins-5
+Removed Pin From Net: NetName=D13 Pin=Digital_pins-6
+Removed Member From Class: ClassName=main Member=Digital_pins

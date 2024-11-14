@@ -1,0 +1,20 @@
+Added Component: Designator=Digital_pins(Header 1x6)
+Added Pin To Net: NetName=D0 Pin=A1-D0
+Added Pin To Net: NetName=D0 Pin=Digital_pins-1
+Added Net: Name=D0
+Added Pin To Net: NetName=D1 Pin=A1-D1
+Added Pin To Net: NetName=D1 Pin=Digital_pins-2
+Added Net: Name=D1
+Added Pin To Net: NetName=D8 Pin=A1-D8
+Added Pin To Net: NetName=D8 Pin=Digital_pins-3
+Added Net: Name=D8
+Added Pin To Net: NetName=D11 Pin=A1-D11
+Added Pin To Net: NetName=D11 Pin=Digital_pins-4
+Added Net: Name=D11
+Added Pin To Net: NetName=D12 Pin=A1-D12
+Added Pin To Net: NetName=D12 Pin=Digital_pins-5
+Added Net: Name=D12
+Added Pin To Net: NetName=D13 Pin=A1-D13
+Added Pin To Net: NetName=D13 Pin=Digital_pins-6
+Added Net: Name=D13
+Added Member To Class: ClassName=main Member=Component Digital_pins Header 1x6
