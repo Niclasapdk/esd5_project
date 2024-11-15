@@ -50,7 +50,6 @@ for i = (numRows)+10:stepSize:(numRows*2)-10
          % Move to the next storage index
          index = index + 1;
 end
-
 index = 1;
      % Loop through each row with the step size of 200
 for i = (3*numRows)+10:stepSize:(numRows*4)-10
@@ -65,7 +64,6 @@ for i = (3*numRows)+10:stepSize:(numRows*4)-10
          % Move to the next storage index
          index = index + 1;
 end
-
 index = 1;
      % Loop through each row with the step size of 200
 for i = (14*numRows)+10:stepSize:(numRows*15)-10
@@ -95,7 +93,6 @@ for i = (9*numRows)+10:stepSize:(numRows*10)-10
          % Move to the next storage index
          index = index + 1;
 end
-
 % Display the results, converting var3_nums to dB
 windowSize = 2800;  % Try different values for the moving average window
 var3_nums_smooth = movmean(var3_nums, windowSize);
