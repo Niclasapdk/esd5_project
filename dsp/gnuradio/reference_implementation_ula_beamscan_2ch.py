@@ -167,14 +167,14 @@ class reference_implementation_ula_beamscan_2ch(gr.top_block, Qt.QWidget):
         ##################################################
         # Connections
         ##################################################
-        self.connect((self.blocks_deinterleave_0, 1), (self.epy_block_0, 1))
         self.connect((self.blocks_deinterleave_0, 0), (self.epy_block_0, 0))
-        self.connect((self.blocks_deinterleave_0, 2), (self.epy_block_0, 2))
+        self.connect((self.blocks_deinterleave_0, 1), (self.epy_block_0, 1))
         self.connect((self.blocks_deinterleave_0, 3), (self.epy_block_0, 3))
+        self.connect((self.blocks_deinterleave_0, 2), (self.epy_block_0, 2))
+        self.connect((self.blocks_deinterleave_0, 3), (self.epy_block_1, 3))
+        self.connect((self.blocks_deinterleave_0, 2), (self.epy_block_1, 2))
         self.connect((self.blocks_deinterleave_0, 0), (self.epy_block_1, 0))
         self.connect((self.blocks_deinterleave_0, 1), (self.epy_block_1, 1))
-        self.connect((self.blocks_deinterleave_0, 2), (self.epy_block_1, 2))
-        self.connect((self.blocks_deinterleave_0, 3), (self.epy_block_1, 3))
         self.connect((self.blocks_file_source_0, 0), (self.blocks_throttle2_0, 0))
         self.connect((self.blocks_throttle2_0, 0), (self.blocks_deinterleave_0, 0))
         self.connect((self.epy_block_0, 0), (self.qtgui_vector_sink_f_0, 0))

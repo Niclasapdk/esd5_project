@@ -42,7 +42,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [200, 76.0]
+    coordinate: [200, 84.0]
     rotation: 0
     state: enabled
 - name: gain
@@ -54,7 +54,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [304, 76.0]
+    coordinate: [304, 84.0]
     rotation: 0
     state: enabled
 - name: phi_scan_max
@@ -114,7 +114,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [416, 76.0]
+    coordinate: [384, 84.0]
     rotation: 0
     state: enabled
 - name: spectrum_len
