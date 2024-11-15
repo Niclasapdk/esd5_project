@@ -11,9 +11,9 @@ rx2_phase_cal = 0
 rx3_phase_cal = 0
 rx4_phase_cal = 0
 
-phi_scan_step = 1
-phi_scan_min = -2 # inclusive
-phi_scan_max = 5 # exclusive
+phi_scan_step = 2
+phi_scan_min = -50 # inclusive
+phi_scan_max = 51 # exclusive
 phi_scan_max -= 1 # don't touch
 
 d = 0.5 # wavelengths

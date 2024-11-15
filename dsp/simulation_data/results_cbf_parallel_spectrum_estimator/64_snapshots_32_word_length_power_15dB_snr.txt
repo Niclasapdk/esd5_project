@@ -1,0 +1,5 @@
+Word length power: 32
+Moving average snapshots: 64
+Phi scan steps: 51
+Normalizing constant (absmax): 4288009160.0
+Number of spectrum samples: 63

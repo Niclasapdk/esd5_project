@@ -39,7 +39,6 @@ class TB(object):
         cocotb.start_soon(Clock(dut.clk, 10, units="ns").start())
 
         self.source = AxiStreamSource(AxiStreamBus.from_prefix(dut, "s_axis"), dut.clk, dut.rst)
-        # self.sink = AxiStreamSink(AxiStreamBus.from_prefix(dut, "m_axis"), dut.clk, dut.rst)
         self.sink = AxiStreamSink(AxiStreamBus.from_prefix(dut, "power_spectrum_axis"), dut.clk, dut.rst)
 
     def set_idle_generator(self, generator=None):
@@ -62,11 +61,13 @@ async def run_test(dut, payload_data: Callable, idle_inserter: Callable):
     await tb.reset()
     tb.set_idle_generator(idle_inserter)
 
+    snr = int(os.environ.get("TB_SNR"))
     snapshot_count = tb.dut.MOVING_AVERAGE_SNAPSHOT_COUNT.value
     word_length_power = tb.dut.WORD_LENGTH_POWER.value
     power_size_bytes = word_length_power//8
     spectrum_steps = tb.dut.PHI_SCAN_NUM_STEPS.value
-    payload = payload_data(snapshot_count)
+    assert spectrum_steps == 51
+    payload = payload_data(snapshot_count, snr)
     test_frame = AxiStreamFrame(payload)
     await tb.source.send(test_frame)
     while tb.sink.empty():
@@ -87,7 +88,7 @@ async def run_test(dut, payload_data: Callable, idle_inserter: Callable):
     spectrum_samples = np.asarray(spectrums)
     normalizing_constant = np.max(np.abs(spectrum_samples))
     spectrum_samples = spectrum_samples / normalizing_constant
-    out_filename = os.path.join(out_data_dir, f"{snapshot_count}_snapshots_{word_length_power}_word_length_power.npy")
+    out_filename = os.path.join(out_data_dir, f"{snapshot_count}_snapshots_{word_length_power}_word_length_power_{snr}dB_snr.npy")
     with open(out_filename.replace(".npy", ".txt"), "w") as f:
         f.write(f"Word length power: {word_length_power}\n")
         f.write(f"Moving average snapshots: {snapshot_count}\n")
@@ -101,10 +102,10 @@ async def run_test(dut, payload_data: Callable, idle_inserter: Callable):
 def cycle_pause():
     return itertools.cycle([1, 1, 1, 0])
 
-def signal_payload(num_samples):
+def signal_payload(num_samples, snr):
     # bytes = samples * antennas * complex and real * float32
     num_bytes = num_samples * 4 * 2 * 4
-    with open(os.path.join(sim_data_dir, 'ula_4ch_sim_data_2_targets.raw'), "rb") as f:
+    with open(os.path.join(sim_data_dir, f'ula_4ch_sim_data_2_targets_{snr}dB_snr.raw'), "rb") as f:
         raw = f.read()
     conv = lambda x: int(struct.unpack("f", x)[0]*0x7ff)
     twos_complement = lambda x: ctypes.c_ushort(x).value
@@ -124,7 +125,8 @@ if cocotb.SIM_NAME:
 
 @pytest.mark.parametrize("moving_average_snapshot_count", [8, 16, 32, 64, 128])
 @pytest.mark.parametrize("word_length_power", [32, 64, 88])
-def test_cbf_spectrum_estimator(request, moving_average_snapshot_count, word_length_power):
+@pytest.mark.parametrize("snr", [-10, -5, 0, 5, 10, 15, 20])
+def test_cbf_spectrum_estimator(request, moving_average_snapshot_count, word_length_power, snr):
     dut = "cbf_spectrum_estimator"
     module = os.path.splitext(os.path.basename(__file__))[0]
     toplevel = dut
@@ -148,6 +150,7 @@ def test_cbf_spectrum_estimator(request, moving_average_snapshot_count, word_len
     parameters["MOVING_AVERAGE_SNAPSHOT_COUNT"] = moving_average_snapshot_count 
     parameters["WORD_LENGTH_POWER"] = word_length_power 
     extra_env = {f'PARAM_{k}': str(v) for k, v in parameters.items()}
+    extra_env["TB_SNR"] = str(snr)
 
     sim_build = os.path.join(tests_dir, "sim_build",
         request.node.name.replace('[', '-').replace(']', ''))
