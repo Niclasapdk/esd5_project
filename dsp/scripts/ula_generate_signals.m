@@ -12,13 +12,14 @@ pos = getElementPosition(ula)/lambda;
 
 Nsamp = 128;
 
-nPower = 0.01; % thermal noise [W] at each antenna
 nSignal = 1; % signal power [W] at each antenna
+snr = 20; % SNR in dB
+nPower = nSignal / (10 ^ (snr/10));
 
 rs = rng(2007); % random number generator
 signal = sensorsig(pos,Nsamp,[ang1 ang2],nPower, nSignal);
-save("../simulation_data/ula_4ch_sim_data_2_targets.mat", "signal", "-mat");
+save(strcat("../simulation_data/ula_4ch_sim_data_2_targets_", tostring(snr), "dB_snr.mat"), "signal", "-mat");
 
 
 signal = sensorsig(pos,Nsamp,[ang1],nPower, nSignal);
-save("../simulation_data/ula_4ch_sim_data_1_target.mat", "signal", "-mat");
+save(strcat("../simulation_data/ula_4ch_sim_data_1_target_", tostring(snr), "dB_snr.mat"), "signal", "-mat");
