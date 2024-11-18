@@ -504,7 +504,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [688, 488.0]
+    coordinate: [552, 432.0]
     rotation: 0
     state: disabled
 - name: qtgui_time_sink_x_1
@@ -1282,7 +1282,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [328, 516.0]
+    coordinate: [192, 404.0]
     rotation: 0
     state: disabled
 - name: uhd_usrp_source_0_0
@@ -1718,7 +1718,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [328, 764.0]
+    coordinate: [192, 636.0]
     rotation: 0
     state: disabled
 
@@ -1760,4 +1760,4 @@ connections:
 
 metadata:
   file_format: 1
-  grc_version: 3.10.11.0
+  grc_version: 3.10.9.2
