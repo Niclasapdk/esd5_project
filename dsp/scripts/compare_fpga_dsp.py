@@ -14,10 +14,12 @@ plt.rcParams.update({
 
 data_dir = os.path.abspath(os.path.join(__file__, "..", "..", "simulation_data"))
 cbf_dir = os.path.join(data_dir, "results_cbf_parallel_spectrum_estimator")
-py_dir = os.path.join(data_dir, "results_cbf_py")
+py_cbf_dir = os.path.join(data_dir, "results_cbf_py")
+py_mvdr_dir = os.path.join(data_dir, "results_mvdr_py")
 fig_out_dir = os.path.abspath(os.path.join(data_dir, "..", "..", "gitfigures", "system_design", "dsp", "sim_plots"))
 
-py_fname = os.path.join(py_dir, "python_results.npy")
+def normalize_ar(ar: np.ndarray):
+    return ar / np.abs(ar).max()
 
 def sim_basename(snapshots, word_length_power, snr_dB, basedir=cbf_dir):
     f = f"{snapshots}_snapshots_{word_length_power}_word_length_power_{snr_dB}dB_snr"
@@ -34,7 +36,7 @@ def get_sim_data(snapshots, word_length_power, snr_dB, basedir=cbf_dir):
             aux[l[0]] = int(float(l[1]))
     return data[-1], aux
 
-def get_py_sim_data(snapshots, snr_dB, targets=2, basedir=py_dir):
+def get_py_sim_data(snapshots, snr_dB, targets=2, basedir=py_cbf_dir):
     fname= os.path.join(basedir, f"{targets}_targets_{snapshots}_snapshots_{snr_dB}dB_snr.npy")
     data = np.load(fname)
     return data[-1]
@@ -48,7 +50,7 @@ def gen_snapshot_plot(word_length_power:int, snapshots:list, snr:int, source_loc
     scan_angles = np.arange(-50, 51, 2)
     for s in snapshots:
         data, aux = get_sim_data(s, word_length_power, snr)
-        leg.append(f"$N={aux['Moving average snapshots']}$")
+        leg.append(f"N={aux['Moving average snapshots']}")
         ax.plot(scan_angles, data, "-x", linewidth=2)
     ax.legend(leg, fontsize=10)
     ax.vlines(source_locations, 0, 1, colors="r", linestyle="dashed")
@@ -66,7 +68,7 @@ def gen_wordlength_plot(word_length_power:list, snapshots:int, snr:int, source_l
     scan_angles = np.arange(-50, 51, 2)
     for wl in word_length_power:
         data, aux = get_sim_data(snapshots, wl, snr)
-        leg.append(f"$WL={aux['Word length power']}$")
+        leg.append(f"WL={aux['Word length power']}")
         ax.plot(scan_angles, data, "-x", linewidth=2)
     ax.legend(leg, fontsize=10)
     ax.vlines(source_locations, 0, 1, colors="r", linestyle="dashed")
@@ -91,24 +93,52 @@ def gen_cmp_plot(power_word_lengths:list, snapshots:list, snr_dB: int, source_lo
         axs = [axs]
     for idx, s in enumerate(snapshots):
         ax = axs[idx]
-        ax.set_title(f"Snapshot count $N={s}$", fontsize=10)
+        ax.set_title(f"Snapshot count N={s}", fontsize=10)
         ax.set_ylabel("Normalized power")
         leg = []
         # Plot floating-point data
         data_fp = get_py_sim_data(s, snr_dB)
-        data_fp = data_fp / np.max(np.abs(data_fp))
+        data_fp = normalize_ar(data_fp)
         ax.plot(scan_angles, data_fp, "-x", linewidth=2)
         leg.append(f"Floating-point")
         # Plot fixed-point data for each power word length
         for pwl in power_word_lengths:
             data_fx, aux = get_sim_data(s, pwl, snr_dB)
             ax.plot(scan_angles, data_fx, "-o", linewidth=2)
-            leg.append(f"Fixed-point $WL={pwl}$")
+            leg.append(f"Fixed-point WL={pwl}")
         ax.vlines(source_locations, 0, 1, colors="r", linestyle="dashed")
         ax.legend(leg, fontsize=10, loc='lower right')
     axs[-1].set_xlabel("Steering angle [degrees]")
     # Add note below the figure
-    note = f"(Simulated data, $SNR={snr_dB}$dB)"
+    note = f"(Simulated data, SNR={snr_dB}dB)"
+    fig.text(0.2, 0.015, note, ha='center', fontsize=10)
+    return fig
+
+def gen_snr_plot(snapshots:int, snrs:list, source_locations=[-20, 40]):
+    assert isinstance(snapshots, int)
+    n_snrs = len(snrs)
+    fig, axs = plt.subplots(n_snrs, 1, sharex=True, figsize=(6.4, 2.6 * n_snrs))
+    fig.suptitle("Comparison of MVDR and CBF", fontsize=13)
+    scan_angles = np.arange(-50, 51, 2)
+    # Ensure axs is always iterable
+    if n_snrs == 1:
+        axs = [axs]
+    for idx, snr in enumerate(snrs):
+        ax = axs[idx]
+        ax.set_title(f"SNR={snr}dB", fontsize=10)
+        ax.set_ylabel("Normalized power")
+        leg = []
+        data_cbf = normalize_ar(get_py_sim_data(snapshots, snr, basedir=py_cbf_dir))
+        ax.plot(scan_angles, data_cbf, "-x", linewidth=2)
+        leg.append(f"CBF")
+        data_mvdr = normalize_ar(get_py_sim_data(snapshots, snr, basedir=py_mvdr_dir))
+        ax.plot(scan_angles, data_mvdr, "-o", linewidth=2)
+        leg.append(f"MVDR")
+        ax.vlines(source_locations, 0, 1, colors="r", linestyle="dashed")
+        ax.legend(leg, fontsize=10, loc='lower right')
+    axs[-1].set_xlabel("Steering angle [degrees]")
+    # Add note below the figure
+    note = f"(Simulated, floating-point, N={snapshots})"
     fig.text(0.2, 0.015, note, ha='center', fontsize=10)
     return fig
 
@@ -161,6 +191,10 @@ if __name__ == "__main__":
             f.savefig(out_path, bbox_inches='tight', dpi=300)
             plt.close()
     if len(snrs) > 0:
-        out_path = os.path.abspath(os.path.join(out_dir, "snr_comparison.png"))
-        print(f"[+] Saving SNR figure at {out_path}")
+        for s in snapshots:
+            f = gen_snr_plot(s, snrs)
+            out_path = os.path.abspath(os.path.join(out_dir, f"snr_comparison_{s}_snapshots.png"))
+            print(f"[+] Saving SNR figure at {out_path}")
+            f.savefig(out_path, bbox_inches='tight', dpi=300)
+            plt.close()
     print("[+] Done")
