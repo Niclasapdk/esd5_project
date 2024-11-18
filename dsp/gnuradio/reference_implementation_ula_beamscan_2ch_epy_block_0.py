@@ -21,7 +21,7 @@ class blk(gr.basic_block):
             self,
             name='Beamscan spatial spectrum estimator',   # will show up in GRC
             in_sig=[np.complex64, np.complex64, np.complex64, np.complex64],
-            out_sig=[(np.float32, self.spectrum_len)]
+            out_sig=[(np.float32, self.spectrum_len), np.float32, np.float32]
         )
         self.logger = gr.logger(self.alias())
         self.num_samples = num_samples
@@ -59,7 +59,11 @@ class blk(gr.basic_block):
         steervecs = self.steering_vectors
         sig_beamformed = np.matmul(steervecs, signals_in) # dimension: phi X snapshot
         spectrum = np.mean(np.square(np.abs(sig_beamformed)), axis=1).astype("float32")
+        peak_value = np.max(spectrum).astype("float32")
+        doa = self.steering_angles[np.argmax(spectrum)]
         output_items[0][:] = spectrum
+        output_items[1][:] = doa
+        output_items[2][:] = peak_value
         for i in range(4):
             self.consume(i, self.num_samples)
         return len(output_items[0])

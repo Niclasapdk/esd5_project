@@ -21,7 +21,7 @@ class blk(gr.basic_block):
             self,
             name='MVDR spatial spectrum estimator',   # will show up in GRC
             in_sig=[np.complex64, np.complex64, np.complex64, np.complex64],
-            out_sig=[(np.float32, self.spectrum_len)]
+            out_sig=[(np.float32, self.spectrum_len), np.float32, np.float32]
         )
         self.logger = gr.logger(self.alias())
         self.num_samples = num_samples
@@ -65,7 +65,12 @@ class blk(gr.basic_block):
             sig_mvdr = signals_in @ w
             p_mvdr = np.mean(np.square(np.abs(sig_mvdr)), axis=0).astype(np.float32)[0,0]
             spectrum[i] = p_mvdr
+
+        peak_value = np.max(spectrum).astype("float32")
+        doa = self.steering_angles[np.argmax(spectrum)]
         output_items[0][:] = spectrum
+        output_items[1][:] = doa
+        output_items[2][:] = peak_value
         for i in range(4):
             self.consume(i, self.num_samples)
         return len(output_items[0])
