@@ -13,8 +13,3 @@ ylabel('Magnitude [dB]');
 title('S_{21} Parameter');
 grid on;
 hold on;
-plot(freq(5207),value,'.','MarkerSize',12);
-x = [0.60 0.54];
-y = [0.90 0.89];
-aa = annotation('textarrow',x,y,'String','-2.8 dB');
-aa.FontSize = 14;
