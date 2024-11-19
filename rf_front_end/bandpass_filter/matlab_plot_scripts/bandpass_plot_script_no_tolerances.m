@@ -5,17 +5,17 @@ FullFileA1 = fullfile(PathA1,FileA1);
 unwrapPhase = rad2deg(unwrap(deg2rad(phaseFound)));
 figure
 yyaxis left
-s = semilogx(Freq1, dBfund1);
-xlabel('Frequency [Hz]','FontSize',12);
+s = plot(Freq1*1E-9, dBfund1);
+xlabel('Frequency [GHz]','FontSize',12);
 ylabel('Magnitude [dB]','FontSize',12);
-s(1).LineWidth = 1.4;
+s(1).LineWidth = 1.8;
 set(gca,'FontSize',14);
 hold on
 yyaxis right
-s1 = semilogx(Freq1, unwrapPhase);
+s1 = plot(Freq1*1E-9, unwrapPhase)
 ylabel('Phase [deg]','FontSize',12);
-s1(1).LineWidth = 1.4;
-set(gca,'FontSize',14);
+s1(1).LineWidth = 1.8;
+set(gca,'FontSize',18);
 grid on;
 
 [max_num, max_idx]=max(dBfund1(:));

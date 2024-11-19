@@ -28,7 +28,7 @@ ylabel('Magnitude [dB]');
 
 % Plot the phase response (right y-axis)
 yyaxis right;
-semilogx(Freq, degree, '--', 'LineWidth', 3);
+semilogx(Freq, unwrap(degree), '--', 'LineWidth', 3);
 ylabel('Phase [°]', 'Interpreter', 'latex');
 
 % Label x-axis and add title
