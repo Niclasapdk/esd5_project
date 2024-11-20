@@ -11,7 +11,7 @@ plot(data.Var1,data.Var5, "Color", [0.9,0.9,0]) %Input
 hold on
 plot(data.Var1,data.Var3, "Color", "b")
 title("Sensor Input and Schmitt-Trigger Output")
-legend("Input 1", "Output 2");
+legend("Input 1", "Output 1");
 ylabel("Voltage (V)")
 grid on;
 xlim([0.1 0.4])
