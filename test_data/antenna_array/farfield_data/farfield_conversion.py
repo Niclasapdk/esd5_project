@@ -25,10 +25,10 @@ try:
     frequency = df['Frequency']
     df = df[df['Frequency'] == 2440000000]  # Frequency is in Hz
     df["Azimuth"] = 180*df['Azimuth']/pi
-    df["Elevation"] = 180+180*df['Elevation']/pi
+    df["Elevation"] = 180*df['Elevation']/pi
     
     df['Theta'] = df['Azimuth']
-    df['Phi'] = df['Elevation'] % 361
+    df['Phi'] = (df['Elevation']+540) % 360
 
     keep_cols = ['Phi', 'Theta', 'EThetaRealpart', 'EThetaImaginarypart', 'EPhiRealpart', 'EPhiImaginarypart']
     df.drop(df.columns.difference(keep_cols), axis=1, inplace=True)
