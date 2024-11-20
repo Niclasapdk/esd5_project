@@ -23,30 +23,33 @@ print("Columns found in the file:", df.columns)
 # Filter for 2.44 GHz frequency
 try:
     frequency = df['Frequency']
-    filtered_df = df[df['Frequency'] == 2440000000]  # Frequency is in Hz
-    azimuth   = 180*filtered_df['Azimuth']/pi
-    filtered_df["Azimuth"] = 180+180*filtered_df['Elevation']/pi
-    filtered_df["Elevation"] = azimuth
-    keep_cols = ['Azimuth', 'Elevation', 'EThetaRealpart', 'EThetaImaginarypart', 'EPhiRealpart', 'EPhiImaginarypart']
-    filtered_df.drop(filtered_df.columns.difference(keep_cols), axis=1, inplace=True)
-    for az in filtered_df["Azimuth"].unique():
-        df_row = pd.DataFrame([[az, 180, 0, 0, 0, 0]], columns=filtered_df.columns)
-        filtered_df = pd.concat([df_row, filtered_df], ignore_index=True)
+    df = df[df['Frequency'] == 2440000000]  # Frequency is in Hz
+    df["Azimuth"] = 180*df['Azimuth']/pi
+    df["Elevation"] = 180*df['Elevation']/pi
+    
+    df['Theta'] = df['Azimuth']
+    df['Phi'] = (df['Elevation'] + 360) % 360
+
+    keep_cols = ['Phi', 'Theta', 'EThetaRealpart', 'EThetaImaginarypart', 'EPhiRealpart', 'EPhiImaginarypart']
+    df.drop(df.columns.difference(keep_cols), axis=1, inplace=True)
+    for az in df["Phi"].unique():
+        append_df = pd.DataFrame([[az, 180, 0, 0, 0, 0]], columns=df.columns)
+        df = pd.concat([append_df, df], ignore_index=True)
     # sort the df
-    filtered_df.sort_values(by=["Azimuth", "Elevation"], inplace=True)
-    print(f"Total rows at 2.44 GHz: {len(filtered_df)}")
+    df.sort_values(by=["Phi", "Theta"], inplace=True)
+    print(f"Total rows at 2.44 GHz: {len(df)}")
 except KeyError as e:
     print(f"Column {e} not found. Check your input file for exact column names.")
     exit()
 
 # Map columns to variables
 try:
-    azimuth   = filtered_df['Azimuth']
-    elevation = filtered_df['Elevation']
-    re_etheta = filtered_df['EThetaRealpart']
-    im_etheta = filtered_df['EThetaImaginarypart']
-    re_ephi = filtered_df['EPhiRealpart']
-    im_ephi = filtered_df['EPhiImaginarypart']
+    azimuth   = df['Phi']
+    elevation = df['Theta']
+    re_etheta = df['EThetaRealpart']
+    im_etheta = df['EThetaImaginarypart']
+    re_ephi = df['EPhiRealpart']
+    im_ephi = df['EPhiImaginarypart']
     tot_phi = len(azimuth.unique())
     tot_theta = len(elevation.unique())
 except KeyError as e:
@@ -72,7 +75,7 @@ try:
         f.write("// >> Phi, Theta, Re(E_Theta), Im(E_Theta), Re(E_Phi), Im(E_Phi):\n")
         
         # Write data row by row
-        for i in range(len(filtered_df)):
+        for i in range(len(df)):
             try:
                 f.write(f"{azimuth.iloc[i]:10.3f} {elevation.iloc[i]:10.3f} "
                         f"{re_etheta.iloc[i]:14.6e} {im_etheta.iloc[i]:14.6e} "
