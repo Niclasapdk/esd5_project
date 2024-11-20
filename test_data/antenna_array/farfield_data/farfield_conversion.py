@@ -25,7 +25,7 @@ try:
     frequency = df['Frequency']
     filtered_df = df[df['Frequency'] == 2440000000]  # Frequency is in Hz
     azimuth   = 180*filtered_df['Azimuth']/pi
-    filtered_df["Azimuth"] = 180*filtered_df['Elevation']/pi
+    filtered_df["Azimuth"] = 180+180*filtered_df['Elevation']/pi
     filtered_df["Elevation"] = azimuth
     keep_cols = ['Azimuth', 'Elevation', 'EThetaRealpart', 'EThetaImaginarypart', 'EPhiRealpart', 'EPhiImaginarypart']
     filtered_df.drop(filtered_df.columns.difference(keep_cols), axis=1, inplace=True)
