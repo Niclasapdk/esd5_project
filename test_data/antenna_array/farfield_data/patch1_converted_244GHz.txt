@@ -6,8 +6,32 @@
 // Data Type
 Farfield
 
+// #Frequencies
+1
+
+//Position
+0.0 0.0 0.0
+
+//z-Axis
+0.0 0.0 1.0
+
+//x-Axis
+1.0 0.0 0.0
+
+// Radiated Power [W,rms]
+4.293431e-001
+
+// Accepted Power [W,rms]
+4.333676e-001
+
+// Stimulated Power [W,rms]
+5.000000e-001
+
 // Frequency[Hz]
 2440000000
+
+// >> Total #phi samples, total #theta samples
+60   121
 
 // >> Phi, Theta, Re(E_Theta), Im(E_Theta), Re(E_Phi), Im(E_Phi):
      0.000      0.000   2.779878e-02   6.788916e-02   8.454795e-02   8.296971e-03

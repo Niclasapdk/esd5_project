@@ -37,6 +37,8 @@ try:
     im_etheta = filtered_df['EThetaImaginarypart']
     re_ephi = filtered_df['EPhiRealpart']
     im_ephi = filtered_df['EPhiImaginarypart']
+    tot_phi = len(azimuth.unique())
+    tot_theta = len(elevation.unique())
 except KeyError as e:
     print(f"Column {e} not found. Check your input file for exact column names.")
     exit()
@@ -48,7 +50,15 @@ try:
         f.write("// CST Farfield Source File\n\n")
         f.write("// Version:\n3.0\n\n")
         f.write("// Data Type\nFarfield\n\n")
+        f.write("// #Frequencies\n1\n\n")
+        f.write("//Position\n0.0 0.0 0.0\n\n")
+        f.write("//z-Axis\n0.0 0.0 1.0\n\n")
+        f.write("//x-Axis\n1.0 0.0 0.0\n\n")
+        f.write("// Radiated Power [W,rms]\n4.293431e-001\n\n")
+        f.write("// Accepted Power [W,rms]\n4.333676e-001\n\n")
+        f.write("// Stimulated Power [W,rms]\n5.000000e-001\n\n")
         f.write("// Frequency[Hz]\n2440000000\n\n")
+        f.write(f"// >> Total #phi samples, total #theta samples\n{tot_phi}   {tot_theta}\n\n")
         f.write("// >> Phi, Theta, Re(E_Theta), Im(E_Theta), Re(E_Phi), Im(E_Phi):\n")
         
         # Write data row by row
