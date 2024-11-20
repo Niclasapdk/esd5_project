@@ -22,7 +22,7 @@ lambda = c / frequency_of_interest;
 d = 0.5 * lambda;
 
 % Desired beam steering angle (degrees)
-theta_0_deg = 0; % Adjust as needed
+theta_0_deg = 30; % Adjust as needed
 theta_0_rad = deg2rad(theta_0_deg); % Convert to radians
 
 % Wavenumber
@@ -34,34 +34,38 @@ element_positions = (0:num_elements-1)' * d; % Column vector
 %% Load Data Files and Extract Data at 2.44 GHz
 
 % Initialize cell arrays to hold data for each element
-element_data = cell(num_elements, 1);
 E_theta = cell(num_elements, 1);
 E_phi = cell(num_elements, 1);
+
+% Initialize arrays to store azimuth and elevation angles (assuming they are consistent across elements)
 Azimuth = [];
 Elevation = [];
 
 % Loop through each element's data file
 for elem = 1:num_elements
     % Construct filename
-    filename = sprintf('patch%d.txt', elem);
+    filename = sprintf('element%d.txt', elem);
     
     % Read the data file into a table
-    data = readtable(filename, 'Delimiter', '\t');
+    % Adjust the 'Delimiter' based on your actual file format
+    data = readtable(filename, 'Delimiter', '\t', 'ReadVariableNames', true, 'VariableNamingRule', 'preserve', NumHeaderLines=0);
     
     % Find indices where the frequency matches 2.44 GHz
     freq_indices = data.Frequency == frequency_of_interest;
     
-    % Extract azimuth and elevation angles (in radians)
+    % Extract azimuth and elevation angles (in radians) for the frequency of interest
+    % Store only once since they should be the same across elements
     if isempty(Azimuth)
         Azimuth = data.Azimuth(freq_indices);
         Elevation = data.Elevation(freq_indices);
     end
     
     % Extract E_theta and E_phi components (combine real and imaginary parts)
-    E_theta_real = data.ETheta_Realpart(freq_indices);
-    E_theta_imag = data.ETheta_Imaginarypart(freq_indices);
-    E_phi_real = data.EPhi_Realpart(freq_indices);
-    E_phi_imag = data.EPhi_Imaginarypart(freq_indices);
+    % Adjust variable names if necessary to match your data
+    E_theta_real = data.('ETheta.Real part')(freq_indices);
+    E_theta_imag = data.('ETheta.Imaginary part')(freq_indices);
+    E_phi_real = data.('EPhi.Real part')(freq_indices);
+    E_phi_imag = data.('EPhi.Imaginary part')(freq_indices);
     
     E_theta{elem} = E_theta_real + 1j * E_theta_imag;
     E_phi{elem} = E_phi_real + 1j * E_phi_imag;
@@ -108,6 +112,7 @@ Azimuth_deg = rad2deg(Azimuth);
 Elevation_deg = rad2deg(Elevation);
 
 % Create a grid of azimuth and elevation angles
+% Identify unique azimuth and elevation values
 unique_azimuth = unique(Azimuth_deg);
 unique_elevation = unique(Elevation_deg);
 
@@ -121,8 +126,8 @@ Azimuth_grid = reshape(Azimuth_deg, [num_elevation, num_azimuth]);
 Elevation_grid = reshape(Elevation_deg, [num_elevation, num_azimuth]);
 
 % Convert spherical coordinates to Cartesian coordinates for plotting
-% Note: MATLAB's sph2cart uses azimuth angle (theta) and elevation angle (phi)
-% We need to convert elevation angle to inclination angle (90 - elevation)
+% MATLAB's sph2cart uses azimuth angle (theta) and elevation angle (phi)
+% Convert elevation angle to inclination angle (90 - elevation)
 inclination_angle = 90 - Elevation_grid; % Convert to inclination angle
 
 % Convert degrees to radians for sph2cart
