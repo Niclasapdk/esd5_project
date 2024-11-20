@@ -32,7 +32,7 @@ except KeyError as e:
 # Map columns to variables
 try:
     azimuth   = 180*filtered_df['Azimuth']/pi
-    elevation = 180*filtered_df['Elevation']/pi
+    elevation = 180+180*filtered_df['Elevation']/pi
     re_etheta = filtered_df['EThetaRealpart']
     im_etheta = filtered_df['EThetaImaginarypart']
     re_ephi = filtered_df['EPhiRealpart']
