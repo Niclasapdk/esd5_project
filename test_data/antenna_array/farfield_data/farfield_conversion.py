@@ -1,4 +1,5 @@
 import pandas as pd
+from math import pi
 
 # Load the file
 input_file = "Patch1_Spherical FieldsGain_EH_EV_ETheta_EPhi_ETotal.txt"
@@ -30,8 +31,8 @@ except KeyError as e:
 
 # Map columns to variables
 try:
-    azimuth = filtered_df['Azimuth']
-    elevation = filtered_df['Elevation']
+    azimuth   = 180*filtered_df['Azimuth']/pi
+    elevation = 180*filtered_df['Elevation']/pi
     re_etheta = filtered_df['EThetaRealpart']
     im_etheta = filtered_df['EThetaImaginarypart']
     re_ephi = filtered_df['EPhiRealpart']
