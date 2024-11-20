@@ -52,7 +52,7 @@ def gen_snapshot_plot(word_length_power:int, snapshots:list, snr:int, source_loc
         data, aux = get_sim_data(s, word_length_power, snr)
         leg.append(f"N={aux['Moving average snapshots']}")
         ax.plot(scan_angles, data, "-x", linewidth=2)
-    ax.legend(leg, fontsize=10)
+    ax.legend(leg, fontsize=9)
     ax.vlines(source_locations, 0, 1, colors="r", linestyle="dashed")
     # Add subtitle
     subtitle = f"(Simulated, fixed-point, WL={word_length_power})"
@@ -70,7 +70,7 @@ def gen_wordlength_plot(word_length_power:list, snapshots:int, snr:int, source_l
         data, aux = get_sim_data(snapshots, wl, snr)
         leg.append(f"WL={aux['Word length power']}")
         ax.plot(scan_angles, data, "-x", linewidth=2)
-    ax.legend(leg, fontsize=10)
+    ax.legend(leg, fontsize=9)
     ax.vlines(source_locations, 0, 1, colors="r", linestyle="dashed")
     # Add subtitle
     subtitle = f"(Simulated, fixed-point, N={snapshots})"
@@ -86,7 +86,7 @@ def gen_cmp_plot(power_word_lengths:list, snapshots:list, snr_dB: int, source_lo
     assert isinstance(snapshots, list)
     n_snapshots = len(snapshots)
     fig, axs = plt.subplots(n_snapshots, 1, sharex=True, figsize=(6.4, 2.6 * n_snapshots))
-    fig.suptitle("Comparison of CBF implementations", fontsize=13)
+    fig.suptitle("Comparison of CBF implementations", fontsize=11)
     scan_angles = np.arange(-50, 51, 2)
     # Ensure axs is always iterable
     if n_snapshots == 1:
@@ -107,7 +107,7 @@ def gen_cmp_plot(power_word_lengths:list, snapshots:list, snr_dB: int, source_lo
             ax.plot(scan_angles, data_fx, "-o", linewidth=2)
             leg.append(f"Fixed-point WL={pwl}")
         ax.vlines(source_locations, 0, 1, colors="r", linestyle="dashed")
-        ax.legend(leg, fontsize=10, loc='lower right')
+        ax.legend(leg, fontsize=9, loc='lower right')
     axs[-1].set_xlabel("Steering angle [degrees]")
     # Add note below the figure
     note = f"(Simulated data, SNR={snr_dB}dB)"
@@ -118,7 +118,7 @@ def gen_snr_plot(snapshots:int, snrs:list, source_locations=[-20, 40]):
     assert isinstance(snapshots, int)
     n_snrs = len(snrs)
     fig, axs = plt.subplots(n_snrs, 1, sharex=True, figsize=(6.4, 2.6 * n_snrs))
-    fig.suptitle("Comparison of MVDR and CBF", fontsize=13)
+    fig.suptitle("Comparison of MVDR and CBF", fontsize=11)
     scan_angles = np.arange(-50, 51, 2)
     # Ensure axs is always iterable
     if n_snrs == 1:
@@ -135,7 +135,7 @@ def gen_snr_plot(snapshots:int, snrs:list, source_locations=[-20, 40]):
         ax.plot(scan_angles, data_mvdr, "-o", linewidth=2)
         leg.append(f"MVDR")
         ax.vlines(source_locations, 0, 1, colors="r", linestyle="dashed")
-        ax.legend(leg, fontsize=10, loc='lower right')
+        ax.legend(leg, fontsize=9, loc='lower right')
     axs[-1].set_xlabel("Steering angle [degrees]")
     # Add note below the figure
     note = f"(Simulated, floating-point, N={snapshots})"
