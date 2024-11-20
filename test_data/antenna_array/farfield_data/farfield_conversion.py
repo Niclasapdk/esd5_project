@@ -33,7 +33,7 @@ try:
         df_row = pd.DataFrame([[az, 180, 0, 0, 0, 0]], columns=filtered_df.columns)
         filtered_df = pd.concat([df_row, filtered_df], ignore_index=True)
     # sort the df
-    filtered_df = df[df['Azimuth'] - 360 > 0.1]  # Drop 360 degrees
+    filtered_df = df[df['Azimuth'] != 360]  # Drop 360 degrees
     filtered_df.sort_values(by=["Azimuth", "Elevation"], inplace=True)
     print(f"Total rows at 2.44 GHz: {len(filtered_df)}")
 except KeyError as e:
