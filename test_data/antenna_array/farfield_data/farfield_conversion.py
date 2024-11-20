@@ -27,6 +27,12 @@ try:
     azimuth   = 180*filtered_df['Azimuth']/pi
     filtered_df["Azimuth"] = 180+180*filtered_df['Elevation']/pi
     filtered_df["Elevation"] = azimuth
+    keep_cols = ['Azimuth', 'Elevation', 'EThetaRealpart', 'EThetaImaginarypart', 'EPhiRealpart', 'EPhiImaginarypart']
+    filtered_df.drop(filtered_df.columns.difference(keep_cols), axis=1, inplace=True)
+    for az in filtered_df["Azimuth"].unique():
+        df_row = pd.DataFrame([[az, 180, 0, 0, 0, 0]], columns=filtered_df.columns)
+        filtered_df = pd.concat([df_row, filtered_df], ignore_index=True)
+    # sort the df
     filtered_df.sort_values(by=["Azimuth", "Elevation"], inplace=True)
     print(f"Total rows at 2.44 GHz: {len(filtered_df)}")
 except KeyError as e:
