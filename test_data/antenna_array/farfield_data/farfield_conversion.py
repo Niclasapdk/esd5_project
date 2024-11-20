@@ -25,15 +25,15 @@ try:
     frequency = df['Frequency']
     df = df[df['Frequency'] == 2440000000]  # Frequency is in Hz
     df["Azimuth"] = 180*df['Azimuth']/pi
-    df["Elevation"] = 180*df['Elevation']/pi
+    df["Elevation"] = 180+180*df['Elevation']/pi
     
     df['Theta'] = df['Azimuth']
-    df['Phi'] = (df['Elevation'] + 360) % 360
+    df['Phi'] = df['Elevation'] % 361
 
     keep_cols = ['Phi', 'Theta', 'EThetaRealpart', 'EThetaImaginarypart', 'EPhiRealpart', 'EPhiImaginarypart']
     df.drop(df.columns.difference(keep_cols), axis=1, inplace=True)
     for az in df["Phi"].unique():
-        append_df = pd.DataFrame([[az, 180, 0, 0, 0, 0]], columns=df.columns)
+        append_df = pd.DataFrame([[az, 180, 0, 0, 0, 0]], columns=keep_cols)
         df = pd.concat([append_df, df], ignore_index=True)
     # sort the df
     df.sort_values(by=["Phi", "Theta"], inplace=True)
