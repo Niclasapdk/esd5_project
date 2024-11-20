@@ -28,7 +28,7 @@ try:
     df["Elevation"] = 180*df['Elevation']/pi
     
     df['Theta'] = df['Azimuth']
-    df['Phi'] = (df['Elevation']+540) % 360
+    df['Phi'] = (df['Elevation']+180) % 360
 
     keep_cols = ['Phi', 'Theta', 'EThetaRealpart', 'EThetaImaginarypart', 'EPhiRealpart', 'EPhiImaginarypart']
     df.drop(df.columns.difference(keep_cols), axis=1, inplace=True)
