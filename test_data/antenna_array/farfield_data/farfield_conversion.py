@@ -24,6 +24,10 @@ print("Columns found in the file:", df.columns)
 try:
     frequency = df['Frequency']
     filtered_df = df[df['Frequency'] == 2440000000]  # Frequency is in Hz
+    azimuth   = 180*filtered_df['Azimuth']/pi
+    filtered_df["Azimuth"] = 180+180*filtered_df['Elevation']/pi
+    filtered_df["Elevation"] = azimuth
+    filtered_df.sort_values(by=["Azimuth", "Elevation"], inplace=True)
     print(f"Total rows at 2.44 GHz: {len(filtered_df)}")
 except KeyError as e:
     print(f"Column {e} not found. Check your input file for exact column names.")
@@ -31,8 +35,8 @@ except KeyError as e:
 
 # Map columns to variables
 try:
-    azimuth   = 180*filtered_df['Azimuth']/pi
-    elevation = 180+180*filtered_df['Elevation']/pi
+    azimuth   = filtered_df['Azimuth']
+    elevation = filtered_df['Elevation']
     re_etheta = filtered_df['EThetaRealpart']
     im_etheta = filtered_df['EThetaImaginarypart']
     re_ephi = filtered_df['EPhiRealpart']
@@ -64,7 +68,7 @@ try:
         # Write data row by row
         for i in range(len(filtered_df)):
             try:
-                f.write(f"{elevation.iloc[i]:10.3f} {azimuth.iloc[i]:10.3f} "
+                f.write(f"{azimuth.iloc[i]:10.3f} {elevation.iloc[i]:10.3f} "
                         f"{re_etheta.iloc[i]:14.6e} {im_etheta.iloc[i]:14.6e} "
                         f"{re_ephi.iloc[i]:14.6e} {im_ephi.iloc[i]:14.6e}\n")
             except Exception as e:
