@@ -64,7 +64,7 @@ try:
         # Write data row by row
         for i in range(len(filtered_df)):
             try:
-                f.write(f"{azimuth.iloc[i]:10.3f} {elevation.iloc[i]:10.3f} "
+                f.write(f"{elevation.iloc[i]:10.3f} {azimuth.iloc[i]:10.3f} "
                         f"{re_etheta.iloc[i]:14.6e} {im_etheta.iloc[i]:14.6e} "
                         f"{re_ephi.iloc[i]:14.6e} {im_ephi.iloc[i]:14.6e}\n")
             except Exception as e:
