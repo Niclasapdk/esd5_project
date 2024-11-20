@@ -7,7 +7,7 @@ clc;
 %% Parameters
 
 % Number of elements in the array
-num_elements = 4;
+num_elements = 1;
 
 % Operating frequency (Hz)
 frequency_of_interest = 2.44e9; % 2.44 GHz
@@ -44,11 +44,11 @@ Elevation = [];
 % Loop through each element's data file
 for elem = 1:num_elements
     % Construct filename
-    filename = sprintf('element%d.txt', elem);
+    filename = sprintf('Patch%d_Spherical FieldsGain_EH_EV_ETheta_EPhi_ETotal.txt', elem);
     
     % Read the data file into a table
     % Adjust the 'Delimiter' based on your actual file format
-    data = readtable(filename, 'Delimiter', '\t', 'ReadVariableNames', true, 'VariableNamingRule', 'preserve', NumHeaderLines=0);
+    data = readtable(filename, 'Delimiter', '\t', NumHeaderLines=1);
     
     % Find indices where the frequency matches 2.44 GHz
     freq_indices = data.Frequency == frequency_of_interest;
@@ -62,10 +62,10 @@ for elem = 1:num_elements
     
     % Extract E_theta and E_phi components (combine real and imaginary parts)
     % Adjust variable names if necessary to match your data
-    E_theta_real = data.('ETheta.Real part')(freq_indices);
-    E_theta_imag = data.('ETheta.Imaginary part')(freq_indices);
-    E_phi_real = data.('EPhi.Real part')(freq_indices);
-    E_phi_imag = data.('EPhi.Imaginary part')(freq_indices);
+    E_theta_real = data.ETheta_RealPart(freq_indices);
+    E_theta_imag = data.ETheta_ImaginaryPart(freq_indices);
+    E_phi_real = data.EPhi_RealPart(freq_indices);
+    E_phi_imag = data.EPhi_ImaginaryPart(freq_indices);
     
     E_theta{elem} = E_theta_real + 1j * E_theta_imag;
     E_phi{elem} = E_phi_real + 1j * E_phi_imag;
@@ -79,7 +79,7 @@ phase_shifts = -k * element_positions * sin(theta_0_rad);
 %% Apply Phase Shifts to Each Element's Data
 
 % Initialize cell arrays to hold the phased fields
-E_theta_phased = cell(num_elements, 1);
+E_theta_phased = zeros(num_elements, E_theta);
 E_phi_phased = cell(num_elements, 1);
 
 for elem = 1:num_elements
