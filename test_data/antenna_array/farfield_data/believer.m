@@ -44,12 +44,9 @@ for elem = 1:num_elements
 	theta = rad2deg(data.Elevation);
 	phi = rad2deg(data.Azimuth);
 	% Convert to MATLAB's coordinate system
-	el = 90 - theta; % MATLAB elevation angle
-	az = phi;        % MATLAB azimuth angle
+	el = unique(90-abs(theta));
+	az = unique(phi + 180*(sign(theta) == -1));
 
-	% Wrap azimuth angles to [-180°, 180°]
-	az = mod(az + 180, 360) - 180;
-    
     % Extract E-field components
     E_theta_real = data.ETheta_RealPart;
     E_theta_imag = data.ETheta_ImaginaryPart;
@@ -65,8 +62,8 @@ for elem = 1:num_elements
     
     % For the first element, store azimuth, elevation, and frequency
     if elem == 1
-        AzimuthAngles = unique(az);
-        ElevationAngles = unique(el);
+        AzimuthAngles = az;
+        ElevationAngles = el;
         Frequency = freqs;
     end
     
