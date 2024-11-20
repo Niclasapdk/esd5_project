@@ -41,8 +41,14 @@ for elem = 1:num_elements
     freqs = unique(data.Frequency);
     
     % Extract azimuth and elevation angles (in degrees)
-    az = rad2deg(data.Elevation);
-	el = rad2deg(data.Azimuth)-90;
+	theta = rad2deg(data.Elevation);
+	phi = rad2deg(data.Azimuth);
+	% Convert to MATLAB's coordinate system
+	el = 90 - theta; % MATLAB elevation angle
+	az = phi;        % MATLAB azimuth angle
+
+	% Wrap azimuth angles to [-180°, 180°]
+	az = mod(az + 180, 360) - 180;
     
     % Extract E-field components
     E_theta_real = data.ETheta_RealPart;
@@ -96,7 +102,7 @@ for elem = 1:num_elements
         end
         
         % Assign to the 3D MagnitudePattern array
-        MagPattern(:, :, fIdx) = MagPatternTemp;
+        MagPattern(:, :, fIdx) = mag2db(MagPatternTemp);
     end
     
     % Create a custom antenna element for each array element
