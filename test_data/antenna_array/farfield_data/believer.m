@@ -22,7 +22,7 @@ lambda = c / frequency_of_interest;
 d = 0.5 * lambda;
 
 % Desired beam steering angle (degrees)
-theta_0_deg = 30; % Adjust as needed
+theta_0_deg = 0; % Adjust as needed
 theta_0_rad = deg2rad(theta_0_deg); % Convert to radians
 
 % Wavenumber
@@ -43,7 +43,7 @@ Elevation = [];
 % Loop through each element's data file
 for elem = 1:num_elements
     % Construct filename
-    filename = sprintf('Patch%d_Spherical FieldsGain_EH_EV_ETheta_EPhi_ETotal.txt', elem);
+    filename = sprintf('patch%d.txt', elem);
     
     % Read the data file into a table
     data = readtable(filename, 'Delimiter', '\t');
