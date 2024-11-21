@@ -1,116 +1,44 @@
-<<<<<<< HEAD
-Questionable use of curly braces in "l1 n002 p001 {99.23n*(1+{tol})}"
-    Error: undefined symbol in: "99.23n*(1+([tol]))"
-Questionable use of curly braces in "l1 n002 p001 (99.23n*(1+{tol}))"
-    Error: undefined symbol in: "[tol]"
-Questionable use of curly braces in "l2 n003 p002 {159.16n*(1+{tol})}"
-    Error: undefined symbol in: "159.16n*(1+([tol]))"
-Questionable use of curly braces in "l2 n003 p002 (159.16n*(1+{tol}))"
-    Error: undefined symbol in: "[tol]"
-Questionable use of curly braces in "l3 n004 p003 {99.23n*(1+{tol})}"
-    Error: undefined symbol in: "99.23n*(1+([tol]))"
-Questionable use of curly braces in "l3 n004 p003 (99.23n*(1+{tol}))"
-    Error: undefined symbol in: "[tol]"
-Questionable use of curly braces in "c1 n002 0 {14.16p*(1+{tol})}"
-    Error: undefined symbol in: "14.16p*(1+([tol]))"
-Questionable use of curly braces in "c1 n002 0 (14.16p*(1+{tol}))"
-    Error: undefined symbol in: "[tol]"
-Questionable use of curly braces in "c2 n003 0 {57.36p*(1+{tol})}"
-    Error: undefined symbol in: "57.36p*(1+([tol]))"
-Questionable use of curly braces in "c2 n003 0 (57.36p*(1+{tol}))"
-    Error: undefined symbol in: "[tol]"
-Questionable use of curly braces in "c3 n004 0 {57.36p*(1+{tol})}"
-    Error: undefined symbol in: "57.36p*(1+([tol]))"
-Questionable use of curly braces in "c3 n004 0 (57.36p*(1+{tol}))"
-    Error: undefined symbol in: "[tol]"
-Questionable use of curly braces in "c4 n005 0 {14.16p*(1+{tol})}"
-    Error: undefined symbol in: "14.16p*(1+([tol]))"
-Questionable use of curly braces in "c4 n005 0 (14.16p*(1+{tol}))"
-    Error: undefined symbol in: "[tol]"
-Questionable use of curly braces in "l4 n004 0 {74.17p*(1+{tol})}"
-    Error: undefined symbol in: "74.17p*(1+([tol]))"
-Questionable use of curly braces in "l4 n004 0 (74.17p*(1+{tol}))"
-    Error: undefined symbol in: "[tol]"
-Questionable use of curly braces in "l5 n005 0 {300.37p*(1+{tol})}"
-    Error: undefined symbol in: "300.37p*(1+([tol]))"
-Questionable use of curly braces in "l5 n005 0 (300.37p*(1+{tol}))"
-    Error: undefined symbol in: "[tol]"
-Questionable use of curly braces in "l6 n003 0 {74.17p*(1+{tol})}"
-    Error: undefined symbol in: "74.17p*(1+([tol]))"
-Questionable use of curly braces in "l6 n003 0 (74.17p*(1+{tol}))"
-    Error: undefined symbol in: "[tol]"
-Questionable use of curly braces in "l7 n002 0 {300.37p*(1+{tol})}"
-    Error: undefined symbol in: "300.37p*(1+([tol]))"
-Questionable use of curly braces in "l7 n002 0 (300.37p*(1+{tol}))"
-    Error: undefined symbol in: "[tol]"
-Questionable use of curly braces in "c5 n003 p001 {42.87f*(1+{tol})}"
-    Error: undefined symbol in: "42.87f*(1+([tol]))"
-Questionable use of curly braces in "c5 n003 p001 (42.87f*(1+{tol}))"
-    Error: undefined symbol in: "[tol]"
-Questionable use of curly braces in "c6 n004 p002 {26.73f*(1+{tol})}"
-    Error: undefined symbol in: "26.73f*(1+([tol]))"
-Questionable use of curly braces in "c6 n004 p002 (26.73f*(1+{tol}))"
-    Error: undefined symbol in: "[tol]"
-Questionable use of curly braces in "c7 n005 p003 {42.87f*(1+{tol})}"
-    Error: undefined symbol in: "42.87f*(1+([tol]))"
-Questionable use of curly braces in "c7 n005 p003 (42.87f*(1+{tol}))"
-    Error: undefined symbol in: "[tol]"
-Circuit: * C:\Users\johba\esd5_project\rf_front_end\bandpass_filter\bandpass_scaled.asc
-=======
 LTspice 24.0.9 for Windows
 Circuit: * C:\Users\nicla\Documents\GitHub\esd5_project\rf_front_end\bandpass_filter\bandpass_scaled.asc
-Start Time: Mon Oct 14 11:18:51 2024
+Start Time: Thu Nov 21 15:32:45 2024
 solver = Normal
 Maximum thread count: 16
->>>>>>> 95d8207 (adds bandpass simulation data)
 
-Error on line 2 : l1 n002 p001 (99.23n*(1+(tol)))
-	 Unknown parameter "*"
-Error on line 3 : l2 n003 p002 (159.16n*(1+(tol)))
-	 Unknown parameter "*"
-Error on line 4 : l3 n004 p003 (99.23n*(1+(tol)))
-	 Unknown parameter "*"
-Error on line 5 : c1 n002 0 (14.16p*(1+(tol)))
-	 Unknown parameter "*"
-Error on line 6 : c2 n003 0 (57.36p*(1+(tol)))
-	 Unknown parameter "*"
-Error on line 7 : c3 n004 0 (57.36p*(1+(tol)))
-	 Unknown parameter "*"
-Error on line 10 : c4 n005 0 (14.16p*(1+(tol)))
-	 Unknown parameter "*"
-Error on line 12 : l4 n004 0 (74.17p*(1+(tol)))
-	 Unknown parameter "*"
-Error on line 13 : l5 n005 0 (300.37p*(1+(tol)))
-	 Unknown parameter "*"
-Error on line 14 : l6 n003 0 (74.17p*(1+(tol)))
-	 Unknown parameter "*"
-Error on line 15 : l7 n002 0 (300.37p*(1+(tol)))
-	 Unknown parameter "*"
-Error on line 16 : c5 n003 p001 (42.87f*(1+(tol)))
-	 Unknown parameter "*"
-Error on line 17 : c6 n004 p002 (26.73f*(1+(tol)))
-	 Unknown parameter "*"
-Error on line 18 : c7 n005 p003 (42.87f*(1+(tol)))
-	 Unknown parameter "*"
 
-Date: Mon Oct 14 14:31:46 2024
-Total elapsed time: 0.154 seconds.
 
+.OP point found by inspection.
+.step tol=-0.16
+
+
+
+.step tol=-0.12
+
+
+
+.step tol=-0.08
+
+
+
+.step tol=-0.04
+
+
+
+.step tol=1.38777878078145e-17
+
+
+
+.step tol=0.04
+
+
+
+.step tol=0.08
+
+
+
+.step tol=0.12
 tnom = 27
 temp = 27
-<<<<<<< HEAD
-method = trap
-totiter = 0
-traniter = 0
-tranpoints = 0
-accept = 0
-rejected = 0
-matrix size = 9
-fillins = 1
-solver = Normal
-=======
 method = modified trap
 .step tol=0.16
-Total elapsed time: 0.311 seconds.
->>>>>>> 95d8207 (adds bandpass simulation data)
+Total elapsed time: 0.250 seconds.
 
