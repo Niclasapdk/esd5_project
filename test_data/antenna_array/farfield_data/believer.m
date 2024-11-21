@@ -44,8 +44,8 @@ for elem = 1:num_elements
 	theta = rad2deg(data.Elevation);
 	phi = rad2deg(data.Azimuth);
 	% Convert to MATLAB's coordinate system
-	el = unique(90-abs(theta));
-	az = unique(phi + 180*(sign(theta) == -1));
+	el = 90-abs(theta);
+	az = phi + 180*(sign(theta) == -1)-180;
 
     % Extract E-field components
     E_theta_real = data.ETheta_RealPart;
@@ -62,8 +62,8 @@ for elem = 1:num_elements
     
     % For the first element, store azimuth, elevation, and frequency
     if elem == 1
-        AzimuthAngles = az;
-        ElevationAngles = el;
+        AzimuthAngles = unique(az);
+        ElevationAngles = unique(el);
         Frequency = freqs;
     end
     
@@ -137,5 +137,5 @@ w = steeringvec(fc, steering_angle);
 
 % Plot the 3D far-field pattern at fc
 figure;
-pattern(array, fc, AzimuthAngles, ElevationAngles, 'Type', 'directivity', 'CoordinateSystem', 'polar', 'Weights', w);
+pattern(array, fc, AzimuthAngles', ElevationAngles', 'Type', 'directivity', 'CoordinateSystem', 'polar', 'Weights', w);
 title('3D Far-Field Pattern after Beamforming with Heterogeneous ULA');
