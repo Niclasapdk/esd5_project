@@ -3,7 +3,7 @@ close all; clear;
 FullFileA1 = fullfile(PathA1,FileA1);
 [Freq1 dBfund1 phaseFound] = textread(FullFileA1,'%f %f %f','headerlines',1);
 unwrapPhase = rad2deg(unwrap(deg2rad(phaseFound)));
-figure
+FigH = figure('WindowState','fullscreen');
 yyaxis left
 s = plot(Freq1*1E-9, dBfund1);
 xlabel('Frequency [GHz]','FontSize',12);
@@ -17,6 +17,7 @@ ylabel('Phase [deg]','FontSize',12);
 s1(1).LineWidth = 1.8;
 set(gca,'FontSize',18);
 grid on;
+% exportgraphics(FigH,"C:\Users\johba\esd5_project\gitfigures\system_design\rf_front_end\bandpass_filter\bandpass_filter_no_tolerances.jpg", 'Resolution', 300)
 
 [max_num, max_idx]=max(dBfund1(:));
 [X,Y]=ind2sub(size(dBfund1),find(dBfund1==max_num));

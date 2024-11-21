@@ -26,6 +26,7 @@ s4(1).LineWidth = 1.4;
 xlabel('Frequency [GHz]','FontSize',14);
 ylabel('Magnitude [dB]','FontSize',14);
 set(gca,'FontSize',18);
+grid on
 % Define the range
 range = -16:8:16;
 formattedStrings = cell(size(range));
@@ -34,4 +35,4 @@ for i = 1:length(range)
 end
 legend(flip(formattedStrings),'Location','northwest')
 title('Tolerance simulation of bandpass filter')
-exportgraphics(FigH,"C:\Users\johba\esd5_project\gitfigures\system_design\rf_front_end\bandpass_filter\bandpass_filter_with_tolerances.jpg", 'Resolution', 300); % 1920x1080 pixels
+% exportgraphics(FigH,"C:\Users\johba\esd5_project\gitfigures\system_design\rf_front_end\bandpass_filter\bandpass_filter_with_tolerances.jpg", 'Resolution', 300); % 1920x1080 pixels

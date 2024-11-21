@@ -71,20 +71,22 @@ exportgraphics(q, 'C:\Users\johba\esd5_project\gitfigures\appendix\antenna_tests
 %% Plot for SWR test of final antenna
 close all
 clear
-
-T1 = readtable('swr.CSV');
-p1 = plot(T1.freq,T1.numerical);
+FigH = figure('WindowState','fullscreen');
+T1 = readtable('final_swr.CSV');
+p1 = plot(T1.freq*1e-9,T1.numerical);
 p1.LineWidth = 2;
 xlabel('Frequency [GHz]','FontSize',12);
 title('SWR');
+set(gca,'FontSize',18)
 grid on
+exportgraphics(gca,"C:\Users\johba\esd5_project\gitfigures\appendix\antenna_tests\antenna_array_swr_test.png", 'Resolution', 300); % 1920x1080 pixels
 %% Plots for S11 test of initial antenna
 close all
 clear
-T1 = readtable('final_s11_1.CSV');
-T2 = readtable('final_s11_2.CSV');
-T3 = readtable('final_s11_3.CSV');
-T4 = readtable('final_s11_4.CSV');
+T1 = readtable('previous_s11_1.CSV');
+T2 = readtable('previous_s11_2.CSV');
+T3 = readtable('previous_s11_3.CSV');
+T4 = readtable('previous_s11_4.CSV');
 
 T1.freq = T1.freq*1e-9;
 T2.freq = T2.freq*1e-9;
