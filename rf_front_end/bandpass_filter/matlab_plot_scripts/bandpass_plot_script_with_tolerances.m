@@ -8,8 +8,7 @@ R3 = R(739:1107,:);
 R4 = R(1108:1476,:);
 R5 = R(1477:1845,:);
 
-N = -3+max(R1.Var2);
-[~,closestIndex] = min(abs(N-R1));
+FigH = figure('WindowState','fullscreen');
 s = semilogx(R1.(1)*1E-9, R1.(2));
 s(1).LineWidth = 1.4;
 hold on
@@ -35,3 +34,4 @@ for i = 1:length(range)
 end
 legend(flip(formattedStrings),'Location','northwest')
 title('Tolerance simulation of bandpass filter')
+exportgraphics(FigH,"C:\Users\johba\esd5_project\gitfigures\system_design\rf_front_end\bandpass_filter\bandpass_filter_with_tolerances.jpg", 'Resolution', 300); % 1920x1080 pixels
