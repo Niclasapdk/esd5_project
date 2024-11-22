@@ -1,3 +1,9 @@
+% Specify the path where figures will be saved
+save_path = '../../gitfigures/system_design/dsp'; % Change this to your desired directory
+if ~exist(save_path, 'dir')
+    mkdir(save_path);
+end
+
 % Antenna array setup
 numElements = 4;
 c = physconst('LightSpeed');
@@ -7,14 +13,14 @@ d = 0.5*lambda; % Element spacing
 ula = phased.ULA('NumElements', numElements, 'ElementSpacing', d);
 
 % Common parameters
-Nsamp = 128; % Number of samples
+Nsamp = 1024; % Number of samples
 nSignal = 1; % Signal power [W] at each antenna
 pos = getElementPosition(ula)/lambda;
 steering_vector = phased.SteeringVector('SensorArray', ula, 'PropagationSpeed', c);
 
 %% Varying SNR
-snr_values = [0, 10, 20]; % SNR values in dB
-figure;
+snr_values = [-10, 0, 10, 20]; % SNR values in dB
+figure_snr = figure;
 for idx = 1:length(snr_values)
     snr = snr_values(idx);
     nPower = nSignal / (10 ^ (snr/10)); % Noise power [W] at each antenna
@@ -28,8 +34,8 @@ for idx = 1:length(snr_values)
     ang2 = -20; % Second signal angle
 
     % Steering vectors
-    sv1 = steering_vector(fc, -ang1);
-    sv2 = steering_vector(fc, -ang2);
+    sv1 = steering_vector(fc, ang1);
+    sv2 = steering_vector(fc, ang2);
 
     % Received signal at the array
     signal = (s1 * sv1.') + (s2 * sv2.') + sqrt(nPower) * randn(Nsamp, numElements);
@@ -60,7 +66,10 @@ for idx = 1:length(snr_values)
     plot(theta_scan, 10*log10(P_cbf), '-', 'LineWidth', 2);
     hold on;
     plot(theta_scan, 10*log10(P_mvdr), '-', 'LineWidth', 2);
-    legend('CBF', 'MVDR');
+    % Add red dotted vertical lines at source angles
+    xline(ang1, 'r--', 'LineWidth', 1.5);
+    xline(ang2, 'r--', 'LineWidth', 1.5);
+    legend('CBF', 'MVDR', 'Location', 'best');
     xlabel('Steering Angle (degrees)');
     ylabel('Normalized Spatial Spectrum (dB)');
     title(['SNR = ', num2str(snr), ' dB']);
@@ -68,12 +77,20 @@ for idx = 1:length(snr_values)
 end
 sgtitle('Spatial Spectrum Estimation for Different SNRs');
 
+% Add a note to the figure
+annotation('textbox', [0.1, 0.015, 0.8, 0.05], ...
+    'String', 'Signal Types: Uncorrelated Signals; Source Angles: 40°, -20°', ...
+    'EdgeColor', 'none', 'HorizontalAlignment', 'center');
+
+% Save the figure
+saveas(figure_snr, fullfile(save_path, 'Spatial_Spectrum_SNRs.png'));
+
 %% Varying Source Locations
 source_spacing_values = [10, 20, 40]; % Degrees between sources
 center_angle = 0; % Center angle
 nPower = nSignal / (10 ^ (20/10)); % Fixed SNR of 20 dB
 
-figure;
+figure_spacing = figure;
 for idx = 1:length(source_spacing_values)
     spacing = source_spacing_values(idx);
     ang1 = center_angle - spacing/2;
@@ -84,8 +101,8 @@ for idx = 1:length(source_spacing_values)
     s2 = sqrt(nSignal) * randn(Nsamp, 1);
 
     % Steering vectors
-    sv1 = steering_vector(fc, -ang1);
-    sv2 = steering_vector(fc, -ang2);
+    sv1 = steering_vector(fc, ang1);
+    sv2 = steering_vector(fc, ang2);
 
     % Received signal
     signal = (s1 * sv1.') + (s2 * sv2.') + sqrt(nPower) * randn(Nsamp, numElements);
@@ -116,7 +133,10 @@ for idx = 1:length(source_spacing_values)
     plot(theta_scan, 10*log10(P_cbf), '-', 'LineWidth', 2);
     hold on;
     plot(theta_scan, 10*log10(P_mvdr), '-', 'LineWidth', 2);
-    legend('CBF', 'MVDR');
+    % Add red dotted vertical lines at source angles
+    xline(ang1, 'r--', 'LineWidth', 1.5);
+    xline(ang2, 'r--', 'LineWidth', 1.5);
+    legend('CBF', 'MVDR', 'Location', 'best');
     xlabel('Steering Angle (degrees)');
     ylabel('Normalized Spatial Spectrum (dB)');
     title(['Source Spacing = ', num2str(spacing), '°']);
@@ -124,11 +144,19 @@ for idx = 1:length(source_spacing_values)
 end
 sgtitle('Spatial Spectrum Estimation for Different Source Spacings');
 
+% Add a note to the figure
+annotation('textbox', [0.1, 0.015, 0.8, 0.05], ...
+    'String', 'SNR: 20 dB; Signal Type: Uncorrelated Signals', ...
+    'EdgeColor', 'none', 'HorizontalAlignment', 'center');
+
+% Save the figure
+saveas(figure_spacing, fullfile(save_path, 'Spatial_Spectrum_Source_Spacings.png'));
+
 %% Varying Signal Types
 signal_types = {'uncorrelated', 'correlated', 'burst'};
 nPower = nSignal / (10 ^ (20/10)); % Fixed SNR of 20 dB
 
-figure;
+figure_types = figure;
 for idx = 1:length(signal_types)
     sig_type = signal_types{idx};
 
@@ -154,8 +182,8 @@ for idx = 1:length(signal_types)
     ang2 = -20;
 
     % Steering vectors
-    sv1 = steering_vector(fc, -ang1);
-    sv2 = steering_vector(fc, -ang2);
+    sv1 = steering_vector(fc, ang1);
+    sv2 = steering_vector(fc, ang2);
 
     % Received signal
     signal = (s1 * sv1.') + (s2 * sv2.') + sqrt(nPower) * randn(Nsamp, numElements);
@@ -186,10 +214,21 @@ for idx = 1:length(signal_types)
     plot(theta_scan, 10*log10(P_cbf), '-', 'LineWidth', 2);
     hold on;
     plot(theta_scan, 10*log10(P_mvdr), '-', 'LineWidth', 2);
-    legend('CBF', 'MVDR');
+    % Add red dotted vertical lines at source angles
+    xline(ang1, 'r--', 'LineWidth', 1.5);
+    xline(ang2, 'r--', 'LineWidth', 1.5);
+    legend('CBF', 'MVDR', 'Location', 'best');
     xlabel('Steering Angle (degrees)');
     ylabel('Normalized Spatial Spectrum (dB)');
     title(['Signal Type: ', sig_type]);
     grid on;
 end
 sgtitle('Spatial Spectrum Estimation for Different Signal Types');
+
+% Add a note to the figure
+annotation('textbox', [0.1, 0.015, 0.8, 0.05], ...
+    'String', 'SNR: 20 dB; Source Angles: 40°, -20°', ...
+    'EdgeColor', 'none', 'HorizontalAlignment', 'center');
+
+% Save the figure
+saveas(figure_types, fullfile(save_path, 'Spatial_Spectrum_Signal_Types.png'));
