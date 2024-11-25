@@ -2,9 +2,9 @@
 <!-- Created with Inkscape (http://www.inkscape.org/) -->
 
 <svg
-   width="100.00126mm"
-   height="94.427765mm"
-   viewBox="0 0 100.00126 94.427765"
+   width="100.04949mm"
+   height="94.473282mm"
+   viewBox="0 0 100.04949 94.473282"
    version="1.1"
    id="svg1"
    inkscape:version="1.4 (86a8ad7, 2024-10-11)"
@@ -27,8 +27,8 @@
      inkscape:document-units="mm"
      showgrid="true"
      inkscape:zoom="1"
-     inkscape:cx="139"
-     inkscape:cy="874.5"
+     inkscape:cx="82"
+     inkscape:cy="229.5"
      inkscape:window-width="1920"
      inkscape:window-height="991"
      inkscape:window-x="-9"
@@ -38,8 +38,8 @@
     <inkscape:grid
        id="grid2"
        units="mm"
-       originx="-50.044862"
-       originy="-170.02499"
+       originx="-50.020746"
+       originy="-170.00385"
        spacingx="0.50000001"
        spacingy="0.49999999"
        empcolor="#0099e5"
@@ -100,20 +100,20 @@
      id="layer2"
      inkscape:label="Lag 2"
      style="display:inline"
-     transform="translate(-50.044862,-170.02499)">
+     transform="translate(-50.020746,-170.00385)">
     <g
        id="g41"
        transform="rotate(32.247113,88.082104,188.36903)"
-       style="display:inline;fill:#85461e;fill-opacity:1">
+       style="display:inline;fill:#85461e;fill-opacity:1;stroke:#000000;stroke-width:0.05;stroke-dasharray:0.6, 0.6;stroke-dashoffset:0;stroke-opacity:1">
       <rect
-         style="fill:#ff0000;fill-opacity:1;stroke:none;stroke-width:0.000948683;stroke-dasharray:none;stroke-opacity:1;paint-order:fill markers stroke"
+         style="fill:#ff0000;fill-opacity:1;stroke:#000000;stroke-width:0.05;stroke-dasharray:0.6, 0.6;stroke-dashoffset:0;stroke-opacity:1;paint-order:fill markers stroke"
          id="rect40"
          width="22.499998"
          height="2.4999998"
          x="67.5"
          y="192.5" />
       <rect
-         style="fill:#85461e;fill-opacity:1;stroke:none;stroke-width:0.001;stroke-dasharray:none;stroke-opacity:1;paint-order:fill markers stroke"
+         style="fill:#85461e;fill-opacity:1;stroke:#000000;stroke-width:0.05;stroke-dasharray:0.6, 0.6;stroke-dashoffset:0;stroke-opacity:1;paint-order:fill markers stroke"
          id="rect41"
          width="2.5"
          height="25"
@@ -121,14 +121,14 @@
          y="181.24158" />
     </g>
     <rect
-       style="display:inline;fill:#e6e6e6;fill-opacity:1;stroke:none;stroke-width:0.0010328;stroke-dasharray:none;stroke-opacity:1;paint-order:fill markers stroke"
+       style="display:inline;fill:#e6e6e6;fill-opacity:1;stroke:#000000;stroke-width:5.164e-05;stroke-dasharray:0.00061968, 0.00061968;stroke-dashoffset:0;stroke-opacity:1;paint-order:fill markers stroke"
        id="rect38"
        width="42.5"
        height="40"
        x="80"
        y="185.00053" />
     <rect
-       style="display:inline;fill:#c0c0c0;fill-opacity:1;stroke:#000000;stroke-width:0.00133139;stroke-dasharray:none;paint-order:fill markers stroke"
+       style="display:inline;fill:#c0c0c0;fill-opacity:1;stroke:#000000;stroke-width:6.657e-05;stroke-dasharray:0.00079884, 0.00079884;stroke-dashoffset:0;stroke-opacity:1;paint-order:fill markers stroke"
        id="rect6-7"
        width="39.998669"
        height="4.9504676"
@@ -137,23 +137,23 @@
     <g
        id="g8-6"
        transform="translate(0.04548645,-3.0478516)"
-       style="display:inline;fill:#3c3c3c;fill-opacity:1">
+       style="display:inline;fill:#3c3c3c;fill-opacity:1;stroke:#000000;stroke-width:0.05;stroke-dasharray:0.6, 0.6;stroke-dashoffset:0;stroke-opacity:1">
       <rect
-         style="display:inline;fill:#3c3c3c;fill-opacity:1;stroke:#000000;stroke-width:0.00176771;stroke-dasharray:none;paint-order:fill markers stroke"
+         style="display:inline;fill:#3c3c3c;fill-opacity:1;stroke:#000000;stroke-width:0.05;stroke-dasharray:0.6, 0.6;stroke-dashoffset:0;stroke-opacity:1;paint-order:fill markers stroke"
          id="rect5-8-3"
          width="99.999489"
          height="4.9997411"
          x="50.000259"
          y="242.50026" />
       <rect
-         style="fill:#3c3c3c;fill-opacity:1;stroke:#000000;stroke-width:0.00125;stroke-dasharray:none;paint-order:fill markers stroke"
+         style="fill:#3c3c3c;fill-opacity:1;stroke:#000000;stroke-width:0.05;stroke-dasharray:0.6, 0.6;stroke-dashoffset:0;stroke-opacity:1;paint-order:fill markers stroke"
          id="rect7-6"
          width="5"
          height="19.999998"
          x="57.500004"
          y="247.49998" />
       <rect
-         style="fill:#3c3c3c;fill-opacity:1;stroke:#000000;stroke-width:0.00125;stroke-dasharray:none;paint-order:fill markers stroke"
+         style="fill:#3c3c3c;fill-opacity:1;stroke:#000000;stroke-width:0.05;stroke-dasharray:0.6, 0.6;stroke-dashoffset:0;stroke-opacity:1;paint-order:fill markers stroke"
          id="rect8-1"
          width="5"
          height="19.999998"
@@ -161,21 +161,21 @@
          y="247.49998" />
     </g>
     <rect
-       style="display:inline;fill:#3c3c3c;fill-opacity:1;stroke:#000000;stroke-width:0.00111812;stroke-dasharray:none;stroke-dashoffset:0;paint-order:fill markers stroke"
+       style="display:inline;fill:#3c3c3c;fill-opacity:1;stroke:#000000;stroke-width:5.591e-05;stroke-dasharray:0.00067092, 0.00067092;stroke-dashoffset:0;stroke-opacity:1;paint-order:fill markers stroke"
        id="rect16-7"
        width="39.998878"
        height="7.0011783"
        x="80.000565"
        y="227.50055" />
     <rect
-       style="display:inline;fill:#00ff00;fill-opacity:1;stroke:none;stroke-width:0.00107418;stroke-dasharray:none;stroke-opacity:1;paint-order:fill markers stroke"
+       style="display:inline;fill:#00ff00;fill-opacity:1;stroke:#000000;stroke-width:5.371e-05;stroke-dasharray:0.00064452, 0.00064452;stroke-dashoffset:0;stroke-opacity:1;paint-order:fill markers stroke"
        id="rect39"
        width="37.500004"
        height="19.999998"
        x="82.5"
        y="190.00055" />
     <rect
-       style="display:inline;fill:#3c3c3c;fill-opacity:1;stroke:none;stroke-width:0.0009759;stroke-dasharray:none;stroke-opacity:1;paint-order:fill markers stroke"
+       style="display:inline;fill:#3c3c3c;fill-opacity:1;stroke:#000000;stroke-width:4.879e-05;stroke-dasharray:0.00058548, 0.00058548;stroke-dashoffset:0;stroke-opacity:1;paint-order:fill markers stroke"
        id="rect37"
        width="2.5"
        height="50"
@@ -183,24 +183,24 @@
        y="177.50002" />
     <g
        id="g9-2"
-       style="display:inline"
+       style="display:inline;stroke:#000000;stroke-width:0.05;stroke-dasharray:0.6, 0.6;stroke-dashoffset:0;stroke-opacity:1"
        transform="translate(-34.046857,0.0925984)">
       <rect
-         style="fill:#0000ff;fill-opacity:1;stroke:#000000;stroke-width:0.00462892;stroke-dasharray:none;stroke-dashoffset:0;paint-order:fill markers stroke"
+         style="fill:#0000ff;fill-opacity:1;stroke:#000000;stroke-width:0.05;stroke-dasharray:0.6, 0.6;stroke-dashoffset:0;stroke-opacity:1;paint-order:fill markers stroke"
          id="rect15-9"
          width="4.9813972"
          height="11.997434"
          x="131.55617"
          y="222.41168" />
       <rect
-         style="fill:#0000ff;fill-opacity:1;stroke:#000000;stroke-width:0.005;stroke-dasharray:none;stroke-dashoffset:0;paint-order:fill markers stroke"
+         style="fill:#0000ff;fill-opacity:1;stroke:#000000;stroke-width:0.05;stroke-dasharray:0.6, 0.6;stroke-dashoffset:0;stroke-opacity:1;paint-order:fill markers stroke"
          id="rect14-1"
          width="9.9822874"
          height="27.499992"
          x="129.06245"
          y="179.90912" />
       <rect
-         style="fill:#0000ff;fill-opacity:1;stroke:#000000;stroke-width:0.005;stroke-dasharray:none;stroke-dashoffset:0;paint-order:fill markers stroke"
+         style="fill:#0000ff;fill-opacity:1;stroke:#000000;stroke-width:0.05;stroke-dasharray:0.6, 0.6;stroke-dashoffset:0;stroke-opacity:1;paint-order:fill markers stroke"
          id="rect13-3"
          width="15.011106"
          height="15.001498"
@@ -208,14 +208,14 @@
          y="207.4091" />
     </g>
     <rect
-       style="display:inline;fill:#3c3c3c;fill-opacity:1;stroke:#000000;stroke-width:0.000883944;stroke-dasharray:none;paint-order:fill markers stroke"
+       style="display:inline;fill:#3c3c3c;fill-opacity:1;stroke:#000000;stroke-width:4.42e-05;stroke-dasharray:0.0005304, 0.0005304;stroke-dashoffset:0;stroke-opacity:1;paint-order:fill markers stroke"
        id="rect5-0"
        width="50.000011"
        height="2.500344"
        x="75"
        y="224.99985" />
     <rect
-       style="display:inline;fill:#ffff00;fill-opacity:1;stroke:#000000;stroke-width:0.00109276;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;paint-order:fill markers stroke"
+       style="display:inline;fill:#ffff00;fill-opacity:1;stroke:#000000;stroke-width:5.464e-05;stroke-dasharray:0.00065568, 0.00065568;stroke-dashoffset:0;stroke-opacity:1;paint-order:fill markers stroke"
        id="rect17-0"
        width="40.030056"
        height="4.9997716"
