@@ -5,9 +5,9 @@ if ~exist(save_path, 'dir')
 end
 
 % Font size and figure dimensions
-FontSize = 11;        % Font size
-FigureWidth = 8;     % Width in inches (adjusted to prevent cropping)
-FigureHeight = 6;    % Height in inches (adjusted to prevent cropping)
+FontSize = 11;       % Font size
+FigureWidth = 8;     % Width in inches
+FigureHeight = 6;    % Height in inches
 
 % Antenna array setup
 numElements = 4;
@@ -27,6 +27,14 @@ steering_vector = phased.SteeringVector('SensorArray', ula, 'PropagationSpeed', 
 snr_values = [-10, 0, 10, 20]; % SNR values in dB
 figure_snr = figure;
 set(figure_snr, 'Units', 'inches', 'Position', [1, 1, FigureWidth, FigureHeight]);
+
+% Adjusted positions for the subplots to increase vertical spacing
+subplot_positions = [
+    0.08, 0.55, 0.38, 0.32; % Subplot 1
+    0.55, 0.55, 0.38, 0.32; % Subplot 2
+    0.08, 0.12, 0.38, 0.32; % Subplot 3
+    0.55, 0.12, 0.38, 0.32; % Subplot 4
+];
 
 for idx = 1:length(snr_values)
     snr = snr_values(idx);
@@ -57,7 +65,7 @@ for idx = 1:length(snr_values)
 
     for i = 1:length(theta_scan)
         ang = theta_scan(i);
-        s = steering_vector(fc, -ang); % Note the negative sign as per your code
+        s = steering_vector(fc, -ang); % Note the negative sign
         w_mvdr = inv(R) * (s / (s' * inv(R) * s));
         w_cbf = s / numElements; % CBF weights
         P_mvdr(i) = real(1 / (s' * inv(R) * s)); % MVDR spectral power
@@ -68,34 +76,33 @@ for idx = 1:length(snr_values)
     P_mvdr = P_mvdr / max(P_mvdr);
     P_cbf = P_cbf / max(P_cbf);
 
-    % Generate subplot in 2x2 grid
-    subplot(2, 2, idx);
+    % Generate subplot with adjusted position
+    axes('Position', subplot_positions(idx, :));
     plot(theta_scan, 10 * log10(P_cbf), '-', 'LineWidth', 1.5);
     hold on;
     plot(theta_scan, 10 * log10(P_mvdr), '-', 'LineWidth', 1.5);
     % Add red dotted vertical lines at source angles
     xline(ang1, 'r--', 'LineWidth', 1);
     xline(ang2, 'r--', 'LineWidth', 1);
-    legend('CBF', 'MVDR', 'Location', 'best', 'FontSize', FontSize - 1);
-    xlabel('Steering Angle (degrees)', 'FontSize', FontSize);
-    ylabel('Normalized Spatial Spectrum (dB)', 'FontSize', FontSize);
+    legend('CBF', 'MVDR', 'Location', 'best', 'FontSize', FontSize - 2);
+    xlabel('Steering Angle (degrees)', 'FontSize', FontSize - 1);
+    ylabel('Normalized Spatial Spectrum (dB)', 'FontSize', FontSize - 1);
     title(['SNR = ', num2str(snr), ' dB'], 'FontSize', FontSize);
     grid on;
-    set(gca, 'FontSize', FontSize);
+    set(gca, 'FontSize', FontSize - 1);
 end
-sgtitle('Spatial Spectrum Estimation for Different SNRs', 'FontSize', FontSize + 2);
 
-% Adjust subplot positions to prevent cropping and overlap
-%tightfig;
+% Adjust the position of the super title to prevent overlap
+sgtitle('Spatial Spectrum Estimation for Different SNRs', 'FontSize', FontSize + 1);
 
-% Add a note to the figure below the subplots
-annotation('textbox', [0, 0.002, 1, 0.05], ...
+% Add a note to the figure below the subplots with adjusted position
+annotation('textbox', [0, 0.004, 1, 0.05], ...
     'String', 'Signal Types: Uncorrelated Signals; Source Angles: 20°, -20°', ...
-    'EdgeColor', 'none', 'HorizontalAlignment', 'center', 'FontSize', FontSize - 1);
+    'EdgeColor', 'none', 'HorizontalAlignment', 'center', 'FontSize', FontSize - 2);
 
 % Save the figure
 set(figure_snr, 'PaperPositionMode', 'auto');
-saveas(figure_snr, fullfile(save_path, 'Spatial_Spectrum_SNRs.png'));
+print(figure_snr, fullfile(save_path, 'Spatial_Spectrum_SNRs.png'), '-dpng', '-r300');
 
 %% Varying Source Locations
 source_spacing_values = [10, 20, 30, 40]; % Degrees between sources
@@ -104,6 +111,14 @@ nPower = nSignal / (10 ^ (20 / 10)); % Fixed SNR of 20 dB
 
 figure_spacing = figure;
 set(figure_spacing, 'Units', 'inches', 'Position', [1, 1, FigureWidth, FigureHeight]);
+
+% Adjusted positions for the subplots to increase vertical spacing
+subplot_positions = [
+    0.08, 0.55, 0.38, 0.32; % Subplot 1
+    0.55, 0.55, 0.38, 0.32; % Subplot 2
+    0.08, 0.12, 0.38, 0.32; % Subplot 3
+    0.55, 0.12, 0.38, 0.32; % Subplot 4
+];
 
 for idx = 1:length(source_spacing_values)
     spacing = source_spacing_values(idx);
@@ -131,7 +146,7 @@ for idx = 1:length(source_spacing_values)
 
     for i = 1:length(theta_scan)
         ang = theta_scan(i);
-        s = steering_vector(fc, -ang); % Note the negative sign
+        s = steering_vector(fc, -ang);
         w_mvdr = inv(R) * (s / (s' * inv(R) * s));
         w_cbf = s / numElements;
         P_mvdr(i) = real(1 / (s' * inv(R) * s));
@@ -142,34 +157,33 @@ for idx = 1:length(source_spacing_values)
     P_mvdr = P_mvdr / max(P_mvdr);
     P_cbf = P_cbf / max(P_cbf);
 
-    % Generate subplot in 2x2 grid
-    subplot(2, 2, idx);
+    % Generate subplot with adjusted position
+    axes('Position', subplot_positions(idx, :));
     plot(theta_scan, 10 * log10(P_cbf), '-', 'LineWidth', 1.5);
     hold on;
     plot(theta_scan, 10 * log10(P_mvdr), '-', 'LineWidth', 1.5);
     % Add red dotted vertical lines at source angles
     xline(ang1, 'r--', 'LineWidth', 1);
     xline(ang2, 'r--', 'LineWidth', 1);
-    legend('CBF', 'MVDR', 'Location', 'best', 'FontSize', FontSize - 1);
-    xlabel('Steering Angle (degrees)', 'FontSize', FontSize);
-    ylabel('Normalized Spatial Spectrum (dB)', 'FontSize', FontSize);
+    legend('CBF', 'MVDR', 'Location', 'best', 'FontSize', FontSize - 2);
+    xlabel('Steering Angle (degrees)', 'FontSize', FontSize - 1);
+    ylabel('Normalized Spatial Spectrum (dB)', 'FontSize', FontSize - 1);
     title(['Source Spacing = ', num2str(spacing), '°'], 'FontSize', FontSize);
     grid on;
-    set(gca, 'FontSize', FontSize);
+    set(gca, 'FontSize', FontSize - 1);
 end
-sgtitle('Spatial Spectrum Estimation for Different Source Spacings', 'FontSize', FontSize + 2);
 
-% Adjust subplot positions to prevent cropping and overlap
-%tightfig;
+% Adjust the position of the super title
+sgtitle('Spatial Spectrum Estimation for Different Source Spacings', 'FontSize', FontSize + 1);
 
 % Add a note to the figure below the subplots
-annotation('textbox', [0, 0.002, 1, 0.05], ...
+annotation('textbox', [0, 0.004, 1, 0.05], ...
     'String', 'SNR: 20 dB; Signal Type: Uncorrelated Signals', ...
-    'EdgeColor', 'none', 'HorizontalAlignment', 'center', 'FontSize', FontSize - 1);
+    'EdgeColor', 'none', 'HorizontalAlignment', 'center', 'FontSize', FontSize - 2);
 
 % Save the figure
 set(figure_spacing, 'PaperPositionMode', 'auto');
-saveas(figure_spacing, fullfile(save_path, 'Spatial_Spectrum_Source_Spacings.png'));
+print(figure_spacing, fullfile(save_path, 'Spatial_Spectrum_Source_Spacings.png'), '-dpng', '-r300');
 
 %% Varying Signal Types
 signal_types = {'uncorr.', 'corr.', 'uncorr. burst', 'corr. burst'};
@@ -177,6 +191,14 @@ nPower = nSignal / (10 ^ (20 / 10)); % Fixed SNR of 20 dB
 
 figure_types = figure;
 set(figure_types, 'Units', 'inches', 'Position', [1, 1, FigureWidth, FigureHeight]);
+
+% Adjusted positions for the subplots to increase vertical spacing
+subplot_positions = [
+    0.08, 0.55, 0.38, 0.32; % Subplot 1
+    0.55, 0.55, 0.38, 0.32; % Subplot 2
+    0.08, 0.12, 0.38, 0.32; % Subplot 3
+    0.55, 0.12, 0.38, 0.32; % Subplot 4
+];
 
 for idx = 1:length(signal_types)
     sig_type = signal_types{idx};
@@ -227,7 +249,7 @@ for idx = 1:length(signal_types)
 
     for i = 1:length(theta_scan)
         ang = theta_scan(i);
-        s = steering_vector(fc, -ang); % Note the negative sign
+        s = steering_vector(fc, -ang);
         w_mvdr = inv(R) * (s / (s' * inv(R) * s));
         w_cbf = s / numElements;
         P_mvdr(i) = real(1 / (s' * inv(R) * s));
@@ -238,31 +260,30 @@ for idx = 1:length(signal_types)
     P_mvdr = P_mvdr / max(P_mvdr);
     P_cbf = P_cbf / max(P_cbf);
 
-    % Generate subplot in 2x2 grid
-    subplot(2, 2, idx);
+    % Generate subplot with adjusted position
+    axes('Position', subplot_positions(idx, :));
     plot(theta_scan, 10 * log10(P_cbf), '-', 'LineWidth', 1.5);
     hold on;
     plot(theta_scan, 10 * log10(P_mvdr), '-', 'LineWidth', 1.5);
     % Add red dotted vertical lines at source angles
     xline(ang1, 'r--', 'LineWidth', 1);
     xline(ang2, 'r--', 'LineWidth', 1);
-    legend('CBF', 'MVDR', 'Location', 'best', 'FontSize', FontSize - 1);
-    xlabel('Steering Angle (degrees)', 'FontSize', FontSize);
-    ylabel('Normalized Spatial Spectrum (dB)', 'FontSize', FontSize);
+    legend('CBF', 'MVDR', 'Location', 'best', 'FontSize', FontSize - 2);
+    xlabel('Steering Angle (degrees)', 'FontSize', FontSize - 1);
+    ylabel('Normalized Spatial Spectrum (dB)', 'FontSize', FontSize - 1);
     title(['Signal Type: ', sig_type], 'FontSize', FontSize);
     grid on;
-    set(gca, 'FontSize', FontSize);
+    set(gca, 'FontSize', FontSize - 1);
 end
-sgtitle('Spatial Spectrum Estimation for Different Signal Types', 'FontSize', FontSize + 2);
 
-% Adjust subplot positions to prevent cropping and overlap
-%tightfig;
+% Adjust the position of the super title
+sgtitle('Spatial Spectrum Estimation for Different Signal Types', 'FontSize', FontSize + 1);
 
 % Add a note to the figure below the subplots
-annotation('textbox', [0, 0.002, 1, 0.05], ...
+annotation('textbox', [0, 0.004, 1, 0.05], ...
     'String', 'SNR: 20 dB; Source Angles: 20°, -20°', ...
-    'EdgeColor', 'none', 'HorizontalAlignment', 'center', 'FontSize', FontSize - 1);
+    'EdgeColor', 'none', 'HorizontalAlignment', 'center', 'FontSize', FontSize - 2);
 
 % Save the figure
 set(figure_types, 'PaperPositionMode', 'auto');
-saveas(figure_types, fullfile(save_path, 'Spatial_Spectrum_Signal_Types.png'));
+print(figure_types, fullfile(save_path, 'Spatial_Spectrum_Signal_Types.png'), '-dpng', '-r300');
