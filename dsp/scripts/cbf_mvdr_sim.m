@@ -5,7 +5,7 @@ if ~exist(save_path, 'dir')
 end
 
 % Font size and figure dimensions
-FontSize = 11;       % Font size
+FontSize = 12;       % Font size
 FigureWidth = 8;     % Width in inches
 FigureHeight = 6;    % Height in inches
 
@@ -87,7 +87,7 @@ for idx = 1:length(snr_values)
     legend('CBF', 'MVDR', 'Location', 'best', 'FontSize', FontSize - 2);
     xlabel('Steering Angle (degrees)', 'FontSize', FontSize - 1);
     ylabel('Normalized Spatial Spectrum (dB)', 'FontSize', FontSize - 1);
-    title(['SNR = ', num2str(snr), ' dB'], 'FontSize', FontSize);
+    title(['SNR = ', num2str(snr), ' dB'], 'FontSize', FontSize, 'FontWeight', 'normal');
     grid on;
     set(gca, 'FontSize', FontSize - 1);
 end
@@ -96,7 +96,7 @@ end
 sgtitle('Spatial Spectrum Estimation for Different SNRs', 'FontSize', FontSize + 1);
 
 % Add a note to the figure below the subplots with adjusted position
-annotation('textbox', [0, 0.004, 1, 0.05], ...
+annotation('textbox', [0, 0, 1, 0.05], ...
     'String', 'Signal Types: Uncorrelated Signals; Source Angles: 20°, -20°', ...
     'EdgeColor', 'none', 'HorizontalAlignment', 'center', 'FontSize', FontSize - 2);
 
@@ -168,7 +168,7 @@ for idx = 1:length(source_spacing_values)
     legend('CBF', 'MVDR', 'Location', 'best', 'FontSize', FontSize - 2);
     xlabel('Steering Angle (degrees)', 'FontSize', FontSize - 1);
     ylabel('Normalized Spatial Spectrum (dB)', 'FontSize', FontSize - 1);
-    title(['Source Spacing = ', num2str(spacing), '°'], 'FontSize', FontSize);
+    title(['Source Spacing = ', num2str(spacing), '°'], 'FontSize', FontSize, 'FontWeight', 'normal');
     grid on;
     set(gca, 'FontSize', FontSize - 1);
 end
@@ -177,7 +177,7 @@ end
 sgtitle('Spatial Spectrum Estimation for Different Source Spacings', 'FontSize', FontSize + 1);
 
 % Add a note to the figure below the subplots
-annotation('textbox', [0, 0.004, 1, 0.05], ...
+annotation('textbox', [0, 0, 1, 0.05], ...
     'String', 'SNR: 20 dB; Signal Type: Uncorrelated Signals', ...
     'EdgeColor', 'none', 'HorizontalAlignment', 'center', 'FontSize', FontSize - 2);
 
@@ -271,7 +271,7 @@ for idx = 1:length(signal_types)
     legend('CBF', 'MVDR', 'Location', 'best', 'FontSize', FontSize - 2);
     xlabel('Steering Angle (degrees)', 'FontSize', FontSize - 1);
     ylabel('Normalized Spatial Spectrum (dB)', 'FontSize', FontSize - 1);
-    title(['Signal Type: ', sig_type], 'FontSize', FontSize);
+    title(['Signal Type: ', sig_type], 'FontSize', FontSize, 'FontWeight', 'normal');
     grid on;
     set(gca, 'FontSize', FontSize - 1);
 end
@@ -280,7 +280,7 @@ end
 sgtitle('Spatial Spectrum Estimation for Different Signal Types', 'FontSize', FontSize + 1);
 
 % Add a note to the figure below the subplots
-annotation('textbox', [0, 0.004, 1, 0.05], ...
+annotation('textbox', [0, 0, 1, 0.05], ...
     'String', 'SNR: 20 dB; Source Angles: 20°, -20°', ...
     'EdgeColor', 'none', 'HorizontalAlignment', 'center', 'FontSize', FontSize - 2);
 
