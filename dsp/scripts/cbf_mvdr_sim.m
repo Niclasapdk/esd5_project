@@ -85,8 +85,8 @@ for idx = 1:length(snr_values)
     xline(ang1, 'r--', 'LineWidth', 1);
     xline(ang2, 'r--', 'LineWidth', 1);
     legend('CBF', 'MVDR', 'Location', 'best', 'FontSize', FontSize - 2);
-    xlabel('Steering Angle (degrees)', 'FontSize', FontSize - 1);
-    ylabel('Normalized Spatial Spectrum (dB)', 'FontSize', FontSize - 1);
+    xlabel(['Steering Angle ('  char(176) ')'], 'FontSize', FontSize - 1);
+    ylabel('Normalized Power (dB)', 'FontSize', FontSize - 1);
     title(['SNR = ', num2str(snr), ' dB'], 'FontSize', FontSize, 'FontWeight', 'normal');
     grid on;
     set(gca, 'FontSize', FontSize - 1);
@@ -166,8 +166,8 @@ for idx = 1:length(source_spacing_values)
     xline(ang1, 'r--', 'LineWidth', 1);
     xline(ang2, 'r--', 'LineWidth', 1);
     legend('CBF', 'MVDR', 'Location', 'best', 'FontSize', FontSize - 2);
-    xlabel('Steering Angle (degrees)', 'FontSize', FontSize - 1);
-    ylabel('Normalized Spatial Spectrum (dB)', 'FontSize', FontSize - 1);
+    xlabel(['Steering Angle ('  char(176) ')'], 'FontSize', FontSize - 1);
+    ylabel('Normalized Power (dB)', 'FontSize', FontSize - 1);
     title(['Source Spacing = ', num2str(spacing), '°'], 'FontSize', FontSize, 'FontWeight', 'normal');
     grid on;
     set(gca, 'FontSize', FontSize - 1);
@@ -269,8 +269,8 @@ for idx = 1:length(signal_types)
     xline(ang1, 'r--', 'LineWidth', 1);
     xline(ang2, 'r--', 'LineWidth', 1);
     legend('CBF', 'MVDR', 'Location', 'best', 'FontSize', FontSize - 2);
-    xlabel('Steering Angle (degrees)', 'FontSize', FontSize - 1);
-    ylabel('Normalized Spatial Spectrum (dB)', 'FontSize', FontSize - 1);
+    xlabel(['Steering Angle ('  char(176) ')'], 'FontSize', FontSize - 1);
+    ylabel('Normalized Power (dB)', 'FontSize', FontSize - 1);
     title(['Signal Type: ', sig_type], 'FontSize', FontSize, 'FontWeight', 'normal');
     grid on;
     set(gca, 'FontSize', FontSize - 1);
