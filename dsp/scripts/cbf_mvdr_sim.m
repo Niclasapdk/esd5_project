@@ -86,7 +86,7 @@ end
 sgtitle('Spatial Spectrum Estimation for Different SNRs', 'FontSize', FontSize + 2);
 
 % Adjust subplot positions to prevent cropping and overlap
-tightfig;
+%tightfig;
 
 % Add a note to the figure below the subplots
 annotation('textbox', [0, 0.005, 1, 0.05], ...
@@ -160,7 +160,7 @@ end
 sgtitle('Spatial Spectrum Estimation for Different Source Spacings', 'FontSize', FontSize + 2);
 
 % Adjust subplot positions to prevent cropping and overlap
-tightfig;
+%tightfig;
 
 % Add a note to the figure below the subplots
 annotation('textbox', [0, 0.005, 1, 0.05], ...
@@ -198,8 +198,10 @@ for idx = 1:length(signal_types)
         case 'corr. burst'
             s_common = zeros(Nsamp, 1);
             s_common(40:70) = sqrt(nSignal) * randn(31, 1);
+            s_alt = zeros(Nsamp, 1);
+            s_alt(40:70) = sqrt(nSignal / 10) * randn(31, 1);
             s1 = s_common;
-            s2 = s_common + sqrt(nSignal / 10) * randn(Nsamp, 1);
+            s2 = s_common + s_alt;
         otherwise
             error('Unknown signal type');
     end
@@ -254,7 +256,7 @@ end
 sgtitle('Spatial Spectrum Estimation for Different Signal Types', 'FontSize', FontSize + 2);
 
 % Adjust subplot positions to prevent cropping and overlap
-tightfig;
+%tightfig;
 
 % Add a note to the figure below the subplots
 annotation('textbox', [0, 0.005, 1, 0.05], ...
