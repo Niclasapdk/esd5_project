@@ -5,7 +5,7 @@ if ~exist(save_path, 'dir')
 end
 
 % Font size and figure dimensions
-FontSize = 9;        % Font size (adjusted down by 2 pt)
+FontSize = 11;        % Font size
 FigureWidth = 8;     % Width in inches (adjusted to prevent cropping)
 FigureHeight = 6;    % Height in inches (adjusted to prevent cropping)
 
@@ -89,7 +89,7 @@ sgtitle('Spatial Spectrum Estimation for Different SNRs', 'FontSize', FontSize +
 %tightfig;
 
 % Add a note to the figure below the subplots
-annotation('textbox', [0, 0.005, 1, 0.05], ...
+annotation('textbox', [0, 0.002, 1, 0.05], ...
     'String', 'Signal Types: Uncorrelated Signals; Source Angles: 20°, -20°', ...
     'EdgeColor', 'none', 'HorizontalAlignment', 'center', 'FontSize', FontSize - 1);
 
@@ -163,7 +163,7 @@ sgtitle('Spatial Spectrum Estimation for Different Source Spacings', 'FontSize',
 %tightfig;
 
 % Add a note to the figure below the subplots
-annotation('textbox', [0, 0.005, 1, 0.05], ...
+annotation('textbox', [0, 0.002, 1, 0.05], ...
     'String', 'SNR: 20 dB; Signal Type: Uncorrelated Signals', ...
     'EdgeColor', 'none', 'HorizontalAlignment', 'center', 'FontSize', FontSize - 1);
 
@@ -259,7 +259,7 @@ sgtitle('Spatial Spectrum Estimation for Different Signal Types', 'FontSize', Fo
 %tightfig;
 
 % Add a note to the figure below the subplots
-annotation('textbox', [0, 0.005, 1, 0.05], ...
+annotation('textbox', [0, 0.002, 1, 0.05], ...
     'String', 'SNR: 20 dB; Source Angles: 20°, -20°', ...
     'EdgeColor', 'none', 'HorizontalAlignment', 'center', 'FontSize', FontSize - 1);
 
