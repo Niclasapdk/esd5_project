@@ -101,7 +101,7 @@ for i = 1:num_segments
     s(i).LineWidth = 1.4;
     xlim([1.8 3.2]);
     grid on
-end 
+end
 
 
 % Finalize plot
