@@ -27,7 +27,7 @@ ylabel("Voltage (V)")
 title("Sensor Input and Schmitt-Trigger Output")
 legend("Input 2", "Output 2")
 grid on;
-xlim([0 0.4])
+xlim([0.1 0.4])
 ylim([min(data.Var4)-0.2 max(data.Var4)+0.2])
 yticks(0:1:5);
 
