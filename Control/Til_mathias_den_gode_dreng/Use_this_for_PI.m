@@ -127,7 +127,7 @@ xline(rise_time, '--b', 'DisplayName', sprintf('Rise Time: %.3f s', rise_time));
 plot(rise_time, target_value, 'ko', 'DisplayName', '63% Point');
 
 % Add title and legend
-title('Velocity (RPM) and Voltage Over Time with Rise Time');
+title('Velocity (RPM) and Input Voltage with Rise Time');
 legend('show');
 grid on;
 hold off;
