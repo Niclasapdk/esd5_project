@@ -9,11 +9,11 @@ data4 = x.Var2(1006:2010);
 data5 = x.Var1(2011:3009);
 data6 = x.Var2(2011:3009);
 FigH = figure('WindowState','fullscreen');
-P1 = plot(data1, data2);
-P1.LineWidth = 1.4;
+% P1 = plot(data1, data2);
+% P1.LineWidth = 1.4;
 hold on
-P2 = plot(data3, data4);
-P2.LineWidth = 1.4;
+% P2 = plot(data3, data4);
+% P2.LineWidth = 1.4;
 hold on
 P3 = plot(data5, data6);
 P3.LineWidth = 1.4;
@@ -22,15 +22,16 @@ ylabel('Magnitude [dB]','FontSize',12);
 set(gca,'FontSize',18);
 grid on
 hold on
-S1 = plot(y.Var1(1:1001),y.Var2(1:1001));
-S1.LineWidth = 1.4;
+% S1 = plot(y.Var1(1:1001),y.Var2(1:1001));
+% S1.LineWidth = 1.4;
 hold on
 [~,maxidx] = max(abs(y.Var2));
 max = y(maxidx,:);
 % plot(max.Var1,max.Var2,'r.', 'LineWidth', 2, 'MarkerSize', 14);
 title('S_{11} parameters');
 % text(2.45,max.Var2,'\Leftarrow 2.44GHz and -26.21dB','FontSize',14);
-legend('IG = 1mm', 'IG = 1.5mm', 'IG = 2mm', "IG = 1mm, PW = 40.5mm, PL = 27.5mm");
+% 
+% legend('IG = 1mm', 'IG = 1.5mm', 'IG = 2mm', "IG = 1mm, PW = 40.5mm, PL = 27.5mm");
 xlim([1.8 3.2]);
 hold off
 %initial % exportgraphics(FigH,"C:\Users\johba\esd5_project\gitfigures\system_design\rf_front_end\antenna_simulation\antenna_sim_s11_initial.png", 'Resolution', 300)
