@@ -81,6 +81,7 @@ xlabel('Time (s)');
 ylabel('Position (Degrees)');
 legend;
 title('Position: Measured vs. Filtered (Degrees)');
+ylim([0 360]);
 grid on;
 
 % Plot Velocity in RPM
@@ -90,6 +91,7 @@ xlabel('Time (s)');
 ylabel('Velocity (RPM)');
 legend;
 title('Filtered Velocity (RPM)');
+ylim([0 25])
 grid on;
 
 % --- Calculate Rise Time to 63% of Steady-State ---
@@ -110,6 +112,7 @@ figure;
 yyaxis right;
 plot(Time, Voltage, 'r', 'DisplayName', 'Voltage');
 ylabel('Voltage (V)');
+hold on;
 
 % Plot RPM on the left y-axis
 yyaxis left;
@@ -126,6 +129,7 @@ plot(rise_time, target_value, 'ko', 'DisplayName', '63% Point');
 % Add title and legend
 title('Velocity (RPM) and Voltage Over Time with Rise Time');
 legend('show');
+grid on;
 hold off;
 
 % Display rise time in Command Window
