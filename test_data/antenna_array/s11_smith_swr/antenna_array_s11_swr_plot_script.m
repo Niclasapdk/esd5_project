@@ -79,7 +79,7 @@ xlabel('Frequency [GHz]','FontSize',12);
 title('SWR');
 set(gca,'FontSize',18)
 grid on
-exportgraphics(gca,"C:\Users\johba\esd5_project\gitfigures\appendix\antenna_tests\antenna_array_swr_test.png", 'Resolution', 300); % 1920x1080 pixels
+% exportgraphics(gca,"C:\Users\johba\esd5_project\gitfigures\appendix\antenna_tests\antenna_array_swr_test.png", 'Resolution', 300); % 1920x1080 pixels
 %% Plots for S11 test of initial antenna
 close all
 clear
