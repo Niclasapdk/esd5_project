@@ -182,7 +182,7 @@ D = 0;
 
 % Create state-space system
 sys = ss(A, B, C, D);
-sisotool(sys)
+sisotool(sys);
 
 % Define input (step voltage)
 t_sim = linspace(0, max(Time), 1000); % Simulation time vector
@@ -229,3 +229,4 @@ title(sprintf('Measured vs Simulated RPM (Fit: %.2f%%)', fit_percentage));
 legend('show');
 grid on;
 hold off;
+

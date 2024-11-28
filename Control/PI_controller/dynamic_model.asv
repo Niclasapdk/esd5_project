@@ -20,13 +20,13 @@ num = Kt / (6.5 * 30); % Numerator
 den = [a3, a2, a1, 0]; % Denominator coefficients
 
 % Define Transfer Function
-C = 1;
+C = 701;
 G = tf(num, den)
 H = 1;
 
 sys_feed = feedback(C*G,H);
 
-sisotool(sys_feed)
+sisot(sys_feed)
 
 % Convert to State-Space
 [A, B, C, D] = tf2ss(num, den);
