@@ -6,6 +6,7 @@ pkgs.mkShell {
     python3Packages.scipy
     python3Packages.matplotlib
     python312Packages.scienceplots
+    python312Packages.tqdm
     texliveFull
   ];
 }
