@@ -1,5 +1,6 @@
 % Clear workspace and close figures
 clear; clc; close all;
+s = tf('s');
 
 %% Load and Preprocess Data
 % Load data
@@ -80,6 +81,7 @@ xlabel('Time (s)');
 ylabel('Position (Degrees)');
 legend;
 title('Position: Measured vs. Filtered (Degrees)');
+ylim([0 360]);
 grid on;
 
 % Plot Velocity in RPM
@@ -89,6 +91,7 @@ xlabel('Time (s)');
 ylabel('Velocity (RPM)');
 legend;
 title('Filtered Velocity (RPM)');
+ylim([0 25])
 grid on;
 
 % --- Calculate Rise Time to 63% of Steady-State ---
@@ -105,10 +108,16 @@ rise_time = Time(rise_index);
 % --- Plot RPM, Voltage, and Mark Rise Time ---
 figure;
 
+% Plot Voltage on the right y-axis
+yyaxis right;
+plot(Time, Voltage, 'r', 'DisplayName', 'Voltage');
+ylabel('Voltage (V)');
+hold on;
+
 % Plot RPM on the left y-axis
 yyaxis left;
-plot(Time, Filtered_Velocity_RPM, 'r', 'DisplayName', 'Filtered RPM');
-ylabel('Speed (RPM)');
+plot(Time, Filtered_Velocity_RPM, 'b', 'DisplayName', 'Filtered RPM');
+ylabel('Velocity (RPM)');
 xlabel('Time (s)');
 hold on;
 
@@ -117,14 +126,10 @@ yline(target_value, '--g', 'DisplayName', '63% of Steady State');
 xline(rise_time, '--b', 'DisplayName', sprintf('Rise Time: %.3f s', rise_time));
 plot(rise_time, target_value, 'ko', 'DisplayName', '63% Point');
 
-% Plot Voltage on the right y-axis
-yyaxis right;
-plot(Time, Voltage, 'b', 'DisplayName', 'Voltage');
-ylabel('Voltage (V)');
-
 % Add title and legend
-title('Speed (RPM) and Voltage Over Time with Rise Time');
+title('Velocity (RPM) and Input Voltage with Rise Time');
 legend('show');
+grid on;
 hold off;
 
 % Display rise time in Command Window
@@ -177,6 +182,7 @@ D = 0;
 
 % Create state-space system
 sys = ss(A, B, C, D);
+sisotool(sys);
 
 % Define input (step voltage)
 t_sim = linspace(0, max(Time), 1000); % Simulation time vector
@@ -195,7 +201,7 @@ plot(Time, Filtered_Velocity_RPM, 'r', 'DisplayName', 'Measured RPM (Filtered)')
 hold on;
 plot(t_sim, RPM_sim, 'b--', 'DisplayName', 'Simulated RPM');
 xlabel('Time (s)');
-ylabel('Speed (RPM)');
+ylabel('Velocity (RPM)');
 title('Measured vs Simulated RPM using State-Space Representation');
 legend('show');
 grid on;
@@ -218,8 +224,9 @@ plot(Time, Filtered_Velocity_RPM, 'r', 'DisplayName', 'Measured RPM (Filtered)')
 hold on;
 plot(Time, RPM_sim_interp, 'b--', 'DisplayName', 'Simulated RPM');
 xlabel('Time (s)');
-ylabel('Speed (RPM)');
+ylabel('Velocity (RPM)');
 title(sprintf('Measured vs Simulated RPM (Fit: %.2f%%)', fit_percentage));
 legend('show');
 grid on;
 hold off;
+

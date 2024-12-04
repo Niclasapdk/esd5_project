@@ -218,6 +218,7 @@ for idx = 1:length(signal_types)
             s2 = zeros(Nsamp, 1);
             s2(50:80) = sqrt(nSignal) * randn(31, 1);
         case 'corr. burst'
+			% correlation = sum(v1 .* v2)
             s_common = zeros(Nsamp, 1);
             s_common(40:70) = sqrt(nSignal) * randn(31, 1);
             s_alt = zeros(Nsamp, 1);
