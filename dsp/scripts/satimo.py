@@ -107,7 +107,7 @@ if __name__ == "__main__":
         if not os.path.exists(cache_file):
             conv(data_file, cache_file)
         data = np.load(cache_file)
-        steering_angles = np.asarray([i for i in range(-50, 51, 2)])
+        steering_angles = np.asarray([i for i in range(-65, 66, 2)])
         N_cbf = [2**i for i in range(3, 12)]
         N_mvdr = [2**i for i in range(7, 12)]
         samp_rate = 5.12e6
