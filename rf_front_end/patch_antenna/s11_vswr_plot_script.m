@@ -77,7 +77,7 @@ grid on;
 % Define the number of rows per segment
 close all
 clear
-
+syms x
 T = readtable('paramsweepfinal_epsR.txt')
 rows_per_segment = 1003;
 
@@ -104,6 +104,31 @@ for i = 1:num_segments
     grid on
 end
 
+x = 2.4565999507904;
+y = -10.097303935531;
+           
+x1 = 2.4244000911713;
+y1 = -10.462214925528;
+
+           
+x2 = 2.6498000621796;
+y2 = -10.206814783037;
+
+           
+x3 = 2.6847999095917;
+y3 = -10.359687824995;
+
+plot(x,y,'r.','MarkerSize',20,'HandleVisibility','off');
+hold on
+plot(x1,y1,'r.','MarkerSize',20,'HandleVisibility','off');
+hold on
+plot(x2,y2,'r.','MarkerSize',20,'HandleVisibility','off');
+hold on
+plot(x3,y3,'r.','MarkerSize',20,'HandleVisibility','off');
+hold on
+dim = [0.15 0.1 0.3 0.3];
+str = {[sprintf('Leftmost Plot:\nBW = %.4f-%.4f=%.4f [GHz]',x,x1,x-x1)],[sprintf('Rightmost Plot:\nBW = %.4f-%.4f=%.4f [GHz]',x2,x3,x3-x2)]};
+annotation('textbox',dim,'String',str,'FitBoxToText','on','FontSize',16);
 
 % Finalize plot
 title('S_{11} parameters','FontSize',20);
