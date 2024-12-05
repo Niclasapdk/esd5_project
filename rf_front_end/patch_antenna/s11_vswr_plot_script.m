@@ -15,8 +15,8 @@ hold on
 % P2 = plot(data3, data4);
 % P2.LineWidth = 1.4;
 hold on
-P3 = plot(data5, data6);
-P3.LineWidth = 1.4;
+%P3 = plot(data5, data6);
+%P3.LineWidth = 1.4;
 xlabel('Frequency [GHz]','FontSize',12);
 ylabel('Magnitude [dB]','FontSize',12);
 set(gca,'FontSize',18);
@@ -31,7 +31,7 @@ max = y(maxidx,:);
 title('S_{11} parameters');
 % text(2.45,max.Var2,'\Leftarrow 2.44GHz and -26.21dB','FontSize',14);
 % 
-% legend('IG = 1mm', 'IG = 1.5mm', 'IG = 2mm', "IG = 1mm, PW = 40.5mm, PL = 27.5mm");
+legend('IG = 1mm', 'IG = 1.5mm', 'IG = 2mm', "IG = 1mm, PW = 40.5mm, PL = 27.5mm");
 xlim([1.8 3.2]);
 hold off
 %initial % exportgraphics(FigH,"C:\Users\johba\esd5_project\gitfigures\system_design\rf_front_end\antenna_simulation\antenna_sim_s11_initial.png", 'Resolution', 300)
@@ -68,7 +68,7 @@ title('S_{11} parameter');
 [value,maxidp] = max(abs(p.Var2));
 maxp = p(maxidp,:);
 % plot(maxp.Var1,maxp.Var2,'r.', 'LineWidth', 3, 'MarkerSize', 16);
-legend('Dimensions: IG = 1mm, PW = 40.5mm, \newlinePL = 27.5mm, IW = 2.36mm, IL = 9.86mm');
+legend('Dimensions: IG = 1mm, W = 40.5mm, \newlineL = 27.5mm, IW = 2.36mm, IL = 9.86mm');
 % text(2.45,maxp.Var2,'\Leftarrow 2.44GHz and -35.57dB','FontSize',14);
 grid on;
 % exportgraphics(FigH,"C:\Users\johba\esd5_project\gitfigures\system_design\rf_front_end\antenna_simulation\antenna_sim_s11_final.png", 'Resolution', 300)
