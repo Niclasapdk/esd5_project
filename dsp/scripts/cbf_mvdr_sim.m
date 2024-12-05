@@ -87,7 +87,7 @@ for idx = 1:length(snr_values)
     % Add red dotted vertical lines at source angles
     xline(ang1, 'r--', 'LineWidth', 1);
     xline(ang2, 'r--', 'LineWidth', 1);
-    legend('CBF', 'MVDR', 'Location', 'best', 'FontSize', FontSize - 2);
+    legend('CBF', 'MVDR', 'Source loc.', 'Location', 'best', 'FontSize', FontSize - 2);
     xlabel(['Steering Angle ('  char(176) ')'], 'FontSize', FontSize - 1);
     ylabel('Normalized Power (dB)', 'FontSize', FontSize - 1);
     title(['SNR = ', num2str(snr), ' dB'], 'FontSize', FontSize, 'FontWeight', 'normal');
@@ -167,7 +167,7 @@ for idx = 1:length(source_spacing_values)
     % Add red dotted vertical lines at source angles
     xline(ang1, 'r--', 'LineWidth', 1);
     xline(ang2, 'r--', 'LineWidth', 1);
-    legend('CBF', 'MVDR', 'Location', 'best', 'FontSize', FontSize - 2);
+    legend('CBF', 'MVDR', 'Source loc.', 'Location', 'best', 'FontSize', FontSize - 2);
     xlabel(['Steering Angle ('  char(176) ')'], 'FontSize', FontSize - 1);
     ylabel('Normalized Power (dB)', 'FontSize', FontSize - 1);
     title(['Source Spacing = ', num2str(spacing), '°'], 'FontSize', FontSize, 'FontWeight', 'normal');
@@ -289,7 +289,7 @@ for idx = 1:length(signal_types)
     % Add red dotted vertical lines at source angles
     xline(ang1, 'r--', 'LineWidth', 1);
     xline(ang2, 'r--', 'LineWidth', 1);
-    legend('CBF', 'MVDR', 'Location', 'best', 'FontSize', FontSize - 2);
+    legend('CBF', 'MVDR', 'Source loc.', 'Location', 'best', 'FontSize', FontSize - 2);
     xlabel(['Steering Angle ('  char(176) ')'], 'FontSize', FontSize - 1);
     ylabel('Normalized Power (dB)', 'FontSize', FontSize - 1);
     title(['Signal Type: ', sig_type], 'FontSize', FontSize, 'FontWeight', 'normal');
@@ -409,7 +409,7 @@ for idx = 1:length(gain_max_deviation_values)
     xline(ang2, 'r--', 'LineWidth', 1);
 
     % Adjust legend and labels
-    legend('CBF', 'MVDR', 'Location', 'best', 'FontSize', FontSize - 2);
+    legend('CBF', 'MVDR', 'Source loc.', 'Location', 'best', 'FontSize', FontSize - 2);
     xlabel(['Steering Angle ('  char(176) ')'], 'FontSize', FontSize - 1);
     ylabel('Normalized Power (dB)', 'FontSize', FontSize - 1);
     title(['Gain Dev. = ', num2str(gain_max_dev_db), ' dB'], 'FontSize', FontSize, 'FontWeight', 'normal');
@@ -497,7 +497,7 @@ for idx = 1:length(rho_values)
     % Add red dotted vertical lines at source angles
     xline(ang1, 'r--', 'LineWidth', 1);
     xline(ang2, 'r--', 'LineWidth', 1);
-    legend('CBF', 'MVDR', 'Location', 'best', 'FontSize', FontSize - 2);
+    legend('CBF', 'MVDR', 'Source loc.', 'Location', 'best', 'FontSize', FontSize - 2);
     xlabel(['Steering Angle (' char(176) ')'], 'FontSize', FontSize - 1);
     ylabel('Normalized Power (dB)', 'FontSize', FontSize - 1);
     title(['Desired \rho = ', num2str(rho), ', Actual \rho = ', sprintf('%.2f', rho_est)], ...
