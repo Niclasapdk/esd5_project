@@ -190,6 +190,7 @@ print(figure_spacing, fullfile(save_path, 'Spatial_Spectrum_Source_Spacings.png'
 %% Varying Signal Types
 signal_types = {'uncorr.', 'corr.', 'uncorr. burst', 'corr. burst'};
 nPower = nSignal / (10 ^ (20 / 10)); % Fixed SNR of 20 dB
+rho = 0.9; % Desired correlation coefficient between s1 and s2
 
 figure_types = figure;
 set(figure_types, 'Units', 'inches', 'Position', [1, 1, FigureWidth, FigureHeight]);
@@ -206,27 +207,45 @@ for idx = 1:length(signal_types)
     sig_type = signal_types{idx};
 
     % Generate signals based on type
-    switch sig_type
+	switch sig_type
         case 'uncorr.'
             s1 = sqrt(nSignal) * randn(Nsamp, 1);
             s2 = sqrt(nSignal) * randn(Nsamp, 1);
+            % Calculate the sample correlation coefficient
+            correlation_matrix = corrcoef(s1, s2);
+            rho_est = correlation_matrix(1, 2);
+            fprintf('Signal Type: %s, Estimated correlation: %.2f\n', sig_type, rho_est);
         case 'corr.'
-            s_common = sqrt(nSignal) * randn(Nsamp, 1);
-            s1 = s_common;
-            s2 = s_common + sqrt(nSignal / 10) * randn(Nsamp, 1);
+            s_common = sqrt(nSignal) * randn(Nsamp, 1);     % Common component
+            s_noise = sqrt(nSignal) * randn(Nsamp, 1);      % Noise component
+            s1 = s_common;                                   % Signal 1
+            s2 = rho * s_common + sqrt(1 - rho^2) * s_noise; % Signal 2
+
+            % Calculate the sample correlation coefficient between s1 and s2
+            correlation_matrix = corrcoef(s1, s2);
+            rho_est = correlation_matrix(1, 2);
+            fprintf('Signal Type: %s, Desired correlation: %.2f, Estimated correlation: %.2f\n', sig_type, rho, rho_est);
         case 'uncorr. burst'
             s1 = zeros(Nsamp, 1);
             s1(40:70) = sqrt(nSignal) * randn(31, 1);
             s2 = zeros(Nsamp, 1);
-            s2(50:80) = sqrt(nSignal) * randn(31, 1);
+            s2(40:70) = sqrt(nSignal) * randn(31, 1);
+            % Calculate the sample correlation coefficient
+            correlation_matrix = corrcoef(s1, s2);
+            rho_est = correlation_matrix(1, 2);
+            fprintf('Signal Type: %s, Estimated correlation: %.2f\n', sig_type, rho_est);
         case 'corr. burst'
-			% correlation = sum(v1 .* v2)
             s_common = zeros(Nsamp, 1);
             s_common(40:70) = sqrt(nSignal) * randn(31, 1);
-            s_alt = zeros(Nsamp, 1);
-            s_alt(40:70) = sqrt(nSignal / 10) * randn(31, 1);
+            s_noise = zeros(Nsamp, 1);
+            s_noise(40:70) = sqrt(nSignal) * randn(31, 1);
             s1 = s_common;
-            s2 = s_common + s_alt;
+            s2 = rho * s_common + sqrt(1 - rho^2) * s_noise;
+
+            % Calculate the sample correlation coefficient between s1 and s2
+            correlation_matrix = corrcoef(s1, s2);
+            rho_est = correlation_matrix(1, 2);
+            fprintf('Signal Type: %s, Desired correlation: %.2f, Estimated correlation: %.2f\n', sig_type, rho, rho_est);
         otherwise
             error('Unknown signal type');
     end
@@ -283,7 +302,7 @@ sgtitle('Spatial Spectrum Estimation for Different Signal Types', 'FontSize', Fo
 
 % Add a note to the figure below the subplots
 annotation('textbox', [0, 0, 1, 0.05], ...
-    'String', 'SNR: 20 dB; Source Angles: 20°, -20°', ...
+    'String', ['SNR: 20 dB; Source Angles: 20°, -20°; Burst length: 30/1024 samples; \rho: ' rho], ...
     'EdgeColor', 'none', 'HorizontalAlignment', 'center', 'FontSize', FontSize - 2);
 
 % Save the figure
