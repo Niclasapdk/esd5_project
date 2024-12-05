@@ -52,6 +52,7 @@ def gen_snapshot_plot(word_length_power:int, snapshots:list, snr:int, source_loc
         data, aux = get_sim_data(s, word_length_power, snr)
         leg.append(f"N={aux['Moving average snapshots']}")
         ax.plot(scan_angles, data, "-x", linewidth=2)
+    leg.append("Source loc.")
     ax.legend(leg, fontsize=9)
     ax.vlines(source_locations, 0, 1, colors="r", linestyle="dashed")
     # Add subtitle
@@ -70,6 +71,7 @@ def gen_wordlength_plot(word_length_power:list, snapshots:int, snr:int, source_l
         data, aux = get_sim_data(snapshots, wl, snr)
         leg.append(f"WL={aux['Word length power']}")
         ax.plot(scan_angles, data, "-x", linewidth=2)
+    leg.append("Source loc.")
     ax.legend(leg, fontsize=9)
     ax.vlines(source_locations, 0, 1, colors="r", linestyle="dashed")
     # Add subtitle
@@ -107,6 +109,7 @@ def gen_cmp_plot(power_word_lengths:list, snapshots:list, snr_dB: int, source_lo
             ax.plot(scan_angles, data_fx, "-o", linewidth=2)
             leg.append(f"Fixed-point WL={pwl}")
         ax.vlines(source_locations, 0, 1, colors="r", linestyle="dashed")
+        leg.append("Source loc.")
         ax.legend(leg, fontsize=9, loc='lower right')
     axs[-1].set_xlabel("Steering angle [degrees]")
     # Add note below the figure
@@ -135,6 +138,7 @@ def gen_snr_plot(snapshots:int, snrs:list, source_locations=[-20, 40]):
         ax.plot(scan_angles, data_mvdr, "-o", linewidth=2)
         leg.append(f"MVDR")
         ax.vlines(source_locations, 0, 1, colors="r", linestyle="dashed")
+        leg.append("Source loc.")
         ax.legend(leg, fontsize=9, loc='lower right')
     axs[-1].set_xlabel("Steering angle [degrees]")
     # Add note below the figure
@@ -146,11 +150,11 @@ if __name__ == "__main__":
     import argparse
     parser = argparse.ArgumentParser()
     parser.add_argument("--output-dir", default=fig_out_dir)
-    parser.add_argument("-s", "--snapshots", nargs="+", help="Snapshot counts to use ()", required=True)
-    parser.add_argument("-w", "--wordlengths", nargs="+", help="Word lengths for representing power ()", required=True)
-    parser.add_argument("-wc", "--wordlengths-comparison", nargs="*", help="Word lengths for representing power (for comparison plot)", required=True)
-    parser.add_argument("-sc", "--snapshots-comparison", nargs="*", help="Snapshot counts (for comparison plot)", required=True)
-    parser.add_argument("--snr", nargs="*", help="SNR in dB (for comparison plot)", required=False, default=[80])
+    parser.add_argument("-s", "--snapshots", nargs="+", help="Snapshot counts to use ()", default=[8, 16, 32, 64, 128])
+    parser.add_argument("-w", "--wordlengths", nargs="+", help="Word lengths for representing power ()", default=[32, 64, 88])
+    parser.add_argument("-wc", "--wordlengths-comparison", nargs="*", help="Word lengths for representing power (for comparison plot)", default=[88])
+    parser.add_argument("-sc", "--snapshots-comparison", nargs="*", help="Snapshot counts (for comparison plot)", default=[8, 32, 128])
+    parser.add_argument("--snr", nargs="*", help="SNR in dB (for comparison plot)", default=[0, 10, 20])
     parser.add_argument("--source-locations", nargs="*", help="Locations of signal sources in simulation data file", default=[-20, 40])
     args = parser.parse_args()
     out_dir = args.output_dir
