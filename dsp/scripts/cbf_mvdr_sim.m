@@ -302,7 +302,7 @@ sgtitle('Spatial Spectrum Estimation for Different Signal Types', 'FontSize', Fo
 
 % Add a note to the figure below the subplots
 annotation('textbox', [0, 0, 1, 0.05], ...
-    'String', ['SNR: 20 dB; Source Angles: 20°, -20°; Burst length: 30/1024 samples; \rho: ' rho], ...
+    'String', ['SNR: 20 dB; Source Angles: 20°, -20°; Burst length: 30/1024 samples; Correlation \rho: ' num2str(rho)], ...
     'EdgeColor', 'none', 'HorizontalAlignment', 'center', 'FontSize', FontSize - 2);
 
 % Save the figure
@@ -428,3 +428,92 @@ annotation('textbox', [0, 0, 1, 0.05], ...
 % Save the figure
 set(figure_gains, 'PaperPositionMode', 'auto');
 print(figure_gains, fullfile(save_path, 'Spatial_Spectrum_Gains.png'), '-dpng', '-r300');
+
+%% Varying Signal Correlation
+rho_values = [0, 0.5, 0.9, 0.99]; % Different desired correlation coefficients
+nPower = nSignal / (10 ^ (20 / 10)); % Fixed SNR of 20 dB
+
+figure_corr = figure;
+set(figure_corr, 'Units', 'inches', 'Position', [1, 1, FigureWidth, FigureHeight]);
+
+% Adjusted positions for the subplots to increase vertical spacing
+subplot_positions = [
+    0.08, 0.55, 0.38, 0.32; % Subplot 1
+    0.55, 0.55, 0.38, 0.32; % Subplot 2
+    0.08, 0.12, 0.38, 0.32; % Subplot 3
+    0.55, 0.12, 0.38, 0.32; % Subplot 4
+];
+
+for idx = 1:length(rho_values)
+    rho = rho_values(idx);
+    
+    % Generate correlated signals
+    s_common = sqrt(nSignal) * randn(Nsamp, 1);     % Common component
+    s_noise = sqrt(nSignal) * randn(Nsamp, 1);      % Noise component
+    s1 = s_common;                                   % Signal 1
+    s2 = rho * s_common + sqrt(1 - rho^2) * s_noise; % Signal 2
+
+    % Calculate the sample correlation coefficient between s1 and s2
+    correlation_matrix = corrcoef(s1, s2);
+    rho_est = correlation_matrix(1, 2);
+    fprintf('Desired correlation: %.2f, Estimated correlation: %.2f\n', rho, rho_est);
+
+    % Source angles
+    ang1 = 20;
+    ang2 = -20;
+
+    % Steering vectors
+    sv1 = steering_vector(fc, ang1);
+    sv2 = steering_vector(fc, ang2);
+
+    % Received signal
+    signal = (s1 * sv1.') + (s2 * sv2.') + sqrt(nPower) * randn(Nsamp, numElements);
+
+    % Estimate covariance matrix
+    R = (signal' * signal) / Nsamp;
+
+    % Calculate spectrum
+    P_mvdr = zeros(size(theta_scan));
+    P_cbf = zeros(size(theta_scan));
+
+    for i = 1:length(theta_scan)
+        ang = theta_scan(i);
+        s = steering_vector(fc, -ang);
+        w_mvdr = inv(R) * (s / (s' * inv(R) * s));
+        w_cbf = s / numElements;
+        P_mvdr(i) = real(1 / (s' * inv(R) * s));
+        P_cbf(i) = real(w_cbf' * R * w_cbf);
+    end
+
+    % Normalize spectrum
+    P_mvdr = P_mvdr / max(P_mvdr);
+    P_cbf = P_cbf / max(P_cbf);
+
+    % Generate subplot with adjusted position
+    axes('Position', subplot_positions(idx, :));
+    plot(theta_scan, 10 * log10(P_cbf), '-', 'LineWidth', 1.5);
+    hold on;
+    plot(theta_scan, 10 * log10(P_mvdr), '-', 'LineWidth', 1.5);
+    % Add red dotted vertical lines at source angles
+    xline(ang1, 'r--', 'LineWidth', 1);
+    xline(ang2, 'r--', 'LineWidth', 1);
+    legend('CBF', 'MVDR', 'Location', 'best', 'FontSize', FontSize - 2);
+    xlabel(['Steering Angle (' char(176) ')'], 'FontSize', FontSize - 1);
+    ylabel('Normalized Power (dB)', 'FontSize', FontSize - 1);
+    title(['Desired \rho = ', num2str(rho), ', Actual \rho = ', sprintf('%.2f', rho_est)], ...
+          'FontSize', FontSize, 'FontWeight', 'normal');
+    grid on;
+    set(gca, 'FontSize', FontSize - 1);
+end
+
+% Adjust the position of the super title
+sgtitle('Spatial Spectrum Estimation for Different Correlation Coefficients', 'FontSize', FontSize + 1);
+
+% Add a note to the figure below the subplots
+annotation('textbox', [0, 0, 1, 0.05], ...
+    'String', 'SNR: 20 dB; Source Angles: 20°, -20°; Signal types: CW', ...
+    'EdgeColor', 'none', 'HorizontalAlignment', 'center', 'FontSize', FontSize - 2);
+
+% Save the figure
+set(figure_corr, 'PaperPositionMode', 'auto');
+print(figure_corr, fullfile(save_path, 'Spatial_Spectrum_Correlation.png'), '-dpng', '-r300');
