@@ -33,6 +33,7 @@ hold on
 angle = [Q.Var1(1:181); 180+flip(Q.Var1(181:end))];
 polarpattern(90+angle,Q.Var3,TitleTopTextInterpreter="tex", ...
     TitleTop="Elevation Cut (Azimuth Angle = 0^{\circ})",FontSize=20,LineWidth=1.4);
-legend('Measured: HPBW=27 [deg], Main= 7.112 [dB]','Simulated: HPBW=26 [deg], Main=11.67 [dBi]','Location','southwest');
+legend('Measured: HPBW=24 [deg], Main= -1.44 [dB]','Simulated: HPBW=31 [deg], Main=10.9 [dBi]','Location','southwest');
 set(gca,'FontSize',18);
 hold off
+% exportgraphics(figH,"C:\Users\johba\esd5_project\gitfigures\appendix\antenna_tests\polar_pattern_meas_sim_50_deg.png", 'Resolution', 300)
