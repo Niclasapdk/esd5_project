@@ -1,5 +1,5 @@
 % Clear workspace and close figures
-clear; clc; close all;
+clear; clc; %close all;
 s = tf('s');
 
 %% Load and Preprocess Data
@@ -182,7 +182,12 @@ D = 0;
 
 % Create state-space system
 sys = ss(A, B, C, D);
-sisotool(sys);
+step(sys);
+den = 1/6.5 * 1/30 * Kt;
+num = (L*J_total)*s^3 + (R*J_total + L*B_total)*s^2 + (R*B_total + Kt*Kb)*s;
+Y = den/num;
+%step(Y);
+%sisotool(sys);
 
 % Define input (step voltage)
 t_sim = linspace(0, max(Time), 1000); % Simulation time vector
