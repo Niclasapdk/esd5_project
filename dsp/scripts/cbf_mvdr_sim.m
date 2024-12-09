@@ -44,7 +44,7 @@ for idx = 1:length(snr_values)
     snr = snr_values(idx);
     nPower = nSignal / (10 ^ (snr / 10)); % Noise power [W] at each antenna
 
-    % Generate uncorrelated signals
+    % Generate Pseudo-random samples
     s1 = sqrt(nSignal) * randn(Nsamp, 1); % Signal 1
     s2 = sqrt(nSignal) * randn(Nsamp, 1); % Signal 2
 
@@ -100,7 +100,7 @@ sgtitle('Spatial Spectrum Estimation for Different SNRs', 'FontSize', FontSize +
 
 % Add a note to the figure below the subplots with adjusted position
 annotation('textbox', [0, 0, 1, 0.05], ...
-    'String', 'Signal Types: Uncorrelated Signals; Source Angles: 30°, -10°', ...
+    'String', 'Signal Types: Pseudo-random samples; Source Angles: 30°, -10°', ...
     'EdgeColor', 'none', 'HorizontalAlignment', 'center', 'FontSize', FontSize - 2);
 
 % Save the figure
@@ -128,7 +128,7 @@ for idx = 1:length(source_spacing_values)
     ang1 = center_angle - spacing / 2;
     ang2 = center_angle + spacing / 2;
 
-    % Generate uncorrelated signals
+    % Generate Pseudo-random samples
     s1 = sqrt(nSignal) * randn(Nsamp, 1);
     s2 = sqrt(nSignal) * randn(Nsamp, 1);
 
@@ -180,7 +180,7 @@ sgtitle('Spatial Spectrum Estimation for Different Source Spacings', 'FontSize',
 
 % Add a note to the figure below the subplots
 annotation('textbox', [0, 0, 1, 0.05], ...
-    'String', 'SNR: 20 dB; Signal Type: Uncorrelated Signals', ...
+    'String', 'SNR: 20 dB; Signal Type: Pseudo-random samples', ...
     'EdgeColor', 'none', 'HorizontalAlignment', 'center', 'FontSize', FontSize - 2);
 
 % Save the figure
@@ -341,7 +341,7 @@ for idx = 1:length(gain_max_deviation_values)
         % Scale gains to have min 1 and max gain_max_dev
         gain_dev = 1 + (gain_dev - min(gain_dev)) * (gain_max_dev - 1) / (max(gain_dev) - min(gain_dev));
 
-        % Generate uncorrelated signals
+        % Generate Pseudo-random samples
         s1 = sqrt(nSignal) * randn(Nsamp, 1); % Signal 1
         s2 = sqrt(nSignal) * randn(Nsamp, 1); % Signal 2
 
@@ -422,7 +422,7 @@ sgtitle('Spatial Spectrum Estimation for Different Element Gains', 'FontSize', F
 
 % Add a note to the figure below the subplots with adjusted position
 annotation('textbox', [0, 0, 1, 0.05], ...
-    'String', ['SNR: 20 dB; Signal Types: Uncorrelated Signals; Source Angles: 30°, -10°; ', num2str(N_runs), ' runs'], ...
+    'String', ['SNR: 20 dB; Signal Types: Pseudo-random samples; Source Angles: 30°, -10°; ', num2str(N_runs), ' runs'], ...
     'EdgeColor', 'none', 'HorizontalAlignment', 'center', 'FontSize', FontSize - 2);
 
 % Save the figure
