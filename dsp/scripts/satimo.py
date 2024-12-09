@@ -6,6 +6,7 @@ matplotlib.use('Agg')  # Use non-interactive backend
 import matplotlib.pyplot as plt
 from multiprocessing import Pool
 import logging
+from scipy.signal import butter, filtfilt
 
 def conv(inpath, outpath):
     logging.info(f"Converting {inpath} to {outpath}")
@@ -107,6 +108,8 @@ def process_cbf_plot(args):
     samp_rate = 5.12e6
     t = times(data, N, samp_rate)
     cbf, doa = rolling_cbf(data, steering_angles, N)
+    b, a = butter(2, 0.5, btype='low', analog=False)
+    doa_filtered = filtfilt(b, a, doa)
     doa_trace = get_real_doa(doa_trace_file, N, cbf)
     f, axs = plt.subplots(2, 1, sharex=True, figsize=(6.4, 6.4))
     f.suptitle(f"CBF for N={N}", fontsize=11)
@@ -117,9 +120,10 @@ def process_cbf_plot(args):
     axs[1].set_title("Angle of Arrival estimation")
     axs[1].set_xlabel("Time [s]")
     axs[1].set_ylabel("Angle of max power [\u00b0]")
-    axs[1].plot(t, doa)
     axs[1].plot(t, doa_trace)
-    axs[1].legend(["Output", "Real DOA"])
+    axs[1].plot(t, doa)
+    axs[1].plot(t, doa_filtered, ":")
+    axs[1].legend(["Real DOA", "Output", "Filtered output"])
     out_path = os.path.join(fig_out_dir, f"cbf_{N}_snapshots_from_data{dtry}.png")
     f.tight_layout()  # call this last
     logging.info(f"Saving figure to {out_path}")
@@ -140,6 +144,8 @@ def process_mvdr_plot(args):
     samp_rate = 5.12e6
     t = times(data, N, samp_rate)
     mvdr, doa = rolling_mvdr(data, steering_angles, N)
+    b, a = butter(2, 0.5, btype='low', analog=False)
+    doa_filtered = filtfilt(b, a, doa)
     doa_trace = get_real_doa(doa_trace_file, N, mvdr)
     f, axs = plt.subplots(2, 1, sharex=True, figsize=(6.4, 6.4))
     f.suptitle(f"MVDR for N={N}", fontsize=11)
@@ -150,9 +156,10 @@ def process_mvdr_plot(args):
     axs[1].set_title("Angle of Arrival estimation")
     axs[1].set_xlabel("Time [s]")
     axs[1].set_ylabel("Angle of max power [\u00b0]")
-    axs[1].plot(t, doa)
     axs[1].plot(t, doa_trace)
-    axs[1].legend(["Output", "Real DOA"])
+    axs[1].plot(t, doa)
+    axs[1].plot(t, doa_filtered, ":")
+    axs[1].legend(["Real DOA", "Output", "Filtered output"])
     out_path = os.path.join(fig_out_dir, f"mvdr_{N}_snapshots_from_data{dtry}.png")
     f.tight_layout()  # call this last
     logging.info(f"Saving figure to {out_path}")
