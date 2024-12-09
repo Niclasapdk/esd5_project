@@ -108,7 +108,7 @@ def process_cbf_plot(args):
     samp_rate = 5.12e6
     t = times(data, N, samp_rate)
     cbf, doa = rolling_cbf(data, steering_angles, N)
-    b, a = butter(2, 0.5, btype='low', analog=False)
+    b, a = butter(2, 0.1, btype='low', analog=False)
     doa_filtered = filtfilt(b, a, doa)
     doa_trace = get_real_doa(doa_trace_file, N, cbf)
     f, axs = plt.subplots(2, 1, sharex=True, figsize=(6.4, 6.4))
@@ -144,7 +144,7 @@ def process_mvdr_plot(args):
     samp_rate = 5.12e6
     t = times(data, N, samp_rate)
     mvdr, doa = rolling_mvdr(data, steering_angles, N)
-    b, a = butter(2, 0.5, btype='low', analog=False)
+    b, a = butter(2, 0.1, btype='low', analog=False)
     doa_filtered = filtfilt(b, a, doa)
     doa_trace = get_real_doa(doa_trace_file, N, mvdr)
     f, axs = plt.subplots(2, 1, sharex=True, figsize=(6.4, 6.4))
