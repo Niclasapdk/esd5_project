@@ -49,8 +49,8 @@ for idx = 1:length(snr_values)
     s2 = sqrt(nSignal) * randn(Nsamp, 1); % Signal 2
 
     % Source angles
-    ang1 = 20;   % First signal angle
-    ang2 = -20;  % Second signal angle
+    ang1 = 30;   % First signal angle
+    ang2 = -10;  % Second signal angle
 
     % Steering vectors
     sv1 = steering_vector(fc, ang1);
@@ -100,7 +100,7 @@ sgtitle('Spatial Spectrum Estimation for Different SNRs', 'FontSize', FontSize +
 
 % Add a note to the figure below the subplots with adjusted position
 annotation('textbox', [0, 0, 1, 0.05], ...
-    'String', 'Signal Types: Uncorrelated Signals; Source Angles: 20°, -20°', ...
+    'String', 'Signal Types: Uncorrelated Signals; Source Angles: 30°, -10°', ...
     'EdgeColor', 'none', 'HorizontalAlignment', 'center', 'FontSize', FontSize - 2);
 
 % Save the figure
@@ -109,7 +109,7 @@ print(figure_snr, fullfile(save_path, 'Spatial_Spectrum_SNRs.png'), '-dpng', '-r
 
 %% Varying Source Locations
 source_spacing_values = [10, 20, 30, 40]; % Degrees between sources
-center_angle = 0; % Center angle
+center_angle = 10; % Center angle
 nPower = nSignal / (10 ^ (20 / 10)); % Fixed SNR of 20 dB
 
 figure_spacing = figure;
@@ -251,8 +251,8 @@ for idx = 1:length(signal_types)
     end
 
     % Source angles
-    ang1 = 20;
-    ang2 = -20;
+    ang1 = 30;
+    ang2 = -10;
 
     % Steering vectors
     sv1 = steering_vector(fc, ang1);
@@ -302,7 +302,7 @@ sgtitle('Spatial Spectrum Estimation for Different Signal Types', 'FontSize', Fo
 
 % Add a note to the figure below the subplots
 annotation('textbox', [0, 0, 1, 0.05], ...
-    'String', ['SNR: 20 dB; Source Angles: 20°, -20°; Burst length: 30/1024 samples; Correlation \rho: ' num2str(rho)], ...
+    'String', ['SNR: 20 dB; Source Angles: 30°, -10°; Burst length: 30/1024 samples; Correlation \rho: ' num2str(rho)], ...
     'EdgeColor', 'none', 'HorizontalAlignment', 'center', 'FontSize', FontSize - 2);
 
 % Save the figure
@@ -346,8 +346,8 @@ for idx = 1:length(gain_max_deviation_values)
         s2 = sqrt(nSignal) * randn(Nsamp, 1); % Signal 2
 
         % Source angles
-        ang1 = 20;   % First signal angle
-        ang2 = -20;  % Second signal angle
+        ang1 = 30;   % First signal angle
+        ang2 = -10;  % Second signal angle
 
         % Steering vectors
         sv1 = gain_dev .* steering_vector(fc, ang1);
@@ -422,7 +422,7 @@ sgtitle('Spatial Spectrum Estimation for Different Element Gains', 'FontSize', F
 
 % Add a note to the figure below the subplots with adjusted position
 annotation('textbox', [0, 0, 1, 0.05], ...
-    'String', ['SNR: 20 dB; Signal Types: Uncorrelated Signals; Source Angles: 20°, -20°; ', num2str(N_runs), ' runs'], ...
+    'String', ['SNR: 20 dB; Signal Types: Uncorrelated Signals; Source Angles: 30°, -10°; ', num2str(N_runs), ' runs'], ...
     'EdgeColor', 'none', 'HorizontalAlignment', 'center', 'FontSize', FontSize - 2);
 
 % Save the figure
@@ -459,8 +459,8 @@ for idx = 1:length(rho_values)
     fprintf('Desired correlation: %.2f, Estimated correlation: %.2f\n', rho, rho_est);
 
     % Source angles
-    ang1 = 20;
-    ang2 = -20;
+    ang1 = 30;
+    ang2 = -10;
 
     % Steering vectors
     sv1 = steering_vector(fc, ang1);
@@ -511,7 +511,7 @@ sgtitle('Spatial Spectrum Estimation for Different Correlation Coefficients', 'F
 
 % Add a note to the figure below the subplots
 annotation('textbox', [0, 0, 1, 0.05], ...
-    'String', 'SNR: 20 dB; Source Angles: 20°, -20°; Signal types: CW', ...
+    'String', 'SNR: 20 dB; Source Angles: 30°, -10°; Signal types: CW', ...
     'EdgeColor', 'none', 'HorizontalAlignment', 'center', 'FontSize', FontSize - 2);
 
 % Save the figure
