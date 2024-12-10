@@ -57,4 +57,4 @@ p2 = polarpattern(90+angle,X.Var3,TitleTopTextInterpreter="tex", ...
 legend('Measured: HPBW = 27[deg], Main = 11.5[dB],','Simulated: HPBW = 33[deg], Main = -0.919[dB]','Location','southwest');
 set(gca,'FontSize',18);
 hold off
-% exportgraphics(figH,"C:\Users\johba\esd5_project\gitfigures\appendix\antenna_tests\polar_pattern_meas_sim_50_deg.png", 'Resolution', 300)
+% exportgraphics(figH,"C:\Users\johba\esd5_project\gitfigures\appendix\antenna_tests\polar_pattern_meas_sim_50_deg.png", 'Resolution', 300);
