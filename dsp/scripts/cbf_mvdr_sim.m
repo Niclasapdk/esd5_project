@@ -66,14 +66,16 @@ for idx = 1:length(snr_values)
     P_mvdr = zeros(size(theta_scan)); % MVDR power
     P_cbf = zeros(size(theta_scan));  % CBF power
 
+	sig_cbf = zeros([length(theta_scan) height(signal)];
     for i = 1:length(theta_scan)
         ang = theta_scan(i);
         s = steering_vector(fc, -ang); % Note the negative sign
         w_mvdr = inv(R) * (s / (s' * inv(R) * s));
-        w_cbf = s / numElements; % CBF weights
         P_mvdr(i) = real(1 / (s' * inv(R) * s)); % MVDR spectral power
-        P_cbf(i) = real(w_cbf' * R * w_cbf);     % CBF spectral power
+        sig_cbf(i,1:Nsamp) = signal * s;
     end
+
+	P_cbf = mean(abs(sig_cbf).^2, 2);
 
     % Normalize spectrum
     P_mvdr = P_mvdr / max(P_mvdr);
@@ -146,14 +148,16 @@ for idx = 1:length(source_spacing_values)
     P_mvdr = zeros(size(theta_scan));
     P_cbf = zeros(size(theta_scan));
 
+	sig_cbf = zeros([length(theta_scan) height(signal)];
     for i = 1:length(theta_scan)
         ang = theta_scan(i);
         s = steering_vector(fc, -ang);
         w_mvdr = inv(R) * (s / (s' * inv(R) * s));
-        w_cbf = s / numElements;
         P_mvdr(i) = real(1 / (s' * inv(R) * s));
-        P_cbf(i) = real(w_cbf' * R * w_cbf);
+        sig_cbf(i,1:Nsamp) = signal * s;
     end
+
+	P_cbf = mean(abs(sig_cbf).^2, 2);
 
     % Normalize spectrum
     P_mvdr = P_mvdr / max(P_mvdr);
@@ -268,14 +272,16 @@ for idx = 1:length(signal_types)
     P_mvdr = zeros(size(theta_scan));
     P_cbf = zeros(size(theta_scan));
 
+	sig_cbf = zeros([length(theta_scan) height(signal)];
     for i = 1:length(theta_scan)
         ang = theta_scan(i);
         s = steering_vector(fc, -ang);
         w_mvdr = inv(R) * (s / (s' * inv(R) * s));
-        w_cbf = s / numElements;
         P_mvdr(i) = real(1 / (s' * inv(R) * s));
-        P_cbf(i) = real(w_cbf' * R * w_cbf);
+        sig_cbf(i,1:Nsamp) = signal * s;
     end
+
+	P_cbf = mean(abs(sig_cbf).^2, 2);
 
     % Normalize spectrum
     P_mvdr = P_mvdr / max(P_mvdr);
@@ -363,14 +369,16 @@ for idx = 1:length(gain_max_deviation_values)
         P_mvdr = zeros(length(theta_scan), 1);
         P_cbf = zeros(length(theta_scan), 1);
 
+		sig_cbf = zeros([length(theta_scan) height(signal)];
         for i = 1:length(theta_scan)
             ang = theta_scan(i);
             s = steering_vector(fc, -ang); % Note the negative sign
             w_mvdr = inv(R) * (s / (s' * inv(R) * s));
-            w_cbf = s / numElements; % CBF weights
             P_mvdr(i) = real(1 / (s' * inv(R) * s)); % MVDR spectral power
-            P_cbf(i) = real(w_cbf' * R * w_cbf);     % CBF spectral power
+            sig_cbf(i,1:Nsamp) = signal * s;
         end
+
+		P_cbf = mean(abs(sig_cbf).^2, 2);
 
         % Normalize spectrum
         P_mvdr = P_mvdr / max(P_mvdr);
@@ -476,14 +484,16 @@ for idx = 1:length(rho_values)
     P_mvdr = zeros(size(theta_scan));
     P_cbf = zeros(size(theta_scan));
 
+	sig_cbf = zeros([length(theta_scan) height(signal)];
     for i = 1:length(theta_scan)
         ang = theta_scan(i);
         s = steering_vector(fc, -ang);
         w_mvdr = inv(R) * (s / (s' * inv(R) * s));
-        w_cbf = s / numElements;
         P_mvdr(i) = real(1 / (s' * inv(R) * s));
-        P_cbf(i) = real(w_cbf' * R * w_cbf);
+        sig_cbf(i,1:Nsamp) = signal * s;
     end
+
+	P_cbf = mean(abs(sig_cbf).^2, 2);
 
     % Normalize spectrum
     P_mvdr = P_mvdr / max(P_mvdr);
