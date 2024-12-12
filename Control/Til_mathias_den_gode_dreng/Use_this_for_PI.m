@@ -39,8 +39,8 @@ A = [1 dt;
 B = [0; 
      dt];               % Input matrix for voltage effect on velocity
 H = [1 0];              % Measurement matrix (observe only position)
-Q = [1e-6 0; 
-     0 1e-5];           % Process noise covariance
+Q = [1e-4 0; 
+     0 1e-3];           % Process noise covariance
 R = 1e-1;               % Measurement noise covariance
 P = eye(2);             % Initial state covariance
 x = [0; 0];             % Initial state [position; velocity]
