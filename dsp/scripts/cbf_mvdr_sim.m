@@ -44,13 +44,13 @@ for idx = 1:length(snr_values)
     snr = snr_values(idx);
     nPower = nSignal / (10 ^ (snr / 10)); % Noise power [W] at each antenna
 
-    % Generate uncorrelated signals
+    % Generate Pseudo-random samples
     s1 = sqrt(nSignal) * randn(Nsamp, 1); % Signal 1
     s2 = sqrt(nSignal) * randn(Nsamp, 1); % Signal 2
 
     % Source angles
-    ang1 = 20;   % First signal angle
-    ang2 = -20;  % Second signal angle
+    ang1 = 30;   % First signal angle
+    ang2 = -10;  % Second signal angle
 
     % Steering vectors
     sv1 = steering_vector(fc, ang1);
@@ -66,14 +66,16 @@ for idx = 1:length(snr_values)
     P_mvdr = zeros(size(theta_scan)); % MVDR power
     P_cbf = zeros(size(theta_scan));  % CBF power
 
+	sig_cbf = zeros([length(theta_scan) height(signal)];
     for i = 1:length(theta_scan)
         ang = theta_scan(i);
         s = steering_vector(fc, -ang); % Note the negative sign
         w_mvdr = inv(R) * (s / (s' * inv(R) * s));
-        w_cbf = s / numElements; % CBF weights
         P_mvdr(i) = real(1 / (s' * inv(R) * s)); % MVDR spectral power
-        P_cbf(i) = real(w_cbf' * R * w_cbf);     % CBF spectral power
+        sig_cbf(i,1:Nsamp) = signal * s;
     end
+
+	P_cbf = mean(abs(sig_cbf).^2, 2);
 
     % Normalize spectrum
     P_mvdr = P_mvdr / max(P_mvdr);
@@ -100,7 +102,7 @@ sgtitle('Spatial Spectrum Estimation for Different SNRs', 'FontSize', FontSize +
 
 % Add a note to the figure below the subplots with adjusted position
 annotation('textbox', [0, 0, 1, 0.05], ...
-    'String', 'Signal Types: Uncorrelated Signals; Source Angles: 20°, -20°', ...
+    'String', 'Signal Types: Pseudo-random samples; Source Angles: 30°, -10°', ...
     'EdgeColor', 'none', 'HorizontalAlignment', 'center', 'FontSize', FontSize - 2);
 
 % Save the figure
@@ -109,7 +111,7 @@ print(figure_snr, fullfile(save_path, 'Spatial_Spectrum_SNRs.png'), '-dpng', '-r
 
 %% Varying Source Locations
 source_spacing_values = [10, 20, 30, 40]; % Degrees between sources
-center_angle = 0; % Center angle
+center_angle = 10; % Center angle
 nPower = nSignal / (10 ^ (20 / 10)); % Fixed SNR of 20 dB
 
 figure_spacing = figure;
@@ -128,7 +130,7 @@ for idx = 1:length(source_spacing_values)
     ang1 = center_angle - spacing / 2;
     ang2 = center_angle + spacing / 2;
 
-    % Generate uncorrelated signals
+    % Generate Pseudo-random samples
     s1 = sqrt(nSignal) * randn(Nsamp, 1);
     s2 = sqrt(nSignal) * randn(Nsamp, 1);
 
@@ -146,14 +148,16 @@ for idx = 1:length(source_spacing_values)
     P_mvdr = zeros(size(theta_scan));
     P_cbf = zeros(size(theta_scan));
 
+	sig_cbf = zeros([length(theta_scan) height(signal)];
     for i = 1:length(theta_scan)
         ang = theta_scan(i);
         s = steering_vector(fc, -ang);
         w_mvdr = inv(R) * (s / (s' * inv(R) * s));
-        w_cbf = s / numElements;
         P_mvdr(i) = real(1 / (s' * inv(R) * s));
-        P_cbf(i) = real(w_cbf' * R * w_cbf);
+        sig_cbf(i,1:Nsamp) = signal * s;
     end
+
+	P_cbf = mean(abs(sig_cbf).^2, 2);
 
     % Normalize spectrum
     P_mvdr = P_mvdr / max(P_mvdr);
@@ -180,7 +184,7 @@ sgtitle('Spatial Spectrum Estimation for Different Source Spacings', 'FontSize',
 
 % Add a note to the figure below the subplots
 annotation('textbox', [0, 0, 1, 0.05], ...
-    'String', 'SNR: 20 dB; Signal Type: Uncorrelated Signals', ...
+    'String', 'SNR: 20 dB; Signal Type: Pseudo-random samples', ...
     'EdgeColor', 'none', 'HorizontalAlignment', 'center', 'FontSize', FontSize - 2);
 
 % Save the figure
@@ -251,8 +255,8 @@ for idx = 1:length(signal_types)
     end
 
     % Source angles
-    ang1 = 20;
-    ang2 = -20;
+    ang1 = 30;
+    ang2 = -10;
 
     % Steering vectors
     sv1 = steering_vector(fc, ang1);
@@ -268,14 +272,16 @@ for idx = 1:length(signal_types)
     P_mvdr = zeros(size(theta_scan));
     P_cbf = zeros(size(theta_scan));
 
+	sig_cbf = zeros([length(theta_scan) height(signal)];
     for i = 1:length(theta_scan)
         ang = theta_scan(i);
         s = steering_vector(fc, -ang);
         w_mvdr = inv(R) * (s / (s' * inv(R) * s));
-        w_cbf = s / numElements;
         P_mvdr(i) = real(1 / (s' * inv(R) * s));
-        P_cbf(i) = real(w_cbf' * R * w_cbf);
+        sig_cbf(i,1:Nsamp) = signal * s;
     end
+
+	P_cbf = mean(abs(sig_cbf).^2, 2);
 
     % Normalize spectrum
     P_mvdr = P_mvdr / max(P_mvdr);
@@ -302,7 +308,7 @@ sgtitle('Spatial Spectrum Estimation for Different Signal Types', 'FontSize', Fo
 
 % Add a note to the figure below the subplots
 annotation('textbox', [0, 0, 1, 0.05], ...
-    'String', ['SNR: 20 dB; Source Angles: 20°, -20°; Burst length: 30/1024 samples; Correlation \rho: ' num2str(rho)], ...
+    'String', ['SNR: 20 dB; Source Angles: 30°, -10°; Burst length: 30/1024 samples; Correlation \rho: ' num2str(rho)], ...
     'EdgeColor', 'none', 'HorizontalAlignment', 'center', 'FontSize', FontSize - 2);
 
 % Save the figure
@@ -341,13 +347,13 @@ for idx = 1:length(gain_max_deviation_values)
         % Scale gains to have min 1 and max gain_max_dev
         gain_dev = 1 + (gain_dev - min(gain_dev)) * (gain_max_dev - 1) / (max(gain_dev) - min(gain_dev));
 
-        % Generate uncorrelated signals
+        % Generate Pseudo-random samples
         s1 = sqrt(nSignal) * randn(Nsamp, 1); % Signal 1
         s2 = sqrt(nSignal) * randn(Nsamp, 1); % Signal 2
 
         % Source angles
-        ang1 = 20;   % First signal angle
-        ang2 = -20;  % Second signal angle
+        ang1 = 30;   % First signal angle
+        ang2 = -10;  % Second signal angle
 
         % Steering vectors
         sv1 = gain_dev .* steering_vector(fc, ang1);
@@ -363,14 +369,16 @@ for idx = 1:length(gain_max_deviation_values)
         P_mvdr = zeros(length(theta_scan), 1);
         P_cbf = zeros(length(theta_scan), 1);
 
+		sig_cbf = zeros([length(theta_scan) height(signal)];
         for i = 1:length(theta_scan)
             ang = theta_scan(i);
             s = steering_vector(fc, -ang); % Note the negative sign
             w_mvdr = inv(R) * (s / (s' * inv(R) * s));
-            w_cbf = s / numElements; % CBF weights
             P_mvdr(i) = real(1 / (s' * inv(R) * s)); % MVDR spectral power
-            P_cbf(i) = real(w_cbf' * R * w_cbf);     % CBF spectral power
+            sig_cbf(i,1:Nsamp) = signal * s;
         end
+
+		P_cbf = mean(abs(sig_cbf).^2, 2);
 
         % Normalize spectrum
         P_mvdr = P_mvdr / max(P_mvdr);
@@ -422,7 +430,7 @@ sgtitle('Spatial Spectrum Estimation for Different Element Gains', 'FontSize', F
 
 % Add a note to the figure below the subplots with adjusted position
 annotation('textbox', [0, 0, 1, 0.05], ...
-    'String', ['SNR: 20 dB; Signal Types: Uncorrelated Signals; Source Angles: 20°, -20°; ', num2str(N_runs), ' runs'], ...
+    'String', ['SNR: 20 dB; Signal Types: Pseudo-random samples; Source Angles: 30°, -10°; ', num2str(N_runs), ' runs'], ...
     'EdgeColor', 'none', 'HorizontalAlignment', 'center', 'FontSize', FontSize - 2);
 
 % Save the figure
@@ -459,8 +467,8 @@ for idx = 1:length(rho_values)
     fprintf('Desired correlation: %.2f, Estimated correlation: %.2f\n', rho, rho_est);
 
     % Source angles
-    ang1 = 20;
-    ang2 = -20;
+    ang1 = 30;
+    ang2 = -10;
 
     % Steering vectors
     sv1 = steering_vector(fc, ang1);
@@ -476,14 +484,16 @@ for idx = 1:length(rho_values)
     P_mvdr = zeros(size(theta_scan));
     P_cbf = zeros(size(theta_scan));
 
+	sig_cbf = zeros([length(theta_scan) height(signal)];
     for i = 1:length(theta_scan)
         ang = theta_scan(i);
         s = steering_vector(fc, -ang);
         w_mvdr = inv(R) * (s / (s' * inv(R) * s));
-        w_cbf = s / numElements;
         P_mvdr(i) = real(1 / (s' * inv(R) * s));
-        P_cbf(i) = real(w_cbf' * R * w_cbf);
+        sig_cbf(i,1:Nsamp) = signal * s;
     end
+
+	P_cbf = mean(abs(sig_cbf).^2, 2);
 
     % Normalize spectrum
     P_mvdr = P_mvdr / max(P_mvdr);
@@ -511,7 +521,7 @@ sgtitle('Spatial Spectrum Estimation for Different Correlation Coefficients', 'F
 
 % Add a note to the figure below the subplots
 annotation('textbox', [0, 0, 1, 0.05], ...
-    'String', 'SNR: 20 dB; Source Angles: 20°, -20°; Signal types: CW', ...
+    'String', 'SNR: 20 dB; Source Angles: 30°, -10°; Signal types: CW', ...
     'EdgeColor', 'none', 'HorizontalAlignment', 'center', 'FontSize', FontSize - 2);
 
 % Save the figure

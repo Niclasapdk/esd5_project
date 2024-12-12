@@ -6,6 +6,7 @@ matplotlib.use('Agg')  # Use non-interactive backend
 import matplotlib.pyplot as plt
 from multiprocessing import Pool
 import logging
+from scipy.signal import butter, filtfilt
 
 def conv(inpath, outpath):
     logging.info(f"Converting {inpath} to {outpath}")
@@ -13,7 +14,9 @@ def conv(inpath, outpath):
         raw = f.read()
     slices = [raw[i:i+8*4] for i in range(0, len(raw), 8*4)]
     spectrums = np.asarray([np.frombuffer(s, dtype=np.complex64) for s in slices]).T
-    np.save(outpath, spectrums)
+    zero_columns = np.all(spectrums == 0, axis=0)
+    spectrums = spectrums[:, ~zero_columns]
+    np.save(outpath, spectrums, allow_pickle=False)
 
 def steervecs(n: np.ndarray, cal: np.ndarray, steering_angles: np.ndarray):
     cal = np.reshape(cal, (1, 4))
@@ -97,6 +100,7 @@ def process_cbf_plot(args):
     cache_dir = data_dir
     data_file = os.path.join(data_dir, f"data_try{dtry}")
     cache_file = os.path.join(cache_dir, ".cache_" + os.path.basename(data_file) + ".npy")
+    doa_trace_file = os.path.join(data_dir, f"doa_data{dtry}")
     if not os.path.exists(cache_file):
         conv(data_file, cache_file)
     data = np.load(cache_file)
@@ -104,6 +108,9 @@ def process_cbf_plot(args):
     samp_rate = 5.12e6
     t = times(data, N, samp_rate)
     cbf, doa = rolling_cbf(data, steering_angles, N)
+    b, a = butter(2, 0.1, btype='low', analog=False)
+    doa_filtered = filtfilt(b, a, doa)
+    doa_trace = get_real_doa(doa_trace_file, N, cbf)
     f, axs = plt.subplots(2, 1, sharex=True, figsize=(6.4, 6.4))
     f.suptitle(f"CBF for N={N}", fontsize=11)
     axs[0].set_title("Spatial Spectrum vs. Time")
@@ -113,7 +120,10 @@ def process_cbf_plot(args):
     axs[1].set_title("Angle of Arrival estimation")
     axs[1].set_xlabel("Time [s]")
     axs[1].set_ylabel("Angle of max power [\u00b0]")
+    axs[1].plot(t, doa_trace)
     axs[1].plot(t, doa)
+    axs[1].plot(t, doa_filtered, ":")
+    axs[1].legend(["Real DOA", "Output", "Filtered output"])
     out_path = os.path.join(fig_out_dir, f"cbf_{N}_snapshots_from_data{dtry}.png")
     f.tight_layout()  # call this last
     logging.info(f"Saving figure to {out_path}")
@@ -126,13 +136,17 @@ def process_mvdr_plot(args):
     cache_dir = data_dir
     data_file = os.path.join(data_dir, f"data_try{dtry}")
     cache_file = os.path.join(cache_dir, ".cache_" + os.path.basename(data_file) + ".npy")
+    doa_trace_file = os.path.join(data_dir, f"doa_data{dtry}")
     if not os.path.exists(cache_file):
         conv(data_file, cache_file)
     data = np.load(cache_file)
-    steering_angles = np.asarray([i for i in range(-65, 66, 2)])
+    steering_angles = np.asarray([i for i in range(-65, 66, 1)])
     samp_rate = 5.12e6
     t = times(data, N, samp_rate)
     mvdr, doa = rolling_mvdr(data, steering_angles, N)
+    b, a = butter(2, 0.1, btype='low', analog=False)
+    doa_filtered = filtfilt(b, a, doa)
+    doa_trace = get_real_doa(doa_trace_file, N, mvdr)
     f, axs = plt.subplots(2, 1, sharex=True, figsize=(6.4, 6.4))
     f.suptitle(f"MVDR for N={N}", fontsize=11)
     axs[0].set_title("Spatial Spectrum vs. Time")
@@ -142,13 +156,58 @@ def process_mvdr_plot(args):
     axs[1].set_title("Angle of Arrival estimation")
     axs[1].set_xlabel("Time [s]")
     axs[1].set_ylabel("Angle of max power [\u00b0]")
+    axs[1].plot(t, doa_trace)
     axs[1].plot(t, doa)
+    axs[1].plot(t, doa_filtered, ":")
+    axs[1].legend(["Real DOA", "Output", "Filtered output"])
     out_path = os.path.join(fig_out_dir, f"mvdr_{N}_snapshots_from_data{dtry}.png")
     f.tight_layout()  # call this last
     logging.info(f"Saving figure to {out_path}")
     f.savefig(out_path, bbox_inches='tight', dpi=300)
     plt.close()
     return True
+
+def get_real_doa(fname, N, spectrums, N_file=128):
+    with open(fname, "r") as f:
+        lines = f.readlines()
+    assert len(lines) % 2 == 0, "must be even since deg, times pairs"
+
+    def straight_line(x0, x1, y0, y1):
+        num = x1 - x0
+        a = (y1 - y0) / (x1 - x0)
+        l = np.zeros(num)
+        for x in range(num):
+            l[x] = a*x + y0
+        return l
+
+    def scale(x, N, N_file):
+        if x == -1:
+            return spectrums.shape[1]
+        return (x * N_file) // N
+
+    degs = []
+    times = []
+    for i in range(0, len(lines), 2):
+        deg_str = lines[i].strip()
+        t_str = lines[i+1].strip()
+        deg, chk = deg_str.split(" ")
+        assert chk == "deg"
+        t = list(map(lambda x: scale(int(x), N, N_file), t_str.split(" to ")))
+        degs.append(int(deg))
+        times.append((t[0], t[1]))
+
+    doa = np.zeros(spectrums.shape[1])
+    for i in range(len(degs)-1):
+        t0 = times[i][0]
+        t_trans0 = times[i][1]
+        t_trans1 = times[i+1][0]
+        y_now = degs[i]
+        y_next = degs[i+1]
+        l = straight_line(t_trans0, t_trans1, y_now, y_next)
+        doa[t0:t_trans0] = y_now
+        doa[t_trans0:t_trans1] = l
+    doa[times[-1][0]:times[-1][1]] = degs[-1] # set last one
+    return doa
 
 if __name__ == "__main__":
     import matplotlib
