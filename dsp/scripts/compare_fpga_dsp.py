@@ -154,7 +154,7 @@ if __name__ == "__main__":
     parser.add_argument("-w", "--wordlengths", nargs="+", help="Word lengths for representing power ()", default=[32, 64, 88])
     parser.add_argument("-wc", "--wordlengths-comparison", nargs="*", help="Word lengths for representing power (for comparison plot)", default=[88])
     parser.add_argument("-sc", "--snapshots-comparison", nargs="*", help="Snapshot counts (for comparison plot)", default=[8, 32, 128])
-    parser.add_argument("--snr", nargs="*", help="SNR in dB (for comparison plot)", default=[0, 10, 20])
+    parser.add_argument("--snr", nargs="*", help="SNR in dB (for comparison plot)", default=[-10, -5, 0, 5, 10, 15, 20])
     parser.add_argument("--source-locations", nargs="*", help="Locations of signal sources in simulation data file", default=[-20, 40])
     args = parser.parse_args()
     out_dir = args.output_dir
@@ -163,6 +163,7 @@ if __name__ == "__main__":
     s_cmp = [int(s) for s in args.snapshots_comparison]
     wl_cmp = [int(wl) for wl in args.wordlengths_comparison]
     snrs = [int(s) for s in args.snr]
+    snrcomp = [0, 10, 20]
     source_locations = [float(sl) for sl in args.source_locations]
     print(f"[+] Output directory: {out_dir}")
     print(f"[+] Snapshot counts: {snapshots}")
@@ -196,7 +197,7 @@ if __name__ == "__main__":
             plt.close()
     if len(snrs) > 0:
         for s in snapshots:
-            f = gen_snr_plot(s, snrs)
+            f = gen_snr_plot(s, snrcomp)
             out_path = os.path.abspath(os.path.join(out_dir, f"snr_comparison_{s}_snapshots.png"))
             print(f"[+] Saving SNR figure at {out_path}")
             f.savefig(out_path, bbox_inches='tight', dpi=300)
